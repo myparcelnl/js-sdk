@@ -1,0 +1,9 @@
+.DS_Store
+yarn-error.log
+
+*.tgz
+
+.idea/
+coverage/
+dist/
+node_modules/

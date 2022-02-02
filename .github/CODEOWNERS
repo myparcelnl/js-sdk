@@ -1,0 +1,13 @@
+# --- Only integration developers ---
+*  @myparcelnl/integration
+
+# --- Both integration and frontend developers ---
+*.js    @myparcelnl/integration @myparcelnl/frontend
+*.ts    @myparcelnl/integration @myparcelnl/frontend
+*.json  @myparcelnl/integration @myparcelnl/frontend
+*.yml   @myparcelnl/integration @myparcelnl/frontend
+
+# --- Exceptions ---
+# Include IT support for readme changes
+readme.md  @myparcelnl/integration @myparcelnl/frontend @myparcelnl/it-support
+README.md  @myparcelnl/integration @myparcelnl/frontend @myparcelnl/it-support
