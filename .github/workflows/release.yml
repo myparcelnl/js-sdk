@@ -1,0 +1,22 @@
+name: 'Publish new release 🚀'
+
+on:
+  repository_dispatch:
+    types: [ release ]
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - uses: myparcelnl/actions/yarn-install@v1
+
+      - run: yarn run build
+
+      - run: myparcelnl/actions/semantic-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,73 @@
+{
+  "extends": [
+    "@myparcel/eslint-config/preset-typescript",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/member-ordering": [
+      "warn",
+      {
+        "default": [
+          "public-field",
+          "protected-field",
+          "private-field",
+          "public-get",
+          "protected-get",
+          "private-get",
+          "public-set",
+          "protected-set",
+          "private-set",
+          "public-method",
+          "protected-method",
+          "private-method"
+        ]
+      }
+    ],
+    "class-methods-use-this": "off",
+    "prettier/prettier": [
+      "warn",
+      {
+        "printWidth": 120
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "./**/*.js",
+        "./**/*.ts"
+      ],
+      "env": {
+        "node": true
+      }
+    },
+    {
+      "files": [
+        "./test/**/*.ts",
+        "./src/**/*.spec.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/no-magic-numbers": "off",
+        "max-lines-per-function": "off"
+      }
+    },
+    {
+      "files": [
+        "./test/**/*.example.ts",
+        "./src/**/*.types.ts"
+      ],
+      "rules": {
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": [
+              "typeProperty"
+            ],
+            "format": null
+          }
+        ]
+      }
+    }
+  ]
+}

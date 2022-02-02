@@ -1,0 +1,26 @@
+{
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "target": "esnext",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@Test/*": [
+        "./test/*"
+      ]
+    }
+  },
+  "include": [
+    "*.ts",
+    "private/**/*.ts",
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ]
+}
