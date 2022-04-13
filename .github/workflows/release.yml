@@ -16,7 +16,7 @@ jobs:
 
       - run: yarn run build
 
-      - run: myparcelnl/actions/semantic-release@v1
+      - uses: myparcelnl/actions/semantic-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
