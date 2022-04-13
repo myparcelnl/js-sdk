@@ -47,9 +47,6 @@
     "unfetch": "^4.2.0"
   },
   "prettier": "@myparcel/prettier-config",
-  "release": {
-    "extends": "@myparcel/semantic-release-config/npm"
-  },
   "lint-staged": {
     "*.ts": "eslint --fix"
   }

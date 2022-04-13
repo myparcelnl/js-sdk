@@ -1,29 +1,12 @@
 {
+  "parserOptions": {
+    "requireConfigFile": false
+  },
   "extends": [
-    "@myparcel/eslint-config/preset-typescript",
+    "@myparcel/eslint-config/preset-es6",
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/member-ordering": [
-      "warn",
-      {
-        "default": [
-          "public-field",
-          "protected-field",
-          "private-field",
-          "public-get",
-          "protected-get",
-          "private-get",
-          "public-set",
-          "protected-set",
-          "private-set",
-          "public-method",
-          "protected-method",
-          "private-method"
-        ]
-      }
-    ],
     "class-methods-use-this": "off",
     "prettier/prettier": [
       "warn",
@@ -33,6 +16,34 @@
     ]
   },
   "overrides": [
+    {
+      "files": "./**/*.ts",
+      "extends": [
+        "@myparcel/eslint-config/preset-typescript"
+      ],
+      "rules": {
+        "@typescript-eslint/consistent-type-definitions": "off",
+        "@typescript-eslint/member-ordering": [
+          "warn",
+          {
+            "default": [
+              "public-field",
+              "protected-field",
+              "private-field",
+              "public-get",
+              "protected-get",
+              "private-get",
+              "public-set",
+              "protected-set",
+              "private-set",
+              "public-method",
+              "protected-method",
+              "private-method"
+            ]
+          }
+        ]
+      }
+    },
     {
       "files": [
         "./**/*.js",
