@@ -6,11 +6,13 @@ on:
       - main
     paths-ignore:
       - ./**/*.md
-      - ./.github
+      - ./.github/**/*
       - .eslintrc
       - .gitignore
 
   pull_request: ~
+
+  workflow_dispatch: ~
 
   repository_dispatch:
     types: [ test-command ]
