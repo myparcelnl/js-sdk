@@ -18,7 +18,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
-    name: 'Run tests '
+    name: 'Run tests'
     steps:
       - uses: actions/checkout@v2
         with:
