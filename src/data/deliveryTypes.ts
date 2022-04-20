@@ -31,3 +31,5 @@ export const PICKUP = {
   ID: PICKUP_ID,
   NAME: PICKUP_NAME,
 };
+
+export const ALL = [MORNING, STANDARD, EVENING, PICKUP];

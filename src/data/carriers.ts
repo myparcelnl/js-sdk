@@ -44,44 +44,46 @@ export const POSTNL: Carrier = {
   HUMAN: POST_NL_HUMAN,
 };
 
-export const BPOST = {
+export const BPOST: Carrier = {
   NAME: BPOST_NAME,
   ID: BPOST_ID,
   HUMAN: BPOST_HUMAN,
 };
 
-export const CHEAP_CARGO = {
+export const CHEAP_CARGO: Carrier = {
   NAME: CHEAP_CARGO_NAME,
   ID: CHEAP_CARGO_ID,
   HUMAN: CHEAP_CARGO_HUMAN,
 };
 
-export const DPD = {
+export const DPD: Carrier = {
   NAME: DPD_NAME,
   ID: DPD_ID,
   HUMAN: DPD_HUMAN,
 };
 
-export const INSTABOX = {
+export const INSTABOX: Carrier = {
   NAME: INSTABOX_NAME,
   ID: INSTABOX_ID,
   HUMAN: INSTABOX_HUMAN,
 };
 
-export const DHL = {
+export const DHL: Carrier = {
   NAME: DHL_NAME,
   ID: DHL_ID,
   HUMAN: DHL_HUMAN,
 };
 
-export const BOL_COM = {
+export const BOL_COM: Carrier = {
   NAME: BOL_COM_NAME,
   ID: BOL_COM_ID,
   HUMAN: BOL_COM_HUMAN,
 };
 
-export const UPS = {
+export const UPS: Carrier = {
   NAME: UPS_NAME,
   ID: UPS_ID,
   HUMAN: UPS_HUMAN,
 };
+
+export const ALL = [CHEAP_CARGO, DPD, INSTABOX, DHL, BOL_COM, UPS];
