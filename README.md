@@ -54,7 +54,7 @@ import { createPrivateSdk, PostShipments } from '@myparcel/sdk';
 
 const clientConfig = {
   headers: {
-    Authorization: 'bearer ' + MY_BASE_64_ENCODED_API_KEY
+    Authorization: 'basic ' + MY_BASE_64_ENCODED_API_KEY
   }
 };
 
