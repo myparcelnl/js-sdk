@@ -8,6 +8,12 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
+  "keywords": [
+    "myparcel",
+    "sdk",
+    "node",
+    "browser"
+  ],
   "author": "edie@myparcel.nl",
   "license": "ISC",
   "main": "./dist/index.js",
