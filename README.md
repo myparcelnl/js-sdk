@@ -1,4 +1,4 @@
-# @myparcel/js-sdk
+# @myparcel/sdk
 
 [![npm](https://img.shields.io/npm/v/@myparcel/sdk)](https://www.npmjs.com/package/@myparcel/sdk/)
 [![coverage](https://img.shields.io/codecov/c/github/myparcelnl/js-sdk?logo=codecov)](https://codecov.io/gh/myparcelnl/js-sdk)
