@@ -2,33 +2,34 @@
   "name": "@myparcel/sdk",
   "version": "1.1.0",
   "description": "JavaScript SDK to connect to the MyParcel API via Node.js or browser",
-  "scripts": {
-    "build": "rimraf dist/* && rollup --config rollup.config.ts --configPlugin typescript",
-    "watch": "nodemon --watch ./src --exec 'yarn build'",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
-  },
   "keywords": [
     "myparcel",
     "sdk",
     "node",
     "browser"
   ],
-  "author": "edie@myparcel.nl",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/myparcelnl/js-sdk.git"
+  },
+  "license": "MIT",
+  "author": "Edie Lemoine <edie@myparcel.nl>",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "access": "public"
+  "scripts": {
+    "build": "rimraf dist/* && rollup --config rollup.config.ts --configPlugin typescript",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "watch": "nodemon --watch ./src --exec 'yarn build'"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/myparcelnl/js-sdk.git"
+  "lint-staged": {
+    "*.ts": "eslint --fix"
   },
+  "prettier": "@myparcel/prettier-config",
   "devDependencies": {
     "@myparcel/eslint-config": "^3.4.4",
     "@myparcel/prettier-config": "^1.0.0",
@@ -56,8 +57,7 @@
     "typescript": "^4.6.3",
     "unfetch": "^4.2.0"
   },
-  "prettier": "@myparcel/prettier-config",
-  "lint-staged": {
-    "*.ts": "eslint --fix"
+  "publishConfig": {
+    "access": "public"
   }
 }
