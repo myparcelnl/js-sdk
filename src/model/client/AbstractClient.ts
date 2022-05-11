@@ -102,12 +102,12 @@ export abstract class AbstractClient {
       urlPath = this.substitutePath<E>(urlPath, options.path);
     }
 
-    if (options?.parameters) {
-      urlPath = addParameters<E>(urlPath, options.parameters);
+    if (urlPath.includes('/:')) {
+      throw new UserException(`One or more path variables are missing in ${urlPath}`);
     }
 
-    if (urlPath.includes(':')) {
-      throw new UserException(`One or more path variables are missing in ${urlPath}`);
+    if (options?.parameters) {
+      urlPath = addParameters<E>(urlPath, options.parameters);
     }
 
     return `${this.baseUrl}/${urlPath}`;

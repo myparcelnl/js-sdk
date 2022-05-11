@@ -47,25 +47,26 @@ describe('AbstractClient', () => {
   });
 
   it('substitutes parameters', async () => {
-    const response = await sdk.getPickupLocations({
+    const response = await sdk.getDeliveryOptions({
       parameters: {
         carrier: 1,
         cc: 'NL',
         number: 31,
         platform: 'myparcel',
         postal_code: '2132JE',
+        cutoff_time: '17:00',
       },
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.myparcel.nl/pickup_locations?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE',
+      'https://api.myparcel.nl/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
       {
-        headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+        headers: {Accept: 'application/json;version=2.0', 'Content-Type': 'application/json'},
         method: 'GET',
       },
     );
 
-    expect(response.length).toBe(2);
+    expect(response.length).toBe(5);
   });
 
   it('returns api error correctly', async () => {

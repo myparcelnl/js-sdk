@@ -3,7 +3,7 @@ import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 export default defineMockResponse({
   match: (path: string, init?: RequestInit) =>
     init?.method === 'GET' &&
-    path === '/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE',
+    path === '/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
 
   response: () => ({
     data: {
