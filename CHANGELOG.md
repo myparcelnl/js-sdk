@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/myparcelnl/js-sdk/compare/v1.1.1...v2.0.0) (2022-05-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* make platforms export consistent with others
+
+### :bug: Bug Fixes
+
+* make platforms export consistent with others ([88148f8](https://github.com/myparcelnl/js-sdk/commit/88148f8e627fe2470e5efd7898c69dcbaa7163cd))
+
 ### [1.1.1](https://github.com/myparcelnl/js-sdk/compare/v1.1.0...v1.1.1) (2022-05-11)
 
 
