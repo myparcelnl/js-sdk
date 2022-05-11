@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.1](https://github.com/myparcelnl/js-sdk/compare/v1.1.0...v1.1.1) (2022-05-11)
+
+
+### :bug: Bug Fixes
+
+* fix error saying path variable is missing when using ":" in a parameter ([c5800fb](https://github.com/myparcelnl/js-sdk/commit/c5800fb47649547e0bea2269c39dc71fa8794d42))
+
 ## [1.1.0](https://github.com/myparcelnl/js-sdk/compare/v1.0.0...v1.1.0) (2022-04-20)
 
 
