@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.0.1](https://github.com/myparcelnl/js-sdk/compare/v2.0.0...v2.0.1) (2022-05-16)
+
+
+### :bug: Bug Fixes
+
+* allow extended endpoints to have any name ([72240cb](https://github.com/myparcelnl/js-sdk/commit/72240cb1b8047ca26871f9a1a7470dbfdb5e8b4b))
+
 ## [2.0.0](https://github.com/myparcelnl/js-sdk/compare/v1.1.1...v2.0.0) (2022-05-11)
 
 
