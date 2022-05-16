@@ -11,5 +11,5 @@ type PrivateEndpointDefinition = {
 export abstract class AbstractPrivateEndpoint<D = EndpointDefinition> extends AbstractEndpoint<
   D & PrivateEndpointDefinition
 > {
-  public abstract readonly name: PrivateGetEndpoints | PrivatePostEndpoints;
+  public abstract readonly name: PrivateGetEndpoints | PrivatePostEndpoints | string;
 }
