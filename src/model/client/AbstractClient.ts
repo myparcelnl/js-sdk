@@ -62,8 +62,8 @@ export abstract class AbstractClient {
     endpoint: E,
     options: OptionsWithBody<E> | OptionsWithoutBody<E>,
   ): Promise<EndpointResponse<E>> {
-    options = AbstractClient.normalizeOptions(options);
-    options.headers = this.validateHeaders(endpoint, options);
+    options = this.normalizeOptions(endpoint, options);
+    this.validateHeaders(endpoint, options);
 
     const response = await this.request(endpoint, options);
 
@@ -129,19 +129,24 @@ export abstract class AbstractClient {
   }
 
   /**
-   * Validates headers passed  options.
+   * Validates headers passed in options.
    *
    * @protected
    */
-  protected validateHeaders<E extends AbstractEndpoint>(endpoint: E, options: OptionsWithBody<E>): RequestHeaders {
-    const headers: RequestHeaders = {...this.getHeaders(), ...options?.headers, ...endpoint.getHeaders()};
+  protected validateHeaders<E extends AbstractEndpoint>(endpoint: E, options: OptionsWithBody<E>): void {
+    const headers = Object.entries(options.headers ?? []).reduce(
+      (acc, [key, header]) => ({
+        ...acc,
+        [key.toLowerCase()]: header,
+      }),
+      {},
+    );
+
     const missingHeaders = this.requiredHeaders.filter((header) => !(header.toLowerCase() in headers));
 
     if (missingHeaders.length) {
       throw new UserException(`Required headers are missing: ${missingHeaders.join(', ')}`);
     }
-
-    return headers;
   }
 
   /**
@@ -149,20 +154,18 @@ export abstract class AbstractClient {
    *
    * @protected
    */
-  protected static normalizeOptions<E extends AbstractEndpoint>(
+  protected normalizeOptions<E extends AbstractEndpoint>(
+    endpoint: E,
     options: OptionsWithBody<E> | OptionsWithoutBody<E>,
   ): OptionsWithBody<E> | OptionsWithoutBody<E> {
-    // Transform headers to lowercase
-    if (options.headers) {
-      options.headers = Object.entries(options.headers).reduce(
-        (acc, [key, header]) => ({
-          ...acc,
-          [key.toLowerCase()]: header,
-        }),
-        {},
-      );
-    }
+    // Merge all headers
+    options.headers = {
+      ...this.getHeaders(),
+      ...options.headers,
+      ...endpoint.getHeaders(),
+    };
 
+    // Convert all parameters to lowercase.
     if (options.parameters) {
       options.parameters = Object.entries(options.parameters).reduce(
         (acc, [key, parameter]) => ({

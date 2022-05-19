@@ -1,9 +1,19 @@
 import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations} from '@/endpoints';
 import {ApiException} from '@/model/exception/ApiException';
+import {EndpointParameters} from '@/model';
 import {FetchClient} from '@/model/client/FetchClient';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPublicSdk} from '@/createPublicSdk';
+
+const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
+  carrier: 1,
+  cc: 'NL',
+  number: 31,
+  platform: 'myparcel',
+  postal_code: '2132JE',
+  cutoff_time: '17:00',
+};
 
 describe('AbstractClient', () => {
   const fetchMock = createFetchMock();
@@ -48,14 +58,7 @@ describe('AbstractClient', () => {
 
   it('substitutes parameters', async () => {
     const response = await sdk.getDeliveryOptions({
-      parameters: {
-        carrier: 1,
-        cc: 'NL',
-        number: 31,
-        platform: 'myparcel',
-        postal_code: '2132JE',
-        cutoff_time: '17:00',
-      },
+      parameters: getDeliveryOptionsParameters,
     });
 
     expect(fetchMock).toHaveBeenCalledWith(
@@ -91,6 +94,30 @@ describe('AbstractClient', () => {
           },
         ],
       }),
+    );
+  });
+
+  it('parses all headers correctly', async () => {
+    expect.assertions(1);
+
+    const client = new FetchClient({headers: {'X-Client-Header': '1'}});
+    const getDeliveryOptions = new GetDeliveryOptions();
+
+    const sdk = createPublicSdk(client, [getDeliveryOptions]);
+
+    await sdk.getDeliveryOptions({headers: {'X-Additional-Header': '1'}, parameters: getDeliveryOptionsParameters});
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.myparcel.nl/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
+      {
+        headers: {
+          Accept: 'application/json;version=2.0',
+          'Content-Type': 'application/json',
+          'X-Client-Header': '1',
+          'X-Additional-Header': '1',
+        },
+        method: 'GET',
+      },
     );
   });
 });
