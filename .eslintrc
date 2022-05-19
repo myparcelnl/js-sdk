@@ -22,6 +22,16 @@
         "@myparcel/eslint-config/preset-typescript"
       ],
       "rules": {
+        "class-methods-use-this": "off",
+        "no-void": "off",
+        "@typescript-eslint/space-before-function-paren": [
+          "warn",
+          {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always"
+          }
+        ],
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/member-ordering": [
           "warn",
@@ -60,6 +70,7 @@
       ],
       "rules": {
         "@typescript-eslint/no-magic-numbers": "off",
+        "max-len": "off",
         "max-lines-per-function": "off"
       }
     },

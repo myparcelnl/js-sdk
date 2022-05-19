@@ -8,8 +8,8 @@ type PrivateEndpointDefinition = {
   headers: RequestHeaders & {Authorization: string};
 };
 
-export abstract class AbstractPrivateEndpoint<D = EndpointDefinition> extends AbstractEndpoint<
-  D & PrivateEndpointDefinition
-> {
+type Private<D = EndpointDefinition> = D & PrivateEndpointDefinition;
+
+export abstract class AbstractPrivateEndpoint<D = EndpointDefinition> extends AbstractEndpoint<Private<D>> {
   public abstract readonly name: PrivateGetEndpoints | PrivatePostEndpoints | string;
 }
