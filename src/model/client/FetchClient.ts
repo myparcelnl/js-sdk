@@ -6,10 +6,7 @@ export class FetchClient extends AbstractClient {
   protected request: ClientRequest = async (endpoint, options) => {
     const config: RequestInit = {
       method: endpoint.method,
-      headers: {
-        ...this.getHeaders(),
-        ...endpoint.getHeaders(),
-      },
+      headers: options.headers,
     };
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {

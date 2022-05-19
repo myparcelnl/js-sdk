@@ -63,7 +63,7 @@ export abstract class AbstractClient {
     options: OptionsWithBody<E> | OptionsWithoutBody<E>,
   ): Promise<EndpointResponse<E>> {
     options = AbstractClient.normalizeOptions(options);
-    this.validateHeaders(endpoint, options);
+    options.headers = this.validateHeaders(endpoint, options);
 
     const response = await this.request(endpoint, options);
 
@@ -129,16 +129,19 @@ export abstract class AbstractClient {
   }
 
   /**
-   * Validates headers passed in options.
+   * Validates headers passed  options.
    *
    * @protected
    */
-  protected validateHeaders<E extends AbstractEndpoint>(endpoint: E, options: OptionsWithBody<E>): void {
-    const missingHeaders = this.requiredHeaders.filter((header) => !(header.toLowerCase() in (options?.headers ?? [])));
+  protected validateHeaders<E extends AbstractEndpoint>(endpoint: E, options: OptionsWithBody<E>): RequestHeaders {
+    const headers: RequestHeaders = {...this.getHeaders(), ...options?.headers, ...endpoint.getHeaders()};
+    const missingHeaders = this.requiredHeaders.filter((header) => !(header.toLowerCase() in headers));
 
     if (missingHeaders.length) {
       throw new UserException(`Required headers are missing: ${missingHeaders.join(', ')}`);
     }
+
+    return headers;
   }
 
   /**

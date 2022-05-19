@@ -145,10 +145,7 @@ class AxiosClient extends AbstractClient {
       const response = await axios.request({
         method: endpoint.method,
         url: this.createUrl(endpoint, options),
-        headers: {
-          ...this.getHeaders(),
-          ...endpoint.getHeaders()
-        }
+        headers: options.headers,
       });
 
       return response.data;
