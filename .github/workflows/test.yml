@@ -1,6 +1,8 @@
 name: 'Run tests 🧪'
 
 on:
+  workflow_call:
+
   push:
     branches:
       - main
@@ -36,10 +38,3 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: 'Trigger release'
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ secrets.GH_REPO_TOKEN }}
-          event-type: release

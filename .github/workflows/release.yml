@@ -5,18 +5,22 @@ on:
     types: [ release ]
 
 jobs:
+  test:
+    uses: myparcelnl/js-sdk/.github/workflows/test.yml@main
+
   release:
+    needs: test
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
 
-      - uses: myparcelnl/actions/yarn-install@v1
+      - uses: myparcelnl/actions/yarn-install@v2
 
       - run: yarn run build
 
-      - uses: myparcelnl/actions/semantic-release@v1
+      - uses: myparcelnl/actions/semantic-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
