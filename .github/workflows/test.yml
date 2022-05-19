@@ -3,15 +3,6 @@ name: 'Run tests 🧪'
 on:
   workflow_call:
 
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - ./**/*.md
-      - ./.github/**/*
-      - .eslintrc
-      - .gitignore
-
   pull_request: ~
 
   workflow_dispatch: ~

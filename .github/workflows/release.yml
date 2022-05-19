@@ -1,8 +1,9 @@
 name: 'Publish new release 🚀'
 
 on:
-  repository_dispatch:
-    types: [ release ]
+  push:
+    branches:
+      - main
 
 jobs:
   test:
