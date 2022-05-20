@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/myparcelnl/js-sdk/compare/v2.1.0...v2.2.0) (2022-05-20)
+
+
+### :sparkles: New Features
+
+* add minified and babeled cjs bundle ([#5](https://github.com/myparcelnl/js-sdk/issues/5)) ([d388ed2](https://github.com/myparcelnl/js-sdk/commit/d388ed225702df17c2c77bf029e27b4d12f503a9))
+
 ## [2.1.0](https://github.com/myparcelnl/js-sdk/compare/v2.0.3...v2.1.0) (2022-05-20)
 
 
