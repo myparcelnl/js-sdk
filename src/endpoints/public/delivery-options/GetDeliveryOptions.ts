@@ -3,7 +3,6 @@ import {HttpMethod, RequestHeaders} from '@/types/request.types';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
 import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {DeliveryOption} from '@/endpoints/public/delivery-options/DeliveryOption.types';
-import {PublicGetEndpoints} from '@/endpoints/public/PublicGetEndpoints';
 import {WithRequired} from '@/types/global.types';
 
 type Parameters = {
@@ -39,6 +38,7 @@ type Parameters = {
 export type DeliveryOptionsParameters = WithRequired<Parameters, 'number'> | WithRequired<Parameters, 'street'>;
 
 type GetDeliveryOptionsDefinition = CreateDefinition<{
+  name: typeof GetDeliveryOptions.name;
   parameters: DeliveryOptionsParameters;
   response: DeliveryOption[];
 }>;
@@ -48,7 +48,7 @@ type GetDeliveryOptionsDefinition = CreateDefinition<{
  */
 export class GetDeliveryOptions extends AbstractPublicEndpoint<GetDeliveryOptionsDefinition> {
   public readonly method: HttpMethod = 'GET';
-  public readonly name = PublicGetEndpoints.GET_DELIVERY_OPTIONS;
+  public readonly name = 'getDeliveryOptions';
   public readonly path = 'delivery_options';
   public readonly property = 'deliveries';
 
