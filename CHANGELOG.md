@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.2.1](https://github.com/myparcelnl/js-sdk/compare/v2.2.0...v2.2.1) (2022-05-20)
+
+
+### :bug: Bug Fixes
+
+* inherit types from extended endpoints ([#8](https://github.com/myparcelnl/js-sdk/issues/8)) ([f12bdeb](https://github.com/myparcelnl/js-sdk/commit/f12bdeb769fd4e54749e5b4676a13ff86de7d9ca))
+
 ## [2.2.0](https://github.com/myparcelnl/js-sdk/compare/v2.1.0...v2.2.0) (2022-05-20)
 
 
