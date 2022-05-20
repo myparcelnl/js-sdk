@@ -1,18 +1,16 @@
-import {EndpointBody, UserException} from '@/model';
 import {GetShipment, GetShipments} from '@/endpoints';
 import {FetchClient} from '@/model/client/FetchClient';
 import {GetCarrier} from '@/endpoints/public/carriers/GetCarrier';
 import {GetCarriers} from '@/endpoints/public/carriers/GetCarriers';
-import {PACKAGE_NAME} from '@/data/packageTypes';
-import {POST_NL_ID} from '@/data/carriers';
+import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {PostShipments} from '@/endpoints/private/shipments/PostShipments';
+import {UserException} from '@/model';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
 
 describe('sdk', () => {
   const fetchMock = createFetchMock();
-
   beforeEach(() => {
     fetchMock.mockClear();
   });
@@ -51,24 +49,9 @@ describe('sdk', () => {
       expect(privateSdk.postShipments).toStrictEqual(expect.any(Function));
     });
 
-    const body: EndpointBody<PostShipments> = [
-      {
-        carrier: POST_NL_ID,
-        options: {
-          package_type: PACKAGE_NAME,
-        },
-        recipient: {
-          cc: 'NL',
-          city: 'Hoofddorp',
-          person: 'Ms. Parcel',
-          street: 'Antareslaan 31',
-        },
-      },
-    ];
-
     it('throws an error if authorization header is missing', async () => {
       expect.assertions(1);
-      await expect(privateSdk.postShipments({body})).rejects.toThrow(
+      await expect(privateSdk.postShipments({body: POST_BODY_SHIPMENTS})).rejects.toThrow(
         new Error('Required headers are missing: Authorization'),
       );
     });
@@ -76,7 +59,7 @@ describe('sdk', () => {
     it('executes the request if the authorization header is present', async () => {
       expect.assertions(1);
       await expect(
-        privateSdk.postShipments({body, headers: {Authorization: 'base64 encoded api key'}}),
+        privateSdk.postShipments({body: POST_BODY_SHIPMENTS, headers: {Authorization: 'base64 encoded api key'}}),
       ).resolves.toStrictEqual([1234567]);
     });
   });

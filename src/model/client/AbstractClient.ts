@@ -3,6 +3,7 @@ import {
   ClientRequest,
   EndpointPath,
   EndpointResponse,
+  EndpointResponseProperty,
   OptionsWithBody,
   OptionsWithoutBody,
 } from '@/model/client/AbstractClient.types';
@@ -71,7 +72,7 @@ export abstract class AbstractClient {
       throw new ApiException(response);
     }
 
-    return response.data[endpoint.getProperty() as E['property']];
+    return response.data[endpoint.getResponseProperty() as EndpointResponseProperty<E>];
   }
 
   /**
@@ -174,6 +175,12 @@ export abstract class AbstractClient {
         }),
         {},
       );
+    }
+
+    if (isOfType<OptionsWithBody<E>>(options, 'body')) {
+      options.body = {
+        data: {[endpoint.getProperty()]: options.body},
+      };
     }
 
     return options;

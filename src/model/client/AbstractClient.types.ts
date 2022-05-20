@@ -29,7 +29,11 @@ export type EndpointPath<E extends AbstractEndpoint> = E['definition']['path'];
 export type EndpointResponse<E extends AbstractEndpoint> = E['definition']['response'];
 export type EndpointBody<E extends AbstractEndpoint> = E['definition']['body'];
 
-export type EndpointResponseBody<E extends AbstractEndpoint> = Record<E['property'], EndpointResponse<E>>;
+export type EndpointResponseProperty<E extends AbstractEndpoint> = E['responseProperty'] extends string
+  ? E['responseProperty']
+  : E['property'];
+
+export type EndpointResponseBody<E extends AbstractEndpoint> = Record<EndpointResponseProperty<E>, EndpointResponse<E>>;
 
 export interface OptionsWithBody<E extends AbstractEndpoint> {
   body?: EndpointBody<E>;

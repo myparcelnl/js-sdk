@@ -1,9 +1,11 @@
-import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations} from '@/endpoints';
+import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations, PostShipments} from '@/endpoints';
 import {ApiException} from '@/model/exception/ApiException';
 import {EndpointParameters} from '@/model';
 import {FetchClient} from '@/model/client/FetchClient';
+import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
+import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
@@ -119,5 +121,25 @@ describe('AbstractClient', () => {
         method: 'GET',
       },
     );
+  });
+
+  it('formats request body correctly on post', async () => {
+    expect.assertions(1);
+
+    const sdk = createPrivateSdk(new FetchClient(), [new PostShipments()]);
+    await sdk.postShipments({
+      headers: {Authorization: 'bearer apiKey'},
+      body: POST_BODY_SHIPMENTS,
+    });
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/shipments', {
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'bearer apiKey',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":"package"},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
+    });
   });
 });
