@@ -3,9 +3,9 @@ import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {DeliveryOptionsParameters} from '@/endpoints';
 import {HttpMethod} from '@/types/request.types';
 import {PickupLocation} from '@/endpoints/public/pickup-locations/PickupLocation.types';
-import {PublicGetEndpoints} from '@/endpoints/public/PublicGetEndpoints';
 
 export type GetPickupLocationsDefinition = CreateDefinition<{
+  name: typeof GetPickupLocations.name;
   // Uses the exact same parameters as get delivery options.
   parameters: DeliveryOptionsParameters;
   response: PickupLocation[];
@@ -16,7 +16,7 @@ export type GetPickupLocationsDefinition = CreateDefinition<{
  */
 export class GetPickupLocations extends AbstractPublicEndpoint<GetPickupLocationsDefinition> {
   public readonly method: HttpMethod = 'GET';
-  public readonly name = PublicGetEndpoints.GET_PICKUP_LOCATIONS;
+  public readonly name = 'getPickupLocations';
   public readonly path = 'pickup_locations';
   public readonly property = 'pickup_locations';
 }

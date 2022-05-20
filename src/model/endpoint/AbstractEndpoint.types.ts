@@ -2,6 +2,7 @@ import {NoInfer} from '@/types/global.types';
 import {RequestHeaders} from '@/types/request.types';
 
 export interface EndpointDefinition {
+  name: string;
   body?: NoInfer<unknown>;
   headers?: RequestHeaders;
   parameters?: NoInfer<Record<string, string | number | boolean>>;
