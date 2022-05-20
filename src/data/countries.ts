@@ -53,12 +53,12 @@ export const CONGO_BRAZZAVILLE = 'CG';
 export const CONGO_KINSHASA = 'CD';
 export const COOK_ISLANDS = 'CK';
 export const COSTA_RICA = 'CR';
+export const COTE_D_IVOIRE = 'CI';
 export const CROATIA = 'HR';
 export const CUBA = 'CU';
 export const CURACAO = 'CW';
 export const CYPRUS = 'CY';
 export const CZECH_REPUBLIC = 'CZ';
-export const COTE_D_IVOIRE = 'CI';
 export const DENMARK = 'DK';
 export const DJIBOUTI = 'DJ';
 export const DOMINICA = 'DM';
@@ -181,10 +181,10 @@ export const POLAND = 'PL';
 export const PORTUGAL = 'PT';
 export const PUERTO_RICO = 'PR';
 export const QATAR = 'QA';
+export const REUNION = 'RE';
 export const ROMANIA = 'RO';
 export const RUSSIAN_FEDERATION = 'RU';
 export const RWANDA = 'RW';
-export const REUNION = 'RE';
 export const SAINT_BARTHELEMY = 'BL';
 export const SAINT_HELENA = 'SH';
 export const SAINT_KITTS_AND_NEVIS = 'KN';
@@ -247,3 +247,33 @@ export const WESTERN_SAHARA = 'EH';
 export const YEMEN = 'YE';
 export const ZAMBIA = 'ZM';
 export const ZIMBABWE = 'ZW';
+
+export const EU = [
+  AUSTRIA,
+  BELGIUM,
+  BULGARIA,
+  CROATIA,
+  CYPRUS,
+  CZECH_REPUBLIC,
+  DENMARK,
+  ESTONIA,
+  FINLAND,
+  FRANCE,
+  GERMANY,
+  GREECE,
+  HUNGARY,
+  IRELAND,
+  ITALY,
+  LATVIA,
+  LITHUANIA,
+  LUXEMBOURG,
+  MALTA,
+  NETHERLANDS,
+  POLAND,
+  PORTUGAL,
+  ROMANIA,
+  SLOVAKIA,
+  SLOVENIA,
+  SPAIN,
+  SWEDEN,
+];
