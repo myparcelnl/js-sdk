@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/myparcelnl/js-sdk/compare/v2.0.3...v2.1.0) (2022-05-20)
+
+
+### :sparkles: New Features
+
+* add eu countries const ([#6](https://github.com/myparcelnl/js-sdk/issues/6)) ([8f1b821](https://github.com/myparcelnl/js-sdk/commit/8f1b821cab9c9c2d291776786799b6b4acf5f689))
+* add shipment options constants ([#4](https://github.com/myparcelnl/js-sdk/issues/4)) ([94c02a5](https://github.com/myparcelnl/js-sdk/commit/94c02a57ce85f2c75221632ae502f7399516f93e))
+
 ### [2.0.3](https://github.com/myparcelnl/js-sdk/compare/v2.0.2...v2.0.3) (2022-05-19)
 
 
