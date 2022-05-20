@@ -21,9 +21,10 @@ export type DeliveryTypeName = 'morning' | 'standard' | 'evening' | 'pickup';
 /**
  * @see https://myparcelnl.github.io/api/#6_A_3
  */
-export type ShipmentOption =
+export type ShipmentOptionName =
   | 'age_check'
   | 'cooled_delivery'
+  | 'insurance'
   | 'large_format'
   | 'only_recipient'
   | 'printerless_return'

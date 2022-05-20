@@ -1,8 +1,8 @@
-import {DeliveryTypeName, PackageTypeName, ShipmentOption} from '@/types/myparcel.types';
+import {DeliveryTypeName, PackageTypeName, ShipmentOptionName} from '@/types/myparcel.types';
 import {EnumSchema, Timestamp} from '@/types';
 
 interface PossibleShipmentOption {
-  name: ShipmentOption;
+  name: ShipmentOptionName;
   schema: EnumSchema<boolean>;
 }
 

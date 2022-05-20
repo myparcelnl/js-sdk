@@ -13,6 +13,7 @@ describe('module exports', () => {
         "DELIVERY_TYPES",
         "PACKAGE_TYPES",
         "PLATFORMS",
+        "SHIPMENT_OPTIONS",
         "PrivateGetEndpoints",
         "PrivatePostEndpoints",
         "GetShipment",
