@@ -18,5 +18,6 @@ export class PostShipments extends AbstractPrivateEndpoint<PostShipmentsDefiniti
   public readonly method: HttpMethod = 'POST';
   public readonly name = 'postShipments';
   public readonly path = 'shipments';
-  public readonly property = 'ids';
+  public readonly property = 'shipments';
+  public readonly responseProperty = 'ids';
 }

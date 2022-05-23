@@ -18,9 +18,16 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
   public abstract readonly path: string;
 
   /**
-   * The property in the response.
+   * The property in the request body and response body. If the response body
+   * property differs, set responseProperty alongside property.
    */
   public abstract readonly property: string;
+
+  /**
+   * Property used in the response. Falls back to `this.property` if it's not
+   * set.
+   */
+  public readonly responseProperty: string | undefined;
 
   /**
    * Used to expose EndpointDefinition type.
@@ -37,5 +44,9 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
 
   public getProperty(): AbstractEndpoint['property'] {
     return this.property;
+  }
+
+  public getResponseProperty(): AbstractEndpoint['responseProperty'] {
+    return this.responseProperty ?? this.property;
   }
 }
