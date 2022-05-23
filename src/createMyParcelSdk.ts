@@ -1,11 +1,9 @@
-import {EndpointResponse, OptionsWithBody, OptionsWithoutBody} from '@/model/client/AbstractClient.types';
+import {EndpointResponse, Options, OptionsWithoutBody} from '@/model/client/AbstractClient.types';
 import {AbstractClient} from '@/model/client/AbstractClient';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {UserException} from '@/model';
 
-type EndpointMethod<E extends AbstractEndpoint> = (
-  options?: OptionsWithoutBody<E> | OptionsWithBody<E>,
-) => Promise<EndpointResponse<E>>;
+type EndpointMethod<E extends AbstractEndpoint> = (options?: Options<E>) => Promise<EndpointResponse<E>>;
 
 export type MyParcelSdk<E extends AbstractEndpoint> = {
   [K in E['name']]: EndpointMethod<Extract<E, {name: K}>>;
