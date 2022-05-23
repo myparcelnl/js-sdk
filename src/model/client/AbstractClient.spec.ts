@@ -1,7 +1,8 @@
+import {AbstractPublicEndpoint, EndpointParameters} from '@/model';
 import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations, PostShipments} from '@/endpoints';
 import {ApiException} from '@/model/exception/ApiException';
-import {EndpointParameters} from '@/model';
 import {FetchClient} from '@/model/client/FetchClient';
+import {HttpMethod} from '@/types';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
@@ -56,6 +57,26 @@ describe('AbstractClient', () => {
     await expect(sdk.getCarrier()).rejects.toThrow(
       new UserException('One or more path variables are missing in /carriers/:carrier'),
     );
+  });
+
+  it('allows optional path variables', async () => {
+    expect.assertions(1);
+
+    class GetCredentials extends AbstractPublicEndpoint {
+      public readonly method: HttpMethod = 'GET';
+      public readonly name = 'getCredentials';
+      public readonly path: string = 'external_integration_provider_credentials/:name/:version?';
+      public readonly property: string = 'credentials';
+    }
+
+    const sdk = createPublicSdk(new FetchClient(), [new GetCredentials()]);
+    await expect(
+      sdk.getCredentials({
+        path: {
+          name: 'wix',
+        },
+      }),
+    ).resolves.toEqual([]);
   });
 
   it('substitutes parameters', async () => {

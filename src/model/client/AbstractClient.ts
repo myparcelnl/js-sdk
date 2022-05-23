@@ -119,7 +119,8 @@ export abstract class AbstractClient {
   }
 
   /**
-   * Replace path variables in an url path.
+   * Replace path variables in an url path. Deletes optional parameters if
+   * they're not passed.
    *
    * @protected
    */
@@ -127,6 +128,14 @@ export abstract class AbstractClient {
     if (pathVariables) {
       Object.entries(pathVariables).forEach(([key, value]) => {
         urlPath = urlPath.replace(`:${key}`, String(value));
+      });
+    }
+
+    if (urlPath.includes(':')) {
+      const optionals = urlPath.match(/:\w+?\?/g);
+
+      optionals?.forEach((optional) => {
+        urlPath = urlPath.replace(`/${optional}`, '');
       });
     }
 
