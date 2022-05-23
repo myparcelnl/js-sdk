@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/myparcelnl/js-sdk/compare/v2.2.1...v2.3.0) (2022-05-23)
+
+
+### :bug: Bug Fixes
+
+* avoid getting two slashes after base url ([#10](https://github.com/myparcelnl/js-sdk/issues/10)) ([71b28fd](https://github.com/myparcelnl/js-sdk/commit/71b28fdd864312bd192b8e55b7777a3fae2b6e74))
+
+
+### :sparkles: New Features
+
+* allow optional path variables ([#11](https://github.com/myparcelnl/js-sdk/issues/11)) ([4f83c77](https://github.com/myparcelnl/js-sdk/commit/4f83c77e657ffbd96b223332221d2919de23860f)), closes [#7](https://github.com/myparcelnl/js-sdk/issues/7)
+* allow post requests to be executed properly ([#9](https://github.com/myparcelnl/js-sdk/issues/9)) ([c6a7aa1](https://github.com/myparcelnl/js-sdk/commit/c6a7aa1342db2d83cd2f2170d92a1f5ddb497a33))
+
 ### [2.2.1](https://github.com/myparcelnl/js-sdk/compare/v2.2.0...v2.2.1) (2022-05-20)
 
 
