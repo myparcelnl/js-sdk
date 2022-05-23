@@ -54,7 +54,7 @@ describe('AbstractClient', () => {
   it('throws error if path is not substituted', async () => {
     expect.assertions(1);
     await expect(sdk.getCarrier()).rejects.toThrow(
-      new UserException('One or more path variables are missing in carriers/:carrier'),
+      new UserException('One or more path variables are missing in /carriers/:carrier'),
     );
   });
 

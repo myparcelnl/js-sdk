@@ -44,7 +44,7 @@ export abstract class AbstractClient {
   private _requiredHeaders: (RequestHeader | string)[] = [];
 
   public constructor(config?: ClientConfig) {
-    this.baseUrl = config?.baseUrl ?? BASE_URL;
+    this.baseUrl = (config?.baseUrl ?? BASE_URL).replace(/\/+$/, '');
     this.headers = config?.headers ?? {};
   }
 
@@ -99,6 +99,10 @@ export abstract class AbstractClient {
   ): string {
     let urlPath = endpoint.getPath();
 
+    if (!urlPath.startsWith('/')) {
+      urlPath = `/${urlPath}`;
+    }
+
     if (options?.path) {
       urlPath = this.substitutePath<E>(urlPath, options.path);
     }
@@ -111,7 +115,7 @@ export abstract class AbstractClient {
       urlPath = addParameters<E>(urlPath, options.parameters);
     }
 
-    return `${this.baseUrl}/${urlPath}`;
+    return this.baseUrl + urlPath;
   }
 
   /**
