@@ -16,17 +16,20 @@ export const getAutoImplementation = async (
 ): Promise<ResponseWrapper | Record<string, unknown>> => {
   const files = fs.readdirSync(DIR_EXAMPLES);
 
-  const [response] = (
-    await Promise.all(
+  try {
+    return await Promise.any(
       files.map(async (file) => {
         const imported = (await import(path.resolve(DIR_EXAMPLES, file))).default;
+        const requestPath = info.toString().replace(BASE_URL, '');
 
-        if (imported.match(info.toString().replace(BASE_URL, ''), init)) {
+        if (imported.match(requestPath, init)) {
           return imported.response();
         }
-      }),
-    )
-  ).filter(Boolean);
 
-  return response ?? doActualFetch(info, init);
+        throw new Error('No match');
+      }),
+    );
+  } catch (e) {
+    return doActualFetch(info, init);
+  }
 };
