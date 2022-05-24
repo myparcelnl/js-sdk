@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.3.1](https://github.com/myparcelnl/js-sdk/compare/v2.3.0...v2.3.1) (2022-05-24)
+
+
+### :bug: Bug Fixes
+
+* don't send content-type with non-POST/PUT requests ([#12](https://github.com/myparcelnl/js-sdk/issues/12)) ([cce556f](https://github.com/myparcelnl/js-sdk/commit/cce556f19d9d442cbc831c33df4106b906e5609c))
+* handle having no response body ([#13](https://github.com/myparcelnl/js-sdk/issues/13)) ([a621b61](https://github.com/myparcelnl/js-sdk/commit/a621b6128911ef8e6b9063bf3f18ef9f1322f4e7))
+
 ## [2.3.0](https://github.com/myparcelnl/js-sdk/compare/v2.2.1...v2.3.0) (2022-05-23)
 
 
