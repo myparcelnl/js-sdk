@@ -47,7 +47,6 @@ type GetDeliveryOptionsDefinition = CreateDefinition<{
  * Get available delivery options for given location. Note: This calls version 2 of the endpoint.
  */
 export class GetDeliveryOptions extends AbstractPublicEndpoint<GetDeliveryOptionsDefinition> {
-  public readonly method: HttpMethod = 'GET';
   public readonly name = 'getDeliveryOptions';
   public readonly path = 'delivery_options';
   public readonly property = 'deliveries';

@@ -15,7 +15,6 @@ export type GetPickupLocationsDefinition = CreateDefinition<{
  * Get available pickup locations for given location.
  */
 export class GetPickupLocations extends AbstractPublicEndpoint<GetPickupLocationsDefinition> {
-  public readonly method: HttpMethod = 'GET';
   public readonly name = 'getPickupLocations';
   public readonly path = 'pickup_locations';
   public readonly property = 'pickup_locations';

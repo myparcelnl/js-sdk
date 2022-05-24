@@ -63,7 +63,6 @@ describe('AbstractClient', () => {
     expect.assertions(1);
 
     class GetCredentials extends AbstractPublicEndpoint {
-      public readonly method: HttpMethod = 'GET';
       public readonly name = 'getCredentials';
       public readonly path: string = 'external_integration_provider_credentials/:name/:version?';
       public readonly property: string = 'credentials';
