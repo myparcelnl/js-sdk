@@ -15,7 +15,6 @@ type GetShipmentDefinition = CreateDefinition<{
  * Retrieve a single shipment by ID.
  */
 export class GetShipment extends AbstractPrivateEndpoint<GetShipmentDefinition> {
-  public readonly method: HttpMethod = 'GET';
   public readonly name = 'getShipment';
   public readonly path = 'shipments/:id';
   public readonly property = 'shipments';

@@ -18,7 +18,6 @@ type GetShipmentsDefinition = CreateDefinition<{
  * Retrieve all shipments, or a paginated subset.
  */
 export class GetShipments extends AbstractPrivateEndpoint<GetShipmentsDefinition> {
-  public readonly method: HttpMethod = 'GET';
   public readonly name = 'getShipments';
   public readonly path = 'shipments';
   public readonly property = 'shipments';

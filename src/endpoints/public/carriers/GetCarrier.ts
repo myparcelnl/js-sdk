@@ -16,7 +16,6 @@ export type GetCarrierDefinition = CreateDefinition<{
  * Get a single carrier.
  */
 export class GetCarrier extends AbstractPublicEndpoint<GetCarrierDefinition> {
-  public readonly method: HttpMethod = 'GET';
   public readonly name = 'getCarrier';
   public readonly path = 'carriers/:carrier';
   public readonly property = 'carriers';

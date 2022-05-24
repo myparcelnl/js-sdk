@@ -5,7 +5,7 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
   /**
    * HTTP method.
    */
-  public abstract readonly method: HttpMethod;
+  public readonly method: HttpMethod = 'GET';
 
   /**
    * Name of the endpoint.
