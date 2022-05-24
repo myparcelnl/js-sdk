@@ -4,6 +4,7 @@ import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
 import {HttpMethod} from '@/types';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
+import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPrivateSdk} from '@/createPrivateSdk';
@@ -161,6 +162,22 @@ describe('AbstractClient', () => {
       },
       method: 'POST',
       body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":"package"},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
+    });
+  });
+
+  it('handles having no response body', async () => {
+    expect.assertions(2);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestDeleteEndpoint()]);
+    const response = await sdk.deleteEndpoint();
+
+    expect(response).toBeUndefined();
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'DELETE',
     });
   });
 });

@@ -4,7 +4,9 @@ import {ResponseWrapper} from '@/types/request.types';
 
 export interface MockResponse<E> {
   match(url: string, init?: RequestInit): boolean;
-  response(): E extends AbstractEndpoint ? ResponseWrapper<EndpointResponseBody<E>> : Record<string, unknown>;
+  response(): E extends AbstractEndpoint
+    ? ResponseWrapper<EndpointResponseBody<E>>
+    : Record<string, unknown> | undefined;
 }
 
 export const defineMockResponse = <E>(responseObject: MockResponse<E>): MockResponse<E> => {

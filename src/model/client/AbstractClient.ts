@@ -3,11 +3,12 @@ import {
   ClientRequest,
   EndpointPath,
   EndpointResponse,
+  EndpointResponseBody,
   EndpointResponseProperty,
   OptionsWithBody,
   OptionsWithoutBody,
 } from '@/model/client/AbstractClient.types';
-import {ErrorResponse, RequestHeader, RequestHeaders} from '@/types/request.types';
+import {ErrorResponse, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {ApiException} from '@/model/exception/ApiException';
 import {UserException} from '@/model/exception/UserException';
@@ -72,7 +73,11 @@ export abstract class AbstractClient {
       throw new ApiException(response);
     }
 
-    return response.data[endpoint.getResponseProperty() as EndpointResponseProperty<E>];
+    if (isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
+      return response.data[endpoint.getResponseProperty() as EndpointResponseProperty<E>];
+    }
+
+    return response;
   }
 
   /**
