@@ -47,7 +47,7 @@ describe('AbstractClient', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/carriers/postnl', {
-      headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+      headers: {Accept: 'application/json'},
       method: 'GET',
     });
     expect(response.length).toBe(1);
@@ -87,7 +87,7 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       'https://api.myparcel.nl/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
       {
-        headers: {Accept: 'application/json;version=2.0', 'Content-Type': 'application/json'},
+        headers: {Accept: 'application/json;version=2.0'},
         method: 'GET',
       },
     );
@@ -135,7 +135,6 @@ describe('AbstractClient', () => {
       {
         headers: {
           Accept: 'application/json;version=2.0',
-          'Content-Type': 'application/json',
           'X-Client-Header': '1',
           'X-Additional-Header': '1',
         },
@@ -174,7 +173,6 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
       },
       method: 'DELETE',
     });

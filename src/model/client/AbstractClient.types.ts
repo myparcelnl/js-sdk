@@ -43,3 +43,5 @@ export interface OptionsWithBody<E extends AbstractEndpoint> {
 }
 
 export type OptionsWithoutBody<E extends AbstractEndpoint> = Omit<OptionsWithBody<E>, 'body'>;
+
+export type Options<E extends AbstractEndpoint> = OptionsWithBody<E> | OptionsWithoutBody<E>;

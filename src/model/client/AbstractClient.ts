@@ -5,10 +5,10 @@ import {
   EndpointResponse,
   EndpointResponseBody,
   EndpointResponseProperty,
+  Options,
   OptionsWithBody,
-  OptionsWithoutBody,
 } from '@/model/client/AbstractClient.types';
-import {ErrorResponse, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
+import {ErrorResponse, HttpMethod, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {ApiException} from '@/model/exception/ApiException';
 import {UserException} from '@/model/exception/UserException';
@@ -16,6 +16,8 @@ import {addParameters} from '@/model/client/helper/addParameters';
 import {isOfType} from '@/utils/isOfType';
 
 export const BASE_URL = 'https://api.myparcel.nl';
+
+const HTTP_METHODS_WITH_CONTENT: HttpMethod[] = ['POST', 'PUT'];
 
 export abstract class AbstractClient {
   /**
@@ -60,14 +62,11 @@ export abstract class AbstractClient {
   /**
    * Prepare and execute the final request and handle the response.
    */
-  public async doRequest<E extends AbstractEndpoint>(
-    endpoint: E,
-    options: OptionsWithBody<E> | OptionsWithoutBody<E>,
-  ): Promise<EndpointResponse<E>> {
-    options = this.normalizeOptions(endpoint, options);
-    this.validateHeaders(endpoint, options);
+  public async doRequest<E extends AbstractEndpoint>(endpoint: E, options: Options<E>): Promise<EndpointResponse<E>> {
+    const newOptions = this.normalizeOptions(endpoint, options);
+    this.validateHeaders(endpoint, newOptions);
 
-    const response = await this.request(endpoint, options);
+    const response = await this.request(endpoint, newOptions);
 
     if (isOfType<ErrorResponse>(response, 'errors')) {
       throw new ApiException(response);
@@ -88,7 +87,6 @@ export abstract class AbstractClient {
   protected getHeaders(): RequestHeaders {
     return {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
       ...this.headers,
     };
   }
@@ -98,10 +96,7 @@ export abstract class AbstractClient {
    *
    * @protected
    */
-  protected createUrl<E extends AbstractEndpoint>(
-    endpoint: E,
-    options: OptionsWithoutBody<E> | OptionsWithBody<E>,
-  ): string {
+  protected createUrl<E extends AbstractEndpoint>(endpoint: E, options: Options<E>): string {
     let urlPath = endpoint.getPath();
 
     if (!urlPath.startsWith('/')) {
@@ -152,8 +147,11 @@ export abstract class AbstractClient {
    *
    * @protected
    */
-  protected validateHeaders<E extends AbstractEndpoint>(endpoint: E, options: OptionsWithBody<E>): void {
-    const headers = Object.entries(options.headers ?? []).reduce(
+  protected validateHeaders<E extends AbstractEndpoint>(
+    endpoint: E,
+    options: WithRequired<Options<E>, 'headers'>,
+  ): void {
+    const headers = Object.entries(options.headers).reduce(
       (acc, [key, header]) => ({
         ...acc,
         [key.toLowerCase()]: header,
@@ -175,18 +173,21 @@ export abstract class AbstractClient {
    */
   protected normalizeOptions<E extends AbstractEndpoint>(
     endpoint: E,
-    options: OptionsWithBody<E> | OptionsWithoutBody<E>,
-  ): OptionsWithBody<E> | OptionsWithoutBody<E> {
-    // Merge all headers
-    options.headers = {
-      ...this.getHeaders(),
-      ...options.headers,
-      ...endpoint.getHeaders(),
+    options: Options<E>,
+  ): WithRequired<Options<E>, 'headers'> {
+    const newOptions: WithRequired<OptionsWithBody<E>, 'headers'> = {
+      ...options,
+      headers: {
+        ...(HTTP_METHODS_WITH_CONTENT.includes(endpoint.method) ? {'Content-Type': 'application/json'} : {}),
+        ...this.getHeaders(),
+        ...options.headers,
+        ...endpoint.getHeaders(),
+      },
     };
 
     // Convert all parameters to lowercase.
     if (options.parameters) {
-      options.parameters = Object.entries(options.parameters).reduce(
+      newOptions.parameters = Object.entries(options.parameters).reduce(
         (acc, [key, parameter]) => ({
           ...acc,
           [key.toLowerCase()]: parameter.toString(),
@@ -196,11 +197,11 @@ export abstract class AbstractClient {
     }
 
     if (isOfType<OptionsWithBody<E>>(options, 'body')) {
-      options.body = {
+      newOptions.body = {
         data: {[endpoint.getProperty()]: options.body},
       };
     }
 
-    return options;
+    return newOptions;
   }
 }
