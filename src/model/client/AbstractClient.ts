@@ -8,7 +8,7 @@ import {
   Options,
   OptionsWithBody,
 } from '@/model/client/AbstractClient.types';
-import {ErrorResponse, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
+import {ErrorResponse, HttpMethod, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {ApiException} from '@/model/exception/ApiException';
 import {UserException} from '@/model/exception/UserException';
@@ -16,6 +16,8 @@ import {addParameters} from '@/model/client/helper/addParameters';
 import {isOfType} from '@/utils/isOfType';
 
 export const BASE_URL = 'https://api.myparcel.nl';
+
+const HTTP_METHODS_WITH_CONTENT: HttpMethod[] = ['POST', 'PUT'];
 
 export abstract class AbstractClient {
   /**
@@ -176,7 +178,7 @@ export abstract class AbstractClient {
     const newOptions: WithRequired<OptionsWithBody<E>, 'headers'> = {
       ...options,
       headers: {
-        ...(['POST', 'PUT'].includes(endpoint.method.toUpperCase()) ? {'Content-Type': 'application/json'} : {}),
+        ...(HTTP_METHODS_WITH_CONTENT.includes(endpoint.method) ? {'Content-Type': 'application/json'} : {}),
         ...this.getHeaders(),
         ...options.headers,
         ...endpoint.getHeaders(),

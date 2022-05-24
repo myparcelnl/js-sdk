@@ -173,7 +173,6 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
       },
       method: 'DELETE',
     });
