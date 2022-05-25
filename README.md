@@ -109,7 +109,7 @@ const sdk = createPrivateSdk(new FetchClient(clientConfig), [
 ]);
 
 const result = await sdk.getShipment({ path: { id: 123456 } });
-console.log(result); // { ... } (The shipment object)
+console.log(result); // [{ ... }] (Array with singular shipment object)
 ```
 
 ### Using constants
