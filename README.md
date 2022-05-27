@@ -68,6 +68,8 @@ Then call the endpoint. There are constants available in our SDK for data like
 carriers, package types, delivery types and more.
 See [constants](#using-constants)
 
+#### POST Shipments example
+
 ```js
 const result = await sdk.postShipments({
   body: [
@@ -89,6 +91,27 @@ const result = await sdk.postShipments({
 console.log(result); // [ 123456 ] (The ID of the shipment that was just created)
 ```
 
+#### GET Shipment example
+
+To get a shipment, you need to pass the shipment ID as a path parameter:
+
+```js
+import { createPrivateSdk, GetShipment } from '@myparcel/sdk';
+
+const clientConfig = {
+  headers: {
+    Authorization: 'bearer ' + MY_BASE_64_ENCODED_API_KEY
+  }
+};
+
+const sdk = createPrivateSdk(new FetchClient(clientConfig), [
+  new GetShipment(),
+]);
+
+const result = await sdk.getShipment({ path: { id: 123456 } });
+console.log(result); // [{ ... }] (Array with singular shipment object)
+```
+
 ### Using constants
 
 Our SDK exposes some constants to make working with our API easier.
@@ -96,13 +119,13 @@ Our SDK exposes some constants to make working with our API easier.
 - Carriers
   ```js
   import { CARRIERS } from '@myparcelnl/sdk';
-  
+
   CARRIERS.POSTNL_NAME // "postnl"
   ```
 - **Package types:** Contains all package types' names and IDs.
   ```js
   import { PACKAGE_TYPES } from '@myparcelnl/sdk';
-  
+
   PACKAGE_TYPES.DIGITAL_STAMP_NAME // "digital_stamp"
   PACKAGE_TYPES.PACKAGE_ID // 1
   PACKAGE_TYPES.LETTER // { ID: 3, NAME: "letter" }
@@ -120,7 +143,7 @@ Our SDK exposes some constants to make working with our API easier.
 - **Countries:** Contains constants for all countries, by name.
   ```js
   import { COUNTRIES } from '@myparcelnl/sdk';
-  
+
   COUNTRIES.NETHERLANDS // "NL"
   COUNTRIES.GERMANY // "DE"
   // etc
