@@ -14,6 +14,6 @@ export const createFetchMock = <T>(implementation?: MockedResponse<T>): jest.Spy
 
     const {body, ...responseInit} = resolvedImplementation ?? {};
 
-    return Promise.resolve(new Response(JSON.stringify(body) as BodyInit, responseInit));
+    return Promise.resolve(new Response(body ? JSON.stringify(body) : undefined, responseInit));
   });
 };
