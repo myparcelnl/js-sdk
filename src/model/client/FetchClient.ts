@@ -15,6 +15,10 @@ export class FetchClient extends AbstractClient {
 
     const request = await fetch(this.createUrl(endpoint, options), config);
 
+    if (request.statusText === 'No Content') {
+      return undefined;
+    }
+
     if (request.body) {
       return request.json();
     }

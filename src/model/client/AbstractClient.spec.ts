@@ -8,6 +8,7 @@ import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
+import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -174,6 +175,27 @@ describe('AbstractClient', () => {
         Accept: 'application/json',
       },
       method: 'DELETE',
+    });
+  });
+
+  it('handles having a status 204 response', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestPut204Endpoint()]);
+    const response = await sdk.putEndpoint();
+
+    expect(response).toBeUndefined();
+
+    const result = await fetchMock.mock.results[0].value;
+    expect(result.status).toBe(204);
+    expect(result.statusText).toBe('No Content');
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/204', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
     });
   });
 });
