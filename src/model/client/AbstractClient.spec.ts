@@ -2,7 +2,6 @@ import {AbstractPublicEndpoint, EndpointParameters} from '@/model';
 import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations, PostShipments} from '@/endpoints';
 import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
-import {HttpMethod} from '@/types';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
 import {UserException} from '@/model/exception/UserException';

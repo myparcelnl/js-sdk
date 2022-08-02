@@ -6,8 +6,10 @@ export default defineMockResponse({
   },
 
   response: () => ({
-    data: {
-      credentials: [],
+    body: {
+      data: {
+        credentials: [],
+      },
     },
   }),
 });

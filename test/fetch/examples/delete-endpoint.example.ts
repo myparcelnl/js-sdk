@@ -3,5 +3,7 @@ import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 export default defineMockResponse({
   match: (path: string, init?: RequestInit) => init?.method === 'DELETE' && path === '/endpoint',
 
-  response: () => undefined,
+  response: () => ({
+    status: 204,
+  }),
 });

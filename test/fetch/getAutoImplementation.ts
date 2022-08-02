@@ -1,5 +1,5 @@
 import {BASE_URL} from '@/model/client/AbstractClient';
-import {ResponseWrapper} from '@/types/request.types';
+import {MockedResponse} from '@Test/fetch/defineMockResponse';
 import {doActualFetch} from './doActualFetch';
 import fs from 'fs';
 import path from 'path';
@@ -10,10 +10,7 @@ export const DIR_EXAMPLES = path.resolve(__dirname, 'examples');
  * Find an existing file in examples that matches the attempted request. If it
  * does not exist, a real API call will be made.
  */
-export const getAutoImplementation = async (
-  info: RequestInfo,
-  init?: RequestInit,
-): Promise<ResponseWrapper | Record<string, unknown>> => {
+export const getAutoImplementation = async (info: RequestInfo, init?: RequestInit): Promise<MockedResponse> => {
   const files = fs.readdirSync(DIR_EXAMPLES);
 
   try {
