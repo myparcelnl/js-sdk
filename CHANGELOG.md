@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.0](https://github.com/myparcelnl/js-sdk/compare/v2.3.1...v2.4.0) (2022-08-03)
+
+
+### :sparkles: New Features
+
+* **fetch:** support text responses ([#17](https://github.com/myparcelnl/js-sdk/issues/17)) ([cc17a03](https://github.com/myparcelnl/js-sdk/commit/cc17a03274b7f070b380aedbf769e3e73056176b))
+
 ### [2.3.1](https://github.com/myparcelnl/js-sdk/compare/v2.3.0...v2.3.1) (2022-05-24)
 
 
