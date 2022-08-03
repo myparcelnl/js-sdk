@@ -5,6 +5,11 @@ export default defineMockResponse<PostShipments>({
   match: (path: string, init?: RequestInit) => init?.method === 'POST' && path === '/shipments',
 
   response: () => ({
-    data: {ids: [1234567]},
+    headers: {'Content-Type': 'application/json'},
+    body: {
+      data: {
+        ids: [1234567],
+      },
+    },
   }),
 });

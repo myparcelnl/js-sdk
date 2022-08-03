@@ -13,10 +13,14 @@ export class FetchClient extends AbstractClient {
       config.body = JSON.stringify(options.body);
     }
 
-    const request = await fetch(this.createUrl(endpoint, options), config);
+    const response = await fetch(this.createUrl(endpoint, options), config);
 
-    if (request.body) {
-      return request.json();
+    if (response.body) {
+      if (response.headers.get('Content-Type')?.includes('application/json')) {
+        return response.json();
+      }
+
+      return response.text();
     }
   };
 }
