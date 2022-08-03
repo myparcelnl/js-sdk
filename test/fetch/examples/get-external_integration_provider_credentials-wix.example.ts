@@ -6,6 +6,7 @@ export default defineMockResponse({
   },
 
   response: () => ({
+    headers: {'Content-Type': 'application/json'},
     body: {
       data: {
         credentials: [],

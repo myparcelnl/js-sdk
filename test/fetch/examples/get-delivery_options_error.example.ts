@@ -5,6 +5,7 @@ export default defineMockResponse({
 
   response: () => ({
     status: 422,
+    headers: {'Content-Type': 'application/json'},
     body: {
       message:
         'The cc field is required. The carrier field is required. The platform field is required. (request_id: 1649780852.44186255a8746bdec)',

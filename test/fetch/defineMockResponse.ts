@@ -3,7 +3,9 @@ import {EndpointResponseBody} from '@/model/client/AbstractClient.types';
 import {ResponseWrapper} from '@/types/request.types';
 
 export interface MockedResponse<E = unknown> extends ResponseInit {
-  body?: E extends AbstractEndpoint ? ResponseWrapper<EndpointResponseBody<E>> : Record<string, unknown> | undefined;
+  body?: E extends AbstractEndpoint
+    ? ResponseWrapper<EndpointResponseBody<E>>
+    : Record<string, unknown> | string | undefined;
 }
 
 export interface MockResponse<E> {

@@ -4,11 +4,12 @@ import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
+import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
-import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
+import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -196,6 +197,26 @@ describe('AbstractClient', () => {
         'Content-Type': 'application/json',
       },
       method: 'PUT',
+    });
+  });
+
+  it('handles receiving a plain text response', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetTextEndpoint()]);
+    const response = await sdk.getText();
+
+    expect(response).toBe('"plain text"');
+
+    const result = await fetchMock.mock.results[0].value;
+    expect(result.status).toBe(200);
+    expect(result.statusText).toBe('OK');
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/text', {
+      headers: {
+        Accept: 'text/plain',
+      },
+      method: 'GET',
     });
   });
 });

@@ -6,6 +6,7 @@ export default defineMockResponse({
     path === '/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
 
   response: () => ({
+    headers: {'Content-Type': 'application/json'},
     body: {
       data: {
         deliveries: [

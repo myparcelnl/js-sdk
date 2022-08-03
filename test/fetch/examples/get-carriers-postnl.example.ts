@@ -5,6 +5,7 @@ export default defineMockResponse<GetCarrier>({
   match: (path: string, init?: RequestInit) => init?.method === 'GET' && path === '/carriers/postnl',
 
   response: () => ({
+    headers: {'Content-Type': 'application/json'},
     body: {
       data: {
         carriers: [

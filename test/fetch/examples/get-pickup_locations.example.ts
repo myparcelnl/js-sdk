@@ -7,6 +7,7 @@ export default defineMockResponse<GetPickupLocations>({
     path === '/pickup_locations?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE',
 
   response: () => ({
+    headers: {'Content-Type': 'application/json'},
     body: {
       data: {
         pickup_locations: [
