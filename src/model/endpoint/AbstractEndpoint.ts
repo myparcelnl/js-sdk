@@ -1,6 +1,11 @@
 import {EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {HttpMethod} from '@/types/request.types';
 
+interface EndpointOptions {
+  headers?: AbstractEndpoint['definition']['headers'];
+  parameters?: AbstractEndpoint['definition']['parameters'];
+}
+
 export abstract class AbstractEndpoint<D = EndpointDefinition> {
   /**
    * HTTP method.
@@ -34,8 +39,27 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
    */
   public declare readonly definition: D;
 
+  /**
+   * Headers to include when calling this endpoint.
+   */
+  private readonly headers: AbstractEndpoint['definition']['headers'];
+
+  /**
+   * Parameters to include in the endpoint url.
+   */
+  private readonly parameters: AbstractEndpoint['definition']['parameters'];
+
+  public constructor(options?: EndpointOptions) {
+    this.headers = options?.headers ?? {};
+    this.parameters = options?.parameters ?? {};
+  }
+
   public getHeaders(): AbstractEndpoint['definition']['headers'] {
-    return {};
+    return this.headers;
+  }
+
+  public getParameters(): AbstractEndpoint['definition']['parameters'] {
+    return this.parameters;
   }
 
   public getPath(): AbstractEndpoint['path'] {
