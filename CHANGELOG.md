@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/myparcelnl/js-sdk/compare/v2.4.0...v2.5.0) (2022-08-11)
+
+
+### :sparkles: New Features
+
+* allow passing headers and parameters to endpoints ([#18](https://github.com/myparcelnl/js-sdk/issues/18)) ([fa4dbdb](https://github.com/myparcelnl/js-sdk/commit/fa4dbdb294719176c99f12bf89a997a6a66ca43b))
+
 ## [2.4.0](https://github.com/myparcelnl/js-sdk/compare/v2.3.1...v2.4.0) (2022-08-03)
 
 
