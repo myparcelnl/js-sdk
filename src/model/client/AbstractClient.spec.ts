@@ -4,12 +4,13 @@ import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
+import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
+import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
-import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -125,19 +126,34 @@ describe('AbstractClient', () => {
     expect.assertions(1);
 
     const client = new FetchClient({headers: {'X-Client-Header': '1'}});
-    const getDeliveryOptions = new GetDeliveryOptions();
+    const sdk = createPublicSdk(client, [new TestGet200Endpoint({headers: {'X-Random': '12345'}})]);
 
-    const sdk = createPublicSdk(client, [getDeliveryOptions]);
+    await sdk.getEndpoint({headers: {'X-Additional-Header': '1'}});
 
-    await sdk.getDeliveryOptions({headers: {'X-Additional-Header': '1'}, parameters: getDeliveryOptionsParameters});
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint?X-Random=12345&X-Static-Parameter=value', {
+      headers: {
+        Accept: 'application/json',
+        'X-Additional-Header': '1',
+        'X-Client-Header': '1',
+        'X-Random': '12345',
+        'X-Static-Header': 'value',
+      },
+      method: 'GET',
+    });
+  });
+
+  it('parses all parameters correctly', async () => {
+    expect.assertions(1);
+    const client = new FetchClient({parameters: {XDEBUG_SESSION_START: 'phpstorm'}});
+    const sdk = createPublicSdk(client, [new TestGet200Endpoint({parameters: {number: 32, test: 1}})]);
+    await sdk.getEndpoint({parameters: {now: '1234', number: 31, param: 'sdk'}});
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.myparcel.nl/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
+      'https://api.myparcel.nl/endpoint?XDEBUG_SESSION_START=phpstorm&now=1234&number=31&param=sdk&X-Static-Parameter=value',
       {
         headers: {
-          Accept: 'application/json;version=2.0',
-          'X-Client-Header': '1',
-          'X-Additional-Header': '1',
+          Accept: 'application/json',
+          'X-Static-Header': 'value',
         },
         method: 'GET',
       },

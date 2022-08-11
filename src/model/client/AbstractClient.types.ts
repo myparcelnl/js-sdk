@@ -16,6 +16,7 @@ type PluginConstructor = (client: AbstractClient) => ClientPlugin;
 export interface ClientConfig {
   baseUrl?: string;
   headers?: RequestHeaders;
+  parameters?: Record<string, string>;
   plugins?: PluginConstructor[];
 }
 

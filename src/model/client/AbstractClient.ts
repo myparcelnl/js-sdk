@@ -40,6 +40,11 @@ export abstract class AbstractClient {
   protected headers: RequestHeaders;
 
   /**
+   * @protected
+   */
+  protected parameters: Record<string, string>;
+
+  /**
    * Array of headers that are required. Client will throw an error if any are missing.
    *
    * @private
@@ -49,6 +54,7 @@ export abstract class AbstractClient {
   public constructor(config?: ClientConfig) {
     this.baseUrl = (config?.baseUrl ?? BASE_URL).replace(/\/+$/, '');
     this.headers = config?.headers ?? {};
+    this.parameters = config?.parameters ?? {};
   }
 
   public get requiredHeaders(): (RequestHeader | string)[] {
@@ -177,6 +183,11 @@ export abstract class AbstractClient {
   ): WithRequired<Options<E>, 'headers'> {
     const newOptions: WithRequired<OptionsWithBody<E>, 'headers'> = {
       ...options,
+      parameters: {
+        ...this.parameters,
+        ...options.parameters,
+        ...endpoint.getParameters(),
+      },
       headers: {
         ...(HTTP_METHODS_WITH_CONTENT.includes(endpoint.method) ? {'Content-Type': 'application/json'} : {}),
         ...this.getHeaders(),
@@ -184,17 +195,6 @@ export abstract class AbstractClient {
         ...endpoint.getHeaders(),
       },
     };
-
-    // Convert all parameters to lowercase.
-    if (options.parameters) {
-      newOptions.parameters = Object.entries(options.parameters).reduce(
-        (acc, [key, parameter]) => ({
-          ...acc,
-          [key.toLowerCase()]: parameter.toString(),
-        }),
-        {},
-      );
-    }
 
     if (isOfType<OptionsWithBody<E>>(options, 'body')) {
       newOptions.body = {
