@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {OutputOptions, ResolveIdHook, defineConfig} from 'rollup';
 import esbuild, {minify} from 'rollup-plugin-esbuild';
 import alias from '@rollup/plugin-alias';

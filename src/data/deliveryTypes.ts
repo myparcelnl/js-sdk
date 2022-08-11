@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {DeliveryTypeId, DeliveryTypeName} from '@/types/myparcel.types';
 
 export const MORNING_ID: DeliveryTypeId = 1;

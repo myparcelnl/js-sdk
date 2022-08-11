@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 
 export default defineMockResponse({

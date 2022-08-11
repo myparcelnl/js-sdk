@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {PlatformId, PlatformName} from '@/types/myparcel.types';
 
 export const MYPARCEL_ID: PlatformId = 1;

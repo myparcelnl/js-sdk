@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export const AFGHANISTAN = 'AF';
 export const ALAND_ISLANDS = 'AX';
 export const ALBANIA = 'AL';

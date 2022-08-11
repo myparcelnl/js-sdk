@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {ShipmentOptionName} from '@/types';
 
 export const AGE_CHECK_HUMAN = 'Age check';

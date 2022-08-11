@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {GetPickupLocations} from '@/endpoints';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 

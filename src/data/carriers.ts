@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {CarrierId, CarrierName} from '@/types/myparcel.types';
 
 interface Carrier {

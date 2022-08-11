@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {InitialOptions} from '@jest/types/build/Config';
 
 const jestConfig: InitialOptions = {

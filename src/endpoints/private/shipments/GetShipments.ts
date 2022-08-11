@@ -1,6 +1,5 @@
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {HttpMethod} from '@/types/request.types';
 import {MyParcelShipment} from '@/endpoints';
 import {PaginationParameters} from '@/types';
 

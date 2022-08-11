@@ -2,7 +2,6 @@ import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
 import {Carrier} from '@/endpoints/public/carriers/Carrier.types';
 import {CarrierNameOrId} from '@/types/myparcel.types';
 import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {HttpMethod} from '@/types/request.types';
 
 export type GetCarrierDefinition = CreateDefinition<{
   name: typeof GetCarrier.name;

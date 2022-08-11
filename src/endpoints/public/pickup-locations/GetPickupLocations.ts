@@ -1,7 +1,6 @@
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
 import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {DeliveryOptionsParameters} from '@/endpoints';
-import {HttpMethod} from '@/types/request.types';
 import {PickupLocation} from '@/endpoints/public/pickup-locations/PickupLocation.types';
 
 export type GetPickupLocationsDefinition = CreateDefinition<{

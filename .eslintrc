@@ -13,7 +13,10 @@
       {
         "printWidth": 120
       }
-    ]
+    ],
+    "implicit-arrow-linebreak": "off",
+    "no-extra-parens": "off",
+    "operator-linebreak": "off"
   },
   "overrides": [
     {
@@ -24,14 +27,10 @@
       "rules": {
         "class-methods-use-this": "off",
         "no-void": "off",
-        "@typescript-eslint/space-before-function-paren": [
-          "warn",
-          {
-            "anonymous": "never",
-            "named": "never",
-            "asyncArrow": "always"
-          }
-        ],
+        "implicit-arrow-linebreak": "off",
+        "operator-linebreak": "off",
+        "@typescript-eslint/no-extra-parens": "off",
+        "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/member-ordering": [
           "warn",

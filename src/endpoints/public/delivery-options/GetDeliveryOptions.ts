@@ -1,8 +1,8 @@
 import {CarrierNameOrId, DeliveryTypeId, PackageTypeName, PlatformNameOrId} from '@/types/myparcel.types';
-import {HttpMethod, RequestHeaders} from '@/types/request.types';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
 import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {DeliveryOption} from '@/endpoints/public/delivery-options/DeliveryOption.types';
+import {RequestHeaders} from '@/types/request.types';
 import {WithRequired} from '@/types/global.types';
 
 type Parameters = {

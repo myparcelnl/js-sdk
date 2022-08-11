@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {GetCarrier} from '@/endpoints/public/carriers';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 

@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {PostShipments} from '@/endpoints';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 

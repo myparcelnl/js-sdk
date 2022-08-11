@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {PackageTypeId, PackageTypeName} from '@/types/myparcel.types';
 
 export const PACKAGE_ID: PackageTypeId = 1;
