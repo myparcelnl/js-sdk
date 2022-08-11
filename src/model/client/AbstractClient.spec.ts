@@ -130,7 +130,7 @@ describe('AbstractClient', () => {
 
     await sdk.getEndpoint({headers: {'X-Additional-Header': '1'}});
 
-    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint?X-Random=12345&X-Static-Parameter=value', {
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint?X-Static-Parameter=value', {
       headers: {
         Accept: 'application/json',
         'X-Additional-Header': '1',
@@ -149,7 +149,7 @@ describe('AbstractClient', () => {
     await sdk.getEndpoint({parameters: {now: '1234', number: 31, param: 'sdk'}});
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.myparcel.nl/endpoint?XDEBUG_SESSION_START=phpstorm&now=1234&number=31&param=sdk&X-Static-Parameter=value',
+      'https://api.myparcel.nl/endpoint?XDEBUG_SESSION_START=phpstorm&now=1234&number=32&param=sdk&test=1&X-Static-Parameter=value',
       {
         headers: {
           Accept: 'application/json',
