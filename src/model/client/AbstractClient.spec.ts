@@ -1,5 +1,6 @@
 import {AbstractPublicEndpoint, EndpointParameters} from '@/model';
 import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations, PostShipments} from '@/endpoints';
+import {beforeEach, describe, expect, it} from 'vitest';
 import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
@@ -197,15 +198,16 @@ describe('AbstractClient', () => {
 
   it('handles a timeout, completed in time', async () => {
     expect.assertions(2);
+    const localFetchMock = createFetchMock(undefined);
 
-    fetchMock.mockClear();
-    const localFetchMock = createFetchMock(undefined, { timeout: 10 });
-
-    const sdk = createPublicSdk(new FetchClient({
-      options: {
-        timeout: 200,
-      }
-    }), [new TestDeleteEndpoint()]);
+    const sdk = createPublicSdk(
+      new FetchClient({
+        options: {
+          timeout: 200,
+        },
+      }),
+      [new TestDeleteEndpoint()],
+    );
 
     const response = await sdk.deleteEndpoint();
     expect(response).toBeUndefined();
@@ -233,7 +235,6 @@ describe('AbstractClient', () => {
     const result = await fetchMock.mock.results[0].value;
     expect(result.status).toBe(204);
     expect(result.statusText).toBe('No Content');
-
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/204', {
       headers: {
         Accept: 'application/json',

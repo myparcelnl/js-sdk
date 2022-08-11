@@ -1,11 +1,12 @@
+import {SpyInstance, vi} from 'vitest';
 import {MockedResponse} from '@Test/fetch/defineMockResponse';
 import {getAutoImplementation} from './getAutoImplementation';
 import {originalFetch} from './originalFetch';
 
-export const createFetchMock = <T>(implementation?: MockedResponse<T>, options?: Record<string, unknown>): jest.SpyInstance => {
+export const createFetchMock = <T>(implementation?: MockedResponse<T>): SpyInstance => {
   originalFetch.set(global.fetch);
 
-  return jest.spyOn(global, 'fetch').mockImplementation(async (info: RequestInfo, init?: RequestInit) => {
+  return vi.spyOn(global, 'fetch').mockImplementation(async (info: RequestInfo, init?: RequestInit) => {
     let resolvedImplementation = implementation;
 
     if (!implementation) {
