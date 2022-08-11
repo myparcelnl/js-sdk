@@ -16,7 +16,7 @@ export class TestGet200Endpoint extends AbstractPublicEndpoint {
 
   public getParameters(): AbstractEndpoint['definition']['parameters'] {
     return {
-      ...super.getHeaders(),
+      ...super.getParameters(),
       'X-Static-Parameter': 'value',
     };
   }
