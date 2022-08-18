@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.1](https://github.com/myparcelnl/js-sdk/compare/v2.5.0...v2.5.1) (2022-08-18)
+
+
+### :bug: Bug Fixes
+
+* don't prefix path with slash if path is empty ([a2de9e9](https://github.com/myparcelnl/js-sdk/commit/a2de9e9ca782dabe237f3372e1f512869f191b2a))
+
 ## [2.5.0](https://github.com/myparcelnl/js-sdk/compare/v2.4.0...v2.5.0) (2022-08-11)
 
 
