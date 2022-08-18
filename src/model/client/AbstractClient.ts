@@ -105,7 +105,7 @@ export abstract class AbstractClient {
   protected createUrl<E extends AbstractEndpoint>(endpoint: E, options: Options<E>): string {
     let urlPath = endpoint.getPath();
 
-    if (!urlPath.startsWith('/')) {
+    if (urlPath.length && !urlPath.startsWith('/')) {
       urlPath = `/${urlPath}`;
     }
 
