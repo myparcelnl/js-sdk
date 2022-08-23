@@ -207,9 +207,7 @@ describe('AbstractClient', () => {
       }
     }), [new TestDeleteEndpoint()]);
 
-    const actual = sdk.deleteEndpoint();
-    const response = await actual;
-
+    const response = await sdk.deleteEndpoint();
     expect(response).toBeUndefined();
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
       headers: {
