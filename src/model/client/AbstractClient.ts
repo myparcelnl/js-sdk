@@ -45,6 +45,13 @@ export abstract class AbstractClient {
   protected parameters: Record<string, string>;
 
   /**
+   * Additional client specific options.
+   *
+   * @protected
+   */
+   protected options: Record<string, unknown>;
+
+  /**
    * Array of headers that are required. Client will throw an error if any are missing.
    *
    * @private
@@ -55,6 +62,7 @@ export abstract class AbstractClient {
     this.baseUrl = (config?.baseUrl ?? BASE_URL).replace(/\/+$/, '');
     this.headers = config?.headers ?? {};
     this.parameters = config?.parameters ?? {};
+    this.options = config?.options ?? {};
   }
 
   public get requiredHeaders(): (RequestHeader | string)[] {
@@ -69,7 +77,7 @@ export abstract class AbstractClient {
    * Prepare and execute the final request and handle the response.
    */
   public async doRequest<E extends AbstractEndpoint>(endpoint: E, options: Options<E>): Promise<EndpointResponse<E>> {
-    const newOptions = this.normalizeOptions(endpoint, options);
+    const newOptions = this.normalizeOptions(endpoint, {...options, ...this.options});
     this.validateHeaders(endpoint, newOptions);
 
     const response = await this.request(endpoint, newOptions);
