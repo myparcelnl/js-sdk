@@ -12,7 +12,7 @@ const jestConfig: InitialOptions = {
   },
   setupFiles: [
     'jest-fetch-mock',
-    './jest-mock-abortcontroller.ts',
+    './test/jestMockAbortController.ts',
   ],
 };
 
