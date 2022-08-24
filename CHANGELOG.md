@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.0](https://github.com/myparcelnl/js-sdk/compare/v2.5.1...v2.6.0) (2022-08-24)
+
+
+### :sparkles: New Features
+
+* **client:** add timeout option ([#20](https://github.com/myparcelnl/js-sdk/issues/20)) ([4a7319b](https://github.com/myparcelnl/js-sdk/commit/4a7319b118b6d7a9d59c1858438cc8c3d1500e17))
+
 ### [2.5.1](https://github.com/myparcelnl/js-sdk/compare/v2.5.0...v2.5.1) (2022-08-18)
 
 

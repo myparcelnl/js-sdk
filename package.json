@@ -1,6 +1,6 @@
 {
   "name": "@myparcel/sdk",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "description": "JavaScript SDK to connect to the MyParcel API via Node.js or browser",
   "keywords": [
     "myparcel",
