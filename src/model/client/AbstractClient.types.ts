@@ -18,6 +18,12 @@ export interface ClientConfig {
   headers?: RequestHeaders;
   parameters?: Record<string, string>;
   plugins?: PluginConstructor[];
+  options?: ClientOptions;
+}
+
+export interface ClientOptions {
+  timeout?: number;
+  [key: string]: unknown;
 }
 
 export type ClientRequest = <E extends AbstractEndpoint>(
@@ -41,6 +47,7 @@ export interface OptionsWithBody<E extends AbstractEndpoint> {
   headers?: RequestHeaders;
   parameters?: EndpointParameters<E>;
   path?: EndpointPath<E>;
+  timeout?: number;
 }
 
 export type OptionsWithoutBody<E extends AbstractEndpoint> = Omit<OptionsWithBody<E>, 'body'>;

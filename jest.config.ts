@@ -10,7 +10,10 @@ const jestConfig: InitialOptions = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@Test/(.*)$': '<rootDir>/test/$1',
   },
-  setupFiles: ['jest-fetch-mock'],
+  setupFiles: [
+    'jest-fetch-mock',
+    './test/jestMockAbortController.ts',
+  ],
 };
 
 export default jestConfig;

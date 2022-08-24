@@ -195,6 +195,33 @@ describe('AbstractClient', () => {
     });
   });
 
+  it('handles a timeout, completed in time', async () => {
+    expect.assertions(2);
+
+    fetchMock.mockClear();
+    const localFetchMock = createFetchMock(undefined, { timeout: 10 });
+
+    const sdk = createPublicSdk(new FetchClient({
+      options: {
+        timeout: 200,
+      }
+    }), [new TestDeleteEndpoint()]);
+
+    const response = await sdk.deleteEndpoint();
+    expect(response).toBeUndefined();
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
+      headers: {
+        Accept: 'application/json',
+      },
+      method: 'DELETE',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
+    });
+
+    localFetchMock.mockClear();
+  });
+
   it('handles having a status 204 response', async () => {
     expect.assertions(4);
 

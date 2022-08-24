@@ -4,9 +4,13 @@ import {isOfType} from '@/utils/isOfType';
 
 export class FetchClient extends AbstractClient {
   protected request: ClientRequest = async (endpoint, options) => {
+    const timeoutController = new AbortController();
+    const id = setTimeout(() => timeoutController.abort(), options.timeout);
+
     const config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
+      ...options.timeout && {signal: timeoutController.signal},
     };
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
@@ -14,6 +18,7 @@ export class FetchClient extends AbstractClient {
     }
 
     const response = await fetch(this.createUrl(endpoint, options), config);
+    clearTimeout(id);
 
     if (response.body) {
       if (response.headers.get('Content-Type')?.includes('application/json')) {
