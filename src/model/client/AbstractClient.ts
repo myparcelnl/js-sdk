@@ -1,5 +1,6 @@
 import {
   ClientConfig,
+  ClientOptions,
   ClientRequest,
   EndpointPath,
   EndpointResponse,
@@ -49,7 +50,7 @@ export abstract class AbstractClient {
    *
    * @protected
    */
-   protected options: Record<string, unknown>;
+   protected options: ClientOptions;
 
   /**
    * Array of headers that are required. Client will throw an error if any are missing.

@@ -18,7 +18,12 @@ export interface ClientConfig {
   headers?: RequestHeaders;
   parameters?: Record<string, string>;
   plugins?: PluginConstructor[];
-  options?: Record<string, unknown>;
+  options?: ClientOptions;
+}
+
+export interface ClientOptions {
+  timeout?: number;
+  [key: string]: unknown;
 }
 
 export type ClientRequest = <E extends AbstractEndpoint>(
