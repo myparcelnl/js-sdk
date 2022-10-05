@@ -1,11 +1,14 @@
 import {NoInfer} from '@/types/global.types';
 import {RequestHeaders} from '@/types/request.types';
 
-export interface PaginatedResponse<T> {
-  [key: string]: undefined | number | T;
+type Pagination = {
   page?: number;
   size?: number;
   results?: number;
+}
+
+export type PaginatedResponse<T> = Pagination & {
+  [key: string]: T;
 }
 
 export interface EndpointDefinition {
