@@ -40,7 +40,15 @@ export type EndpointResponseProperty<E extends AbstractEndpoint> = E['responsePr
   ? E['responseProperty']
   : E['property'];
 
-export type EndpointResponseBody<E extends AbstractEndpoint> = Record<EndpointResponseProperty<E>, EndpointResponse<E>>;
+type EndpointResponseBodyWrapper<E extends AbstractEndpoint> = EndpointResponseProperty<E>;
+
+type Page = 'page' | 'size' | 'results';
+
+export type EndpointResponseBody<E extends AbstractEndpoint> = {
+  [key in EndpointResponseBodyWrapper<E>]: EndpointResponse<E>;
+} & {
+  [key in Page]?: number;
+};
 
 export interface OptionsWithBody<E extends AbstractEndpoint> {
   body?: EndpointBody<E>;

@@ -1,5 +1,12 @@
 import {AbstractPublicEndpoint, EndpointParameters} from '@/model';
-import {GetCarrier, GetCarriers, GetDeliveryOptions, GetPickupLocations, PostShipments} from '@/endpoints';
+import {
+  GetCarrier,
+  GetCarriers,
+  GetDeliveryOptions,
+  GetPickupLocations,
+  GetShipments,
+  PostShipments,
+} from '@/endpoints';
 import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
@@ -199,13 +206,16 @@ describe('AbstractClient', () => {
     expect.assertions(2);
 
     fetchMock.mockClear();
-    const localFetchMock = createFetchMock(undefined, { timeout: 10 });
+    const localFetchMock = createFetchMock(undefined, {timeout: 10});
 
-    const sdk = createPublicSdk(new FetchClient({
-      options: {
-        timeout: 200,
-      }
-    }), [new TestDeleteEndpoint()]);
+    const sdk = createPublicSdk(
+      new FetchClient({
+        options: {
+          timeout: 200,
+        },
+      }),
+      [new TestDeleteEndpoint()],
+    );
 
     const response = await sdk.deleteEndpoint();
     expect(response).toBeUndefined();
@@ -261,5 +271,24 @@ describe('AbstractClient', () => {
       },
       method: 'GET',
     });
+  });
+
+  it('handles receiving a paginated response', async () => {
+    expect.assertions(8);
+
+    const sdk = createPublicSdk(new FetchClient(), [new GetShipments()]);
+    const response = await sdk.getShipments({
+      headers: {Authorization: 'bearer apiKey'},
+    });
+
+    expect(response).toHaveProperty('shipments');
+    expect(response).toHaveProperty('page');
+    expect(response).toHaveProperty('size');
+    expect(response).toHaveProperty('results');
+
+    expect(response.shipments).toHaveLength(4);
+    expect(response.page).toBe(1);
+    expect(response.size).toBe(30);
+    expect(response.results).toBe(4);
   });
 });

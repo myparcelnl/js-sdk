@@ -1,5 +1,5 @@
+import {CreateDefinition, PaginatedResponse} from '@/model/endpoint/AbstractEndpoint.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {MyParcelShipment} from '@/endpoints';
 import {PaginationParameters} from '@/types';
 
@@ -10,7 +10,7 @@ type Parameters = PaginationParameters & {
 type GetShipmentsDefinition = CreateDefinition<{
   name: typeof GetShipments.name;
   parameters: Parameters;
-  response: MyParcelShipment[];
+  response: PaginatedResponse<MyParcelShipment[]>;
 }>;
 
 /**

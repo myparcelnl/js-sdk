@@ -12,6 +12,7 @@ import {
 import {ErrorResponse, HttpMethod, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {ApiException} from '@/model/exception/ApiException';
+import {NoInfer} from '@/types';
 import {UserException} from '@/model/exception/UserException';
 import {addParameters} from '@/model/client/helper/addParameters';
 import {isOfType} from '@/utils/isOfType';
@@ -50,7 +51,7 @@ export abstract class AbstractClient {
    *
    * @protected
    */
-   protected options: ClientOptions;
+  protected options: ClientOptions;
 
   /**
    * Array of headers that are required. Client will throw an error if any are missing.
@@ -88,7 +89,27 @@ export abstract class AbstractClient {
     }
 
     if (isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
-      return response.data[endpoint.getResponseProperty() as EndpointResponseProperty<E>];
+      const property = endpoint.getResponseProperty() as EndpointResponseProperty<E>;
+      let wrappedResponse: EndpointResponse<E> = response.data[property];
+
+      // If the response is paginated, wrap it.
+      if (response.data.page || response.data.size || response.data.results) {
+        wrappedResponse = {
+          [property]: response.data[property] as NoInfer<unknown[]>,
+        };
+
+        if (response.data.page) {
+          wrappedResponse.page = response.data.page;
+        }
+        if (response.data.size) {
+          wrappedResponse.size = response.data.size;
+        }
+        if (response.data.results) {
+          wrappedResponse.results = response.data.results;
+        }
+      }
+
+      return wrappedResponse;
     }
 
     return response;
