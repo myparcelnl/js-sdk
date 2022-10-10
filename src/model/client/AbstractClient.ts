@@ -93,19 +93,20 @@ export abstract class AbstractClient {
       let wrappedResponse: EndpointResponse<E> = response.data[property];
 
       // If the response is paginated, wrap it.
-      if (response.data.page !== undefined || response.data.size !== undefined || response.data.results !== undefined) {
+      const {page, size, results} = response.data;
+      if (page !== undefined || size !== undefined || results !== undefined) {
         wrappedResponse = {
           [property]: response.data[property] as NoInfer<unknown[]>,
         };
 
-        if (response.data.page !== undefined) {
-          wrappedResponse.page = response.data.page;
+        if (page !== undefined) {
+          wrappedResponse.page = page;
         }
-        if (response.data.size !== undefined) {
-          wrappedResponse.size = response.data.size;
+        if (size !== undefined) {
+          wrappedResponse.size = size;
         }
-        if (response.data.results !== undefined) {
-          wrappedResponse.results = response.data.results;
+        if (results !== undefined) {
+          wrappedResponse.results = results;
         }
       }
 
