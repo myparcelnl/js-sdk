@@ -4,7 +4,8 @@ import {MyParcelShipment} from '@/endpoints';
 import {PaginationParameters} from '@/types';
 
 type Parameters = PaginationParameters & {
-  hidden: boolean;
+  carrier?: number;
+  hidden?: boolean;
 };
 
 type GetShipmentsDefinition = CreateDefinition<{

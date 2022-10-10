@@ -10,7 +10,7 @@ export class FetchClient extends AbstractClient {
     const config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
-      ...options.timeout && {signal: timeoutController.signal},
+      ...(options.timeout && {signal: timeoutController.signal}),
     };
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {

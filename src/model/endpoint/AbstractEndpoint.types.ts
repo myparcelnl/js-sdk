@@ -5,11 +5,9 @@ type Pagination = {
   page?: number;
   size?: number;
   results?: number;
-}
+};
 
-export type PaginatedResponse<T> = Pagination & {
-  [key: string]: T;
-}
+export type PaginatedResponse<T> = Pagination & Record<string, T>;
 
 export interface EndpointDefinition {
   name: string;

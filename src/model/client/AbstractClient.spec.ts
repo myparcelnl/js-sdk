@@ -291,4 +291,20 @@ describe('AbstractClient', () => {
     expect(response.size).toBe(30);
     expect(response.results).toBe(4);
   });
+
+  it('handles receiving a paginated response with 0 results', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new GetShipments()]);
+    const response = await sdk.getShipments({
+      parameters: {carrier: 2, page: 1, size: 30},
+      headers: {Authorization: 'bearer apiKey'},
+    });
+
+    expect(response).toHaveProperty('shipments');
+    expect(response).toHaveProperty('results');
+
+    expect(response.shipments).toHaveLength(0);
+    expect(response.results).toBe(0);
+  });
 });
