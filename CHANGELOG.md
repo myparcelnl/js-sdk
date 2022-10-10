@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.0](https://github.com/myparcelnl/js-sdk/compare/v2.7.0...v2.8.0) (2022-10-10)
+
+
+### :sparkles: New Features
+
+* extra check for pagination with results = 0 ([#22](https://github.com/myparcelnl/js-sdk/issues/22)) ([820d166](https://github.com/myparcelnl/js-sdk/commit/820d166c8ae8d57340b6a36099f626c5ef6d674f))
+
 ## [2.7.0](https://github.com/myparcelnl/js-sdk/compare/v2.6.0...v2.7.0) (2022-10-07)
 
 
