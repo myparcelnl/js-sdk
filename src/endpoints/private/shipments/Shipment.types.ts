@@ -2,7 +2,7 @@ import {
   CarrierId,
   CustomsDeclarationContents,
   DeliveryTypeId,
-  PackageTypeName,
+  PackageTypeId,
   ShipmentStatus,
 } from '@/types/myparcel.types';
 import {IntBoolean, Price, WithRequired} from '@/types';
@@ -42,7 +42,7 @@ export interface ShipmentOptions {
   label_description?: string;
   large_format?: IntBoolean;
   only_recipient?: IntBoolean;
-  package_type: PackageTypeName;
+  package_type: PackageTypeId;
   return?: IntBoolean;
   same_day_delivery?: IntBoolean;
   saturday_delivery?: IntBoolean;

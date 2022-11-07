@@ -183,7 +183,7 @@ describe('AbstractClient', () => {
         'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":"package"},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
+      body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
     });
   });
 
