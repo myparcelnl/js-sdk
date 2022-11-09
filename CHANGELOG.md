@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.8.1](https://github.com/myparcelnl/js-sdk/compare/v2.8.0...v2.8.1) (2022-11-09)
+
+
+### :bug: Bug Fixes
+
+* **shipment:** change package type name to id in post data ([6f06ac9](https://github.com/myparcelnl/js-sdk/commit/6f06ac90a45a81a357b8515ecc7ece0d308b3f88))
+
 ## [2.8.0](https://github.com/myparcelnl/js-sdk/compare/v2.7.0...v2.8.0) (2022-10-10)
 
 
