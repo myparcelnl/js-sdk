@@ -15,10 +15,10 @@
                     <option name="path" value=".github/ISSUE_TEMPLATE/BUG-REPORT.yml" />
                   </Item>
                   <Item>
-                    <option name="path" value=".github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml" />
+                    <option name="path" value=".github/ISSUE_TEMPLATE/config.yml" />
                   </Item>
                   <Item>
-                    <option name="path" value=".github/ISSUE_TEMPLATE/config.yml" />
+                    <option name="path" value=".github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml" />
                   </Item>
                 </list>
               </option>
