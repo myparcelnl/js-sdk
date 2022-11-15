@@ -1,6 +1,6 @@
 import {ClientRequest, OptionsWithBody} from '@/model/client/AbstractClient.types';
 import {AbstractClient} from '@/model/client/AbstractClient';
-import {isOfType} from '@/utils/isOfType';
+import {isOfType} from '@myparcel/ts-utils';
 
 export class FetchClient extends AbstractClient {
   protected request: ClientRequest = async (endpoint, options) => {

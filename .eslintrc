@@ -1,93 +1,30 @@
 {
-  "parserOptions": {
-    "requireConfigFile": false
-  },
+  "root": true,
   "extends": [
-    "@myparcel/eslint-config/preset-es6",
-    "plugin:prettier/recommended"
+    "@myparcel-eslint/eslint-config-esnext",
+    "@myparcel-eslint/eslint-config-prettier"
   ],
-  "rules": {
-    "class-methods-use-this": "off",
-    "prettier/prettier": [
-      "warn",
-      {
-        "printWidth": 120
-      }
-    ],
-    "implicit-arrow-linebreak": "off",
-    "no-extra-parens": "off",
-    "operator-linebreak": "off"
-  },
   "overrides": [
     {
-      "files": "./**/*.ts",
-      "extends": [
-        "@myparcel/eslint-config/preset-typescript"
-      ],
-      "rules": {
-        "class-methods-use-this": "off",
-        "no-void": "off",
-        "implicit-arrow-linebreak": "off",
-        "operator-linebreak": "off",
-        "@typescript-eslint/no-extra-parens": "off",
-        "@typescript-eslint/space-before-function-paren": "off",
-        "@typescript-eslint/consistent-type-definitions": "off",
-        "@typescript-eslint/member-ordering": [
-          "warn",
-          {
-            "default": [
-              "public-field",
-              "protected-field",
-              "private-field",
-              "public-get",
-              "protected-get",
-              "private-get",
-              "public-set",
-              "protected-set",
-              "private-set",
-              "public-method",
-              "protected-method",
-              "private-method"
-            ]
-          }
-        ]
-      }
-    },
-    {
       "files": [
-        "./**/*.js",
         "./**/*.ts"
       ],
-      "env": {
-        "node": true
+      "extends": [
+        "@myparcel-eslint/eslint-config-prettier-typescript"
+      ],
+      "rules": {
+        "class-methods-use-this": "off"
       }
     },
     {
       "files": [
-        "./test/**/*.ts",
-        "./src/**/*.spec.ts"
+        "./**/*.spec.*",
+        "./test/**/*"
       ],
       "rules": {
         "@typescript-eslint/no-magic-numbers": "off",
-        "max-len": "off",
-        "max-lines-per-function": "off"
-      }
-    },
-    {
-      "files": [
-        "./test/**/*.example.ts",
-        "./src/**/*.types.ts"
-      ],
-      "rules": {
-        "@typescript-eslint/naming-convention": [
-          "warn",
-          {
-            "selector": [
-              "typeProperty"
-            ],
-            "format": null
-          }
-        ]
+        "max-lines-per-function": "off",
+        "max-len": "off"
       }
     }
   ]

@@ -10,12 +10,12 @@ import {
   OptionsWithBody,
 } from '@/model/client/AbstractClient.types';
 import {ErrorResponse, HttpMethod, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
+import {NoInfer, WithRequired} from '@/types';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {ApiException} from '@/model/exception/ApiException';
-import {NoInfer} from '@/types';
 import {UserException} from '@/model/exception/UserException';
 import {addParameters} from '@/model/client/helper/addParameters';
-import {isOfType} from '@/utils/isOfType';
+import {isOfType} from '@myparcel/ts-utils';
 
 export const BASE_URL = 'https://api.myparcel.nl';
 
@@ -94,6 +94,7 @@ export abstract class AbstractClient {
 
       // If the response is paginated, wrap it.
       const {page, size, results} = response.data;
+
       if (page !== undefined || size !== undefined || results !== undefined) {
         wrappedResponse = {
           [property]: response.data[property] as NoInfer<unknown[]>,
@@ -102,9 +103,11 @@ export abstract class AbstractClient {
         if (page !== undefined) {
           wrappedResponse.page = page;
         }
+
         if (size !== undefined) {
           wrappedResponse.size = size;
         }
+
         if (results !== undefined) {
           wrappedResponse.results = results;
         }

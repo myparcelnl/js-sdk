@@ -10,7 +10,7 @@ export const DIR_EXAMPLES = path.resolve(__dirname, 'examples');
  * Find an existing file in examples that matches the attempted request. If it
  * does not exist, a real API call will be made.
  */
-export const getAutoImplementation = async (info: RequestInfo, init?: RequestInit): Promise<MockedResponse> => {
+export const getAutoImplementation = async (info: string | Request, init?: RequestInit): Promise<MockedResponse> => {
   const files = fs.readdirSync(DIR_EXAMPLES);
 
   try {

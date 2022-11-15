@@ -7,7 +7,8 @@ on:
 
 jobs:
   test:
-    uses: myparcelnl/js-sdk/.github/workflows/test.yml@main
+    uses: ./.github/workflows/--test.yml
+    secrets: inherit
 
   release:
     needs: test

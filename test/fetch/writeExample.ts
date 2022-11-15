@@ -19,7 +19,7 @@ const EXTENSION = '.example.ts';
 /**
  * Generate a new example file from a real request.
  */
-export function writeExample(info: RequestInfo, init: RequestInit | undefined, response: Response): void {
+export function writeExample(info: string | Request, init: RequestInit | undefined, response: Response): void {
   let endpoint = '-unknown';
 
   if (typeof info === 'string') {
