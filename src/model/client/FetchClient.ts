@@ -1,8 +1,12 @@
-import {ClientRequest, OptionsWithBody} from '@/model/client/AbstractClient.types';
+import {ClientConfig, ClientRequest, OptionsWithBody} from '@/model/client/AbstractClient.types';
 import {AbstractClient} from '@/model/client/AbstractClient';
 import {isOfType} from '@myparcel/ts-utils';
 
 export class FetchClient extends AbstractClient {
+  public constructor(config?: ClientConfig) {
+    super(config);
+  }
+
   protected request: ClientRequest = async (endpoint, options) => {
     const timeoutController = new AbortController();
     const id = setTimeout(() => timeoutController.abort(), options.timeout);
