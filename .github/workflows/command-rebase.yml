@@ -16,7 +16,7 @@ jobs:
 
       - name: 'Add reaction'
         if: steps.rebase.outputs.rebased-count == 1
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           token: ${{ secrets.GH_REPO_TOKEN }}
           repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
