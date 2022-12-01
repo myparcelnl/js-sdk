@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.0](https://github.com/myparcelnl/js-sdk/compare/v2.8.1...v2.9.0) (2022-12-01)
+
+
+### :sparkles: New Features
+
+* switch to vite ([#33](https://github.com/myparcelnl/js-sdk/issues/33)) ([80bb123](https://github.com/myparcelnl/js-sdk/commit/80bb12313c99549b31ad70da453c88fe1b8f0c5a))
+
 ### [2.8.1](https://github.com/myparcelnl/js-sdk/compare/v2.8.0...v2.8.1) (2022-11-09)
 
 
