@@ -1,3 +1,4 @@
+import {describe, expect, it} from 'vitest';
 import {addParameters} from '@/model/client/helper/addParameters';
 
 describe('addParameters', () => {

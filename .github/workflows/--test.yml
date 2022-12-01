@@ -1,0 +1,25 @@
+name: '🔸 Run tests 🧪'
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    name: 'Run unit tests'
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: myparcelnl/actions/yarn2-install@v2
+
+      - name: 'Run tests'
+        run: yarn test:run --coverage
+
+      - uses: codecov/codecov-action@v3
+        with:
+          files: coverage/clover.xml
+
+      - uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          api-token: ${{ secrets.CODACY_API_TOKEN }}
+          coverage-reports: coverage/clover.xml

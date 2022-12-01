@@ -5,7 +5,7 @@ import {writeExample} from './writeExample';
  * Execute a real fetch request and save its results as a new example.
  */
 export const doActualFetch = async (
-  info: RequestInfo,
+  info: string | Request,
   init: RequestInit | undefined,
 ): Promise<Record<string, unknown>> => {
   const response = await originalFetch.get()(info, init);

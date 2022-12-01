@@ -3,7 +3,14 @@ yarn-error.log
 
 *.tgz
 
-.idea/
 coverage/
-dist/
+lib/
 node_modules/
+
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+

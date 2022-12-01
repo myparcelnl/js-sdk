@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JsonSchemaMappingsProjectConfiguration">
+    <state>
+      <map>
+        <entry key="GitHub Issue Template configuration">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="GitHub Issue Template configuration" />
+              <option name="relativePathToSchema" value="https://json.schemastore.org/github-issue-config.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value=".github/ISSUE_TEMPLATE/BUG-REPORT.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value=".github/ISSUE_TEMPLATE/config.yml" />
+                  </Item>
+                  <Item>
+                    <option name="path" value=".github/ISSUE_TEMPLATE/FEATURE-REQUEST.yml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="GitHub Workflow">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="GitHub Workflow" />
+              <option name="relativePathToSchema" value="https://json.schemastore.org/github-workflow.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="directory" value="true" />
+                    <option name="path" value=".github/workflows" />
+                    <option name="mappingKind" value="Directory" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+      </map>
+    </state>
+  </component>
+</project>

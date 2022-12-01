@@ -1,8 +1,27 @@
 {
-  "extends": "./tsconfig-base.json",
+  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "node",
-    "target": "esnext"
-  }
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "target": "esnext",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@Test/*": [
+        "./test/*"
+      ]
+    }
+  },
+  "include": [
+    "*.js",
+    "*.ts",
+    "private/**/*.ts",
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ]
 }

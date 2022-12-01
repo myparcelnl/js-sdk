@@ -7,6 +7,7 @@ import {
   GetShipments,
   PostShipments,
 } from '@/endpoints';
+import {beforeEach, describe, expect, it} from 'vitest';
 import {ApiException} from '@/model/exception/ApiException';
 import {FetchClient} from '@/model/client/FetchClient';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';

@@ -1,14 +1,16 @@
+import {FetchMock} from 'vitest-fetch-mock';
 import {MockedResponse} from '@Test/fetch/defineMockResponse';
 import {getAutoImplementation} from './getAutoImplementation';
-import {originalFetch} from './originalFetch';
 
-export const createFetchMock = <T>(implementation?: MockedResponse<T>, options?: Record<string, unknown>): jest.SpyInstance => {
-  originalFetch.set(global.fetch);
-
-  return jest.spyOn(global, 'fetch').mockImplementation(async (info: RequestInfo, init?: RequestInit) => {
+export const createFetchMock = <T>(
+  implementation?: MockedResponse<T>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  options?: Record<string, unknown>,
+): FetchMock => {
+  return fetchMock.mockImplementation(async (info, init) => {
     let resolvedImplementation = implementation;
 
-    if (!implementation) {
+    if (!implementation && info) {
       resolvedImplementation = await getAutoImplementation(info, init);
     }
 
