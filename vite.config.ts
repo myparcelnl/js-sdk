@@ -1,13 +1,14 @@
 import {defineConfig} from 'vitest/config';
 import dts from 'vite-plugin-dts';
+import path from 'path';
 
 const config = defineConfig((env) => {
   return {
     plugins: [dts({entryRoot: 'src'})],
     resolve: {
       alias: {
-        '@': '/src',
-        '@Test': '/test',
+        '@': path.resolve(__dirname, './src'),
+        '@Test': path.resolve(__dirname, './test'),
       },
     },
     build: {
