@@ -56,6 +56,24 @@ export const UPS_NAME: CarrierName = 'ups';
 
 export const UPS_HUMAN = 'UPS';
 
+export const DHL_FOR_YOU_ID: CarrierId = 9;
+
+export const DHL_FOR_YOU_NAME: CarrierName = 'dhlforyou';
+
+export const DHL_FOR_YOU_HUMAN = 'DHL For You';
+
+export const DHL_PARCEL_CONNECT_ID: CarrierId = 10;
+
+export const DHL_PARCEL_CONNECT_NAME: CarrierName = 'dhlparcelconnect';
+
+export const DHL_PARCEL_CONNECT_HUMAN = 'DHL Parcel Connect';
+
+export const DHL_EUROPLUS_ID: CarrierId = 11;
+
+export const DHL_EUROPLUS_NAME: CarrierName = 'dhleuroplus';
+
+export const DHL_EUROPLUS_HUMAN = 'DHL Europlus';
+
 export const POSTNL: Carrier = {
   NAME: POST_NL_NAME,
   ID: POST_NL_ID,
@@ -102,6 +120,24 @@ export const UPS: Carrier = {
   NAME: UPS_NAME,
   ID: UPS_ID,
   HUMAN: UPS_HUMAN,
+};
+
+export const DHL_FOR_YOU: Carrier = {
+  NAME: DHL_FOR_YOU_NAME,
+  ID: DHL_FOR_YOU_ID,
+  HUMAN: DHL_FOR_YOU_HUMAN,
+};
+
+export const DHL_PARCEL_CONNECT: Carrier = {
+  NAME: DHL_PARCEL_CONNECT_NAME,
+  ID: DHL_PARCEL_CONNECT_ID,
+  HUMAN: DHL_PARCEL_CONNECT_HUMAN,
+};
+
+export const DHL_EUROPLUS: Carrier = {
+  NAME: DHL_EUROPLUS_NAME,
+  ID: DHL_EUROPLUS_ID,
+  HUMAN: DHL_EUROPLUS_HUMAN,
 };
 
 export const ALL = [CHEAP_CARGO, DPD, INSTABOX, DHL, BOL_COM, UPS];
