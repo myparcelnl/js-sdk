@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.1](https://github.com/myparcelnl/js-sdk/compare/v2.9.0...v2.9.1) (2022-12-01)
+
+
+### :bug: Bug Fixes
+
+* fix relative paths in type declarations ([8d6cb75](https://github.com/myparcelnl/js-sdk/commit/8d6cb75dd613a8cefa5df5bca264271b4caab349))
+
 ## [2.9.0](https://github.com/myparcelnl/js-sdk/compare/v2.8.1...v2.9.0) (2022-12-01)
 
 
