@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.2](https://github.com/myparcelnl/js-sdk/compare/v2.9.1...v2.9.2) (2022-12-07)
+
+
+### :bug: Bug Fixes
+
+* **shipment:** add missing header to post /shipments ([#31](https://github.com/myparcelnl/js-sdk/issues/31)) ([a2aa8ef](https://github.com/myparcelnl/js-sdk/commit/a2aa8efba47c3a758eb30c35f155dfe95e72034d))
+
 ## [2.9.1](https://github.com/myparcelnl/js-sdk/compare/v2.9.0...v2.9.1) (2022-12-01)
 
 
