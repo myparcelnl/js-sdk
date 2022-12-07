@@ -181,7 +181,7 @@ describe('AbstractClient', () => {
       headers: {
         Accept: 'application/json',
         Authorization: 'bearer apiKey',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/vnd.shipment+json;charset=utf-8;version=1.1',
       },
       method: 'POST',
       body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
