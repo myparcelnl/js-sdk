@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.0](https://github.com/myparcelnl/js-sdk/compare/v2.9.2...v2.10.0) (2022-12-08)
+
+
+### :sparkles: New Features
+
+* add new dhl carrier definitions ([#37](https://github.com/myparcelnl/js-sdk/issues/37)) ([4794035](https://github.com/myparcelnl/js-sdk/commit/4794035943b35b68394c0e11f45d9cd4e1be49d9))
+
 ## [2.9.2](https://github.com/myparcelnl/js-sdk/compare/v2.9.1...v2.9.2) (2022-12-07)
 
 
