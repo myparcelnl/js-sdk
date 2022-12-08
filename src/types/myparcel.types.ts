@@ -1,9 +1,24 @@
 export type PlatformId = 1 | 2 | 3;
+
 export type PlatformName = 'myparcel' | 'belgie' | 'flespakket';
+
 export type PlatformNameOrId = PlatformName | PlatformId;
 
-export type CarrierName = 'postnl' | 'bpost' | 'cheapcargo' | 'dpd' | 'instabox' | 'dhl' | 'bol.com' | 'ups';
-export type CarrierId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type CarrierName =
+  | 'postnl'
+  | 'bpost'
+  | 'cheapcargo'
+  | 'dpd'
+  | 'instabox'
+  | 'dhl'
+  | 'bol.com'
+  | 'ups'
+  | 'dhlforyou'
+  | 'dhlparcelconnect'
+  | 'dhleuroplus';
+
+export type CarrierId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+
 export type CarrierNameOrId = CarrierName | CarrierId;
 
 /** @see https://myparcelnl.github.io/api/#6_A_1 */
