@@ -323,9 +323,9 @@ __metadata:
   linkType: hard
 
 "@myparcel/ts-utils@npm:^1.0.0":
-  version: 1.1.0
-  resolution: "@myparcel/ts-utils@npm:1.1.0"
-  checksum: fe8f27a1b91c1ec0e34bcf275f7f29a3368c4170a3bdaaeaf2596c097421108371f076ed8c5a703a8340ff2f979301d24ff1e2616c66df9fba931e550272264d
+  version: 1.2.1
+  resolution: "@myparcel/ts-utils@npm:1.2.1"
+  checksum: 63bdeb3a4de6685527ed2f40935687d18863d78fdc9c19e957568526a89cd5262b7104aecfe3a65ee8ec472538ce36ef7cf86192c271e18d6c3f8ecd9502a507
   languageName: node
   linkType: hard
 
