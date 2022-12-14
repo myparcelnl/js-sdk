@@ -1,6 +1,7 @@
 import {defineConfig} from 'vitest/config';
 import dts from 'vite-plugin-dts';
 import path from 'path';
+import process from 'process';
 
 const config = defineConfig((env) => {
   return {
@@ -9,6 +10,11 @@ const config = defineConfig((env) => {
       alias: {
         '@': path.resolve(__dirname, './src'),
         '@Test': path.resolve(__dirname, './test'),
+      },
+    },
+    define: {
+      'process.env': {
+        SDK_VERSION: process.env.npm_package_version,
       },
     },
     build: {

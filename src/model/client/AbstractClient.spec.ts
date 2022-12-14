@@ -19,6 +19,7 @@ import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
+import {matchNodeUserAgent} from '@Test/matchNodeUserAgent';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -57,7 +58,10 @@ describe('AbstractClient', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/carriers/postnl', {
-      headers: {Accept: 'application/json'},
+      headers: {
+        Accept: 'application/json',
+        'X-User-Agent': matchNodeUserAgent(),
+      },
       method: 'GET',
     });
     expect(response.length).toBe(1);
@@ -97,7 +101,10 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith(
       'https://api.myparcel.nl/delivery_options?carrier=1&cc=NL&number=31&platform=myparcel&postal_code=2132JE&cutoff_time=17:00',
       {
-        headers: {Accept: 'application/json;version=2.0'},
+        headers: {
+          Accept: 'application/json;version=2.0',
+          'X-User-Agent': matchNodeUserAgent(),
+        },
         method: 'GET',
       },
     );
@@ -141,6 +148,7 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint?X-Static-Parameter=value', {
       headers: {
         Accept: 'application/json',
+        'X-User-Agent': matchNodeUserAgent(),
         'X-Additional-Header': '1',
         'X-Client-Header': '1',
         'X-Random': '12345',
@@ -161,6 +169,7 @@ describe('AbstractClient', () => {
       {
         headers: {
           Accept: 'application/json',
+          'X-User-Agent': matchNodeUserAgent(),
           'X-Static-Header': 'value',
         },
         method: 'GET',
@@ -182,6 +191,7 @@ describe('AbstractClient', () => {
         Accept: 'application/json',
         Authorization: 'bearer apiKey',
         'Content-Type': 'application/vnd.shipment+json;charset=utf-8;version=1.1',
+        'X-User-Agent': matchNodeUserAgent(),
       },
       method: 'POST',
       body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
@@ -198,6 +208,7 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
       headers: {
         Accept: 'application/json',
+        'X-User-Agent': matchNodeUserAgent(),
       },
       method: 'DELETE',
     });
@@ -223,6 +234,7 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
       headers: {
         Accept: 'application/json',
+        'X-User-Agent': matchNodeUserAgent(),
       },
       method: 'DELETE',
       signal: expect.objectContaining({
@@ -249,6 +261,7 @@ describe('AbstractClient', () => {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'X-User-Agent': matchNodeUserAgent(),
       },
       method: 'PUT',
     });
@@ -269,6 +282,7 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/text', {
       headers: {
         Accept: 'text/plain',
+        'X-User-Agent': matchNodeUserAgent(),
       },
       method: 'GET',
     });
@@ -304,5 +318,18 @@ describe('AbstractClient', () => {
 
     expect(response).toHaveProperty('shipments', []);
     expect(response).toHaveProperty('results', 0);
+  });
+
+  it('passes node X-User-Agent header', async () => {
+    const sdk = createPublicSdk(new FetchClient(), [new GetCarriers()]);
+    await sdk.getCarriers();
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/carriers', {
+      headers: {
+        Accept: 'application/json',
+        'X-User-Agent': expect.stringMatching(/^MyParcelNL-JS-SDK\/.+ Node\/.+$/),
+      },
+      method: 'GET',
+    });
   });
 });

@@ -16,6 +16,7 @@ import {ApiException} from '@/model/exception/ApiException';
 import {UserException} from '@/model/exception/UserException';
 import {addParameters} from '@/model/client/helper/addParameters';
 import {isOfType} from '@myparcel/ts-utils';
+import semver from 'semver/preload';
 
 export const BASE_URL = 'https://api.myparcel.nl';
 
@@ -227,6 +228,7 @@ export abstract class AbstractClient {
         ...this.getHeaders(),
         ...options.headers,
         ...endpoint.getHeaders(),
+        'X-User-Agent': this.getUserAgent().join(' '),
       },
     };
 
@@ -237,5 +239,29 @@ export abstract class AbstractClient {
     }
 
     return newOptions;
+  }
+
+  private getUserAgent(): string[] {
+    return [
+      this.getHeaders()['User-Agent'],
+      `MyParcelNL-JS-SDK/${process.env.SDK_VERSION}`,
+      this.getBrowserUserAgent() ?? this.getNodeVersion(),
+    ].filter(Boolean) as string[];
+  }
+
+  private getBrowserUserAgent(): string | undefined {
+    if (typeof navigator === 'undefined') {
+      return undefined;
+    }
+
+    return navigator.userAgent;
+  }
+
+  private getNodeVersion(): string | undefined {
+    if (typeof process === 'undefined') {
+      return undefined;
+    }
+
+    return `Node/${semver.parse(process.version)?.version}`;
   }
 }

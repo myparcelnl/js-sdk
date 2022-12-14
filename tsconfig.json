@@ -4,10 +4,16 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "esModuleInterop": true,
+    "module": "ESNext",
     "noEmit": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "rootDir": ".",
     "target": "esnext",
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "paths": {
       "@/*": [
         "./src/*"
