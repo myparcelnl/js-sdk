@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/myparcelnl/js-sdk/compare/v2.10.0...v2.10.1) (2023-01-10)
+
+
+### :bug: Bug Fixes
+
+* swap flespakket and sendmyparcel id ([a660a95](https://github.com/myparcelnl/js-sdk/commit/a660a95718a43deaad4bf2c5b009d442557799f8))
+
 ## [2.10.0](https://github.com/myparcelnl/js-sdk/compare/v2.9.2...v2.10.0) (2022-12-08)
 
 
