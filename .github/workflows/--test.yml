@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: myparcelnl/actions/yarn2-install@v2
+      - uses: myparcelnl/actions/yarn2-install@v3
 
       - name: 'Run tests'
         run: yarn test:run --coverage
