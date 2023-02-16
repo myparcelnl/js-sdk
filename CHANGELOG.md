@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.0](https://github.com/myparcelnl/js-sdk/compare/v2.10.1...v2.11.0) (2023-02-16)
+
+
+### :sparkles: New Features
+
+* add american and canadian states to the data ([#94](https://github.com/myparcelnl/js-sdk/issues/94)) ([e5d5a0e](https://github.com/myparcelnl/js-sdk/commit/e5d5a0e909a49beaddbaaa80ea410d588f924357))
+
 ## [2.10.1](https://github.com/myparcelnl/js-sdk/compare/v2.10.0...v2.10.1) (2023-01-10)
 
 
