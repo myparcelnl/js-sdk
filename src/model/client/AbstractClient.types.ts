@@ -32,8 +32,11 @@ export type ClientRequest = <E extends AbstractEndpoint>(
 ) => Promise<ResponseWrapper<EndpointResponseBody<E>>>;
 
 export type EndpointParameters<E extends AbstractEndpoint> = E['definition']['parameters'];
+
 export type EndpointPath<E extends AbstractEndpoint> = E['definition']['path'];
+
 export type EndpointResponse<E extends AbstractEndpoint> = E['definition']['response'];
+
 export type EndpointBody<E extends AbstractEndpoint> = E['definition']['body'];
 
 export type EndpointResponseProperty<E extends AbstractEndpoint> = E['responseProperty'] extends string

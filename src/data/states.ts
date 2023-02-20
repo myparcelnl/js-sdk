@@ -1,7 +1,4 @@
-import {
-  CANADA as CANADA_CC,
-  UNITED_STATES_OF_AMERICA as UNITED_STATES_OF_AMERICA_CC,
-} from '@/data/countries';
+import {CANADA as CANADA_CC, UNITED_STATES_OF_AMERICA as UNITED_STATES_OF_AMERICA_CC} from '@/data/countries';
 
 interface State {
   name: string;
