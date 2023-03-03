@@ -1,4 +1,4 @@
-import {CarrierNameOrId, DeliveryTypeId, PackageTypeName, PlatformNameOrId} from '@/types/myparcel.types';
+import {CarrierNameOrId, DeliveryTypeId, PackageTypeName, PlatformNameOrId} from '@myparcel/constants';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
 import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {DeliveryOption} from '@/endpoints/public/delivery-options/DeliveryOption.types';

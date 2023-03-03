@@ -21,6 +21,9 @@ const config = defineConfig((env) => {
         name: 'MyParcelSdk',
         formats: ['cjs', 'es'],
       },
+      rollupOptions: {
+        external: [/^@myparcel\//],
+      },
     },
     test: {
       coverage: {
