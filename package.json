@@ -34,7 +34,10 @@
   },
   "lint-staged": {
     "*.ts": "eslint --fix",
-    "package.json": "npx -q sort-package-json"
+    "package.json": [
+      "sort-package-json",
+      "sh -c \"publint\""
+    ]
   },
   "prettier": "@myparcel/prettier-config",
   "dependencies": {
