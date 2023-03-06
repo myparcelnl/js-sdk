@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/myparcelnl/js-sdk/compare/v2.11.0...v3.0.0) (2023-03-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove constants and types and externalize dependencies (#103)
+
+* remove constants and types and externalize dependencies ([#103](https://github.com/myparcelnl/js-sdk/issues/103)) ([fc06b9d](https://github.com/myparcelnl/js-sdk/commit/fc06b9d5c2c0030cb46dfed8057a177a1bebb6f2))
+
 ## [2.11.0](https://github.com/myparcelnl/js-sdk/compare/v2.10.1...v2.11.0) (2023-02-16)
 
 
