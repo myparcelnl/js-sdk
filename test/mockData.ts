@@ -1,13 +1,12 @@
+import {CarrierId, PackageTypeId} from '@myparcel/constants';
 import {EndpointBody} from '@/model';
-import {PACKAGE_ID} from '@/data/packageTypes';
-import {POST_NL_ID} from '@/data/carriers';
 import {PostShipments} from '@/endpoints';
 
 export const POST_BODY_SHIPMENTS: EndpointBody<PostShipments> = [
   {
-    carrier: POST_NL_ID,
+    carrier: CarrierId.PostNl,
     options: {
-      package_type: PACKAGE_ID,
+      package_type: PackageTypeId.Package,
     },
     recipient: {
       cc: 'NL',

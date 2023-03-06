@@ -1,4 +1,4 @@
-import {DeliveryTypeName, PackageTypeName, ShipmentOptionName} from '@/types/myparcel.types';
+import {DeliveryTypeName, PackageTypeName, ShipmentOptionName} from '@myparcel/constants';
 import {EnumSchema, Timestamp} from '@/types';
 
 interface PossibleShipmentOption {

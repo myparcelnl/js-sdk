@@ -4,7 +4,7 @@ import {
   DeliveryTypeId,
   PackageTypeId,
   ShipmentStatus,
-} from '@/types/myparcel.types';
+} from '@myparcel/constants';
 import {IntBoolean, Price, WithRequired} from '@/types';
 
 export interface ShipmentRecipient {
