@@ -11,6 +11,13 @@
   "repository": "github:myparcelnl/js-sdk",
   "license": "MIT",
   "author": "Edie Lemoine <edie@myparcel.nl>",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js"
+    }
+  },
   "main": "./lib/index.js",
   "module": "./lib/index.mjs",
   "types": "./lib/index.d.ts",
@@ -27,7 +34,10 @@
   },
   "lint-staged": {
     "*.ts": "eslint --fix",
-    "package.json": "npx -q sort-package-json"
+    "package.json": [
+      "sort-package-json",
+      "sh -c \"publint\""
+    ]
   },
   "prettier": "@myparcel/prettier-config",
   "dependencies": {
@@ -43,6 +53,8 @@
     "eslint": "^8.34.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.4",
+    "publint": "^0.1.9",
+    "sort-package-json": "^2.4.1",
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
     "vite-plugin-dts": "^1.7.3",
