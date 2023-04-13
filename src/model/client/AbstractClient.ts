@@ -113,10 +113,10 @@ export abstract class AbstractClient {
         }
       }
 
-      return wrappedResponse;
+      return endpoint.transformResponse(wrappedResponse);
     }
 
-    return response;
+    return endpoint.transformResponse(response);
   }
 
   /**

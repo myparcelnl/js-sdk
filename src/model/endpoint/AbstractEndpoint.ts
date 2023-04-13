@@ -73,4 +73,8 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
   public getResponseProperty(): AbstractEndpoint['responseProperty'] {
     return this.responseProperty ?? this.property;
   }
+
+  public transformResponse<R = D extends EndpointDefinition ? D['response'] : unknown>(response: unknown): R {
+    return response as R;
+  }
 }
