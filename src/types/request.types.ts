@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export type HttpMethodWithBody = 'POST' | 'PATCH' | 'PUT';
 
 export type HttpMethodWithoutBody = 'GET' | 'OPTIONS' | 'DELETE' | 'HEAD';
@@ -17,5 +18,3 @@ export interface ErrorResponse {
   request_id: string;
   errors: {status?: number; code: number; title?: string; message: string}[];
 }
-
-export type IdsResponse = number[];
