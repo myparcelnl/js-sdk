@@ -1,5 +1,6 @@
-import {ClientConfig, ClientRequest, OptionsWithBody} from '@/model/client/AbstractClient.types';
+import {type ClientConfig, type ClientRequest, type OptionsWithBody} from '@/model/client/AbstractClient.types';
 import {AbstractClient} from '@/model/client/AbstractClient';
+import {isJson} from '@/model/client/helper/isJson';
 import {isOfType} from '@myparcel/ts-utils';
 
 export class FetchClient extends AbstractClient {
@@ -25,11 +26,13 @@ export class FetchClient extends AbstractClient {
     clearTimeout(id);
 
     if (response.body) {
-      if (response.headers.get('Content-Type')?.includes('application/json')) {
-        return response.json();
+      const text = await response.text();
+
+      if (response.headers.get('Content-Type')?.includes('application/json') && isJson(text)) {
+        return JSON.parse(text);
       }
 
-      return response.text();
+      return text;
     }
   };
 }
