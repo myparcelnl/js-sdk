@@ -1,7 +1,7 @@
-import {CreateDefinition, PaginatedResponse} from '@/model/endpoint/AbstractEndpoint.types';
+import {type CreateDefinition, type PaginatedResponse} from '@/model/endpoint/AbstractEndpoint.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
-import {MyParcelShipment} from '@/endpoints';
-import {PaginationParameters} from '@/types';
+import {type MyParcelShipment} from '@/endpoints';
+import {type PaginationParameters} from '@/types';
 
 type Parameters = PaginationParameters & {
   carrier?: number;

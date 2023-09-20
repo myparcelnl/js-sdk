@@ -1,28 +1,17 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import {
-  CarrierId,
-  CustomsDeclarationContents,
-  DeliveryTypeId,
-  PackageTypeId,
-  ShipmentStatus,
+  type CarrierId,
+  type CustomsDeclarationContents,
+  type DeliveryTypeId,
+  type PackageTypeId,
+  type ShipmentStatus,
 } from '@myparcel/constants';
-import {IntBoolean, Price, WithRequired} from '@/types';
+import {type IntBoolean, type Price, type WithRequired} from '@/types';
+import {type Address, type AddressWithContactDetails, type RetailLocation} from '../../../types/common.types';
 
-export interface ShipmentRecipient {
-  area?: string;
-  box_number?: string;
-  cc: string;
-  city: string;
-  company?: string;
-  email?: string;
-  number?: string;
-  number_suffix?: string;
-  person: string;
-  phone?: string;
-  postal_code?: string;
-  region?: string;
-  state?: string;
-  street: string;
-  street_additional_info?: string;
+export interface PostedShipmentReference {
+  id: number;
+  reference_identifier: string;
 }
 
 export interface PhysicalProperties {
@@ -34,15 +23,19 @@ export interface PhysicalProperties {
 }
 
 export interface ShipmentOptions {
+  delivery_type: DeliveryTypeId | null;
+  package_type: PackageTypeId;
   age_check?: IntBoolean;
+  collect?: IntBoolean;
   cooled_delivery?: IntBoolean;
   delivery_date?: string | null;
-  delivery_type?: DeliveryTypeId | null;
+  drop_off_at_postal_point?: IntBoolean;
+  extra_assurance?: IntBoolean;
+  hide_sender?: IntBoolean;
   insurance?: Price;
   label_description?: string;
   large_format?: IntBoolean;
   only_recipient?: IntBoolean;
-  package_type: PackageTypeId;
   return?: IntBoolean;
   same_day_delivery?: IntBoolean;
   saturday_delivery?: IntBoolean;
@@ -73,6 +66,16 @@ export interface ShipmentGeneralSettings {
   disable_auto_detect_pickup?: IntBoolean;
   printer_identifier?: string;
   save_recipient_address?: IntBoolean;
+  tracktrace?: {
+    bcc: IntBoolean;
+    bcc_email: string;
+    carrier_email_basic_notification: IntBoolean;
+    delivery_notification: IntBoolean;
+    email_on_handed_to_courier: IntBoolean;
+    from_address_company: string;
+    from_address_email: string;
+    send_track_trace_emails: IntBoolean;
+  };
 }
 
 export interface ShipmentPickup {
@@ -100,13 +103,83 @@ export interface ShipmentPostData {
   options?: ShipmentOptions;
   physical_properties?: PhysicalProperties;
   pickup?: ShipmentPickup | null;
-  recipient: WithRequired<ShipmentRecipient, 'number'> | WithRequired<ShipmentRecipient, 'street'>;
+  recipient: WithRequired<Address, 'number'> | WithRequired<Address, 'street'>;
   reference_identifier?: number | string;
   shop_id?: number;
   status?: ShipmentStatus;
 }
 
+interface ShippedItem {
+  order_identifier: string;
+  order_line: {
+    external_identifier: null;
+    instructions: null;
+    price: number;
+    price_after_vat: number;
+    product: {
+      external_identifier: string;
+      height: number;
+      length: number;
+      name: string;
+      sku: string;
+      weight: number;
+      width: number;
+    };
+    quantity: number;
+    shippable: boolean;
+    uuid: string;
+    vat: null;
+    vat_percentage: null;
+  };
+  order_line_identifier: string;
+  quantity: number;
+}
+
 export interface MyParcelShipment {
-  carrier: CarrierId;
-  shipment_options: ShipmentOptions;
+  account_id: number;
+  api_key: string | null;
+  barcode: string | null;
+  carrier_id: CarrierId;
+  collection_contact: string | null;
+  contract_id: number;
+  created: Date;
+  created_by: number;
+  customs_declaration: ShipmentCustomsDeclaration | null;
+  delayed: boolean;
+  delivered: boolean;
+  drop_off_point: RetailLocation | null;
+  external_identifier: string | null;
+  external_provider: null;
+  external_provider_id: null;
+  general_settings: ShipmentGeneralSettings;
+  hidden: boolean;
+  id: number;
+  is_return: boolean;
+  link_consumer_portal: string | null;
+  modified: Date;
+  modified_by: number;
+  multi_collo: boolean;
+  multi_collo_main_shipment_id: string | null;
+  options: ShipmentOptions;
+  origin: string | null;
+  parent_id: number | null;
+  partner_track_traces: unknown[];
+  partner_tracktraces: unknown[];
+  payment_status: string;
+  physical_properties: PhysicalProperties | null;
+  pickup: RetailLocation | null;
+  pickup_request_number: null;
+  platform_id: number;
+  price: Price;
+  recipient: AddressWithContactDetails;
+  reference_identifier: string | null;
+  region: string;
+  secondary_shipments: unknown[];
+  sender: AddressWithContactDetails;
+  shipment_type: number | null;
+  shipped_items: ShippedItem[];
+  shop_id: number;
+  status: number | null;
+  transaction_status: string;
+  user_agent: string | null;
 }

@@ -1,12 +1,12 @@
-import {HttpMethod, IdsResponse, RequestHeaders} from '@/types/request.types';
+import {type HttpMethod, type RequestHeaders} from '@/types/request.types';
+import {type PostedShipmentReference, type ShipmentPostData} from '@/endpoints/private/shipments/Shipment.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {ShipmentPostData} from '@/endpoints/private/shipments/Shipment.types';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 
 type PostShipmentsDefinition = CreateDefinition<{
   name: typeof PostShipments.name;
   body: ShipmentPostData[];
-  response: IdsResponse;
+  response: PostedShipmentReference[];
 }>;
 
 /**
