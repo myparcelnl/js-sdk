@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/myparcelnl/js-sdk/compare/v3.0.0...v3.0.1) (2023-09-20)
+
+
+### :bug: Bug Fixes
+
+* check if response is json before parsing ([#133](https://github.com/myparcelnl/js-sdk/issues/133)) ([f341fb3](https://github.com/myparcelnl/js-sdk/commit/f341fb32ae04759fc83276f987025afaf40d0d96))
+* **types:** update shipment response types ([#135](https://github.com/myparcelnl/js-sdk/issues/135)) ([a14fb03](https://github.com/myparcelnl/js-sdk/commit/a14fb03e6b4e58f740199beef28b2d8434a00afc)), closes [#121](https://github.com/myparcelnl/js-sdk/issues/121)
+
 ## [3.0.0](https://github.com/myparcelnl/js-sdk/compare/v2.11.0...v3.0.0) (2023-03-06)
 
 
