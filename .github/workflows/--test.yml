@@ -10,12 +10,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: 'Handle coverage cache'
+        uses: actions/cache@v3
+        id: coverage-cache
+        with:
+          path: coverage
+          key: coverage-${{ hashFiles('yarn.lock', 'src/**/*', 'test/**/*') }}
+
       - uses: myparcelnl/actions/yarn-install@v3
+        if: steps.coverage-cache.outputs.cache-hit != 'true'
         with:
           node-version: 18
 
       - name: 'Run tests'
-        run: yarn test:run --coverage
+        if: steps.coverage-cache.outputs.cache-hit != 'true'
+        #language=sh
+        run: | 
+          yarn test:coverage
 
       - uses: codecov/codecov-action@v3
         with:
