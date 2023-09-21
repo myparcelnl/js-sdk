@@ -1,5 +1,5 @@
-import {EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {HttpMethod} from '@/types/request.types';
+import {type EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type HttpMethod} from '@/types/request.types';
 
 interface EndpointOptions {
   headers?: AbstractEndpoint['definition']['headers'];
@@ -25,8 +25,9 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
   /**
    * The property in the request body and response body. If the response body
    * property differs, set responseProperty alongside property.
+   * If the property is undefined, the endpoint will be called without a namespace.
    */
-  public abstract readonly property: string;
+  public abstract readonly property: string | undefined;
 
   /**
    * Property used in the response. Falls back to `this.property` if it's not

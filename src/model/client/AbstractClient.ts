@@ -1,17 +1,23 @@
 import {
-  ClientConfig,
-  ClientOptions,
-  ClientRequest,
-  EndpointPath,
-  EndpointResponse,
-  EndpointResponseBody,
-  EndpointResponseProperty,
-  Options,
-  OptionsWithBody,
+  type ClientConfig,
+  type ClientOptions,
+  type ClientRequest,
+  type EndpointPath,
+  type EndpointResponse,
+  type EndpointResponseBody,
+  type EndpointResponseProperty,
+  type Options,
+  type OptionsWithBody,
 } from '@/model/client/AbstractClient.types';
-import {ErrorResponse, HttpMethod, RequestHeader, RequestHeaders, ResponseWrapper} from '@/types/request.types';
-import {NoInfer, WithRequired} from '@/types';
-import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {
+  type ErrorResponse,
+  type HttpMethod,
+  type RequestHeader,
+  type RequestHeaders,
+  type ResponseWrapper,
+} from '@/types/request.types';
+import {type NoInfer, type WithRequired} from '@/types';
+import {type AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
 import {ApiException} from '@/model/exception/ApiException';
 import {UserException} from '@/model/exception/UserException';
 import {addParameters} from '@/model/client/helper/addParameters';
@@ -231,9 +237,17 @@ export abstract class AbstractClient {
     };
 
     if (isOfType<OptionsWithBody<E>>(options, 'body')) {
-      newOptions.body = {
-        data: {[endpoint.getProperty()]: options.body},
-      };
+      const property = endpoint.getProperty();
+
+      if (property === undefined) {
+        newOptions.body = {
+          data: options.body,
+        };
+      } else {
+        newOptions.body = {
+          data: {[property]: options.body},
+        };
+      }
     }
 
     return newOptions;
