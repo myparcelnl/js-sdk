@@ -1,4 +1,4 @@
-import {AbstractPublicEndpoint, EndpointParameters} from '@/model';
+import {AbstractPublicEndpoint, type EndpointParameters} from '@/model';
 import {
   GetCarrier,
   GetCarriers,
@@ -14,6 +14,7 @@ import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {UserException} from '@/model/exception/UserException';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
@@ -168,23 +169,43 @@ describe('AbstractClient', () => {
     );
   });
 
-  it('formats request body correctly on post', async () => {
-    expect.assertions(1);
+  describe('formats request body correctly on post', () => {
+    it('formats request body correctly with a property', async () => {
+      expect.assertions(1);
 
-    const sdk = createPrivateSdk(new FetchClient(), [new PostShipments()]);
-    await sdk.postShipments({
-      headers: {Authorization: 'bearer apiKey'},
-      body: POST_BODY_SHIPMENTS,
+      const sdk = createPrivateSdk(new FetchClient(), [new PostShipments()]);
+      await sdk.postShipments({
+        headers: {Authorization: 'bearer apiKey'},
+        body: POST_BODY_SHIPMENTS,
+      });
+
+      expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/shipments', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'bearer apiKey',
+          'Content-Type': 'application/vnd.shipment+json;charset=utf-8;version=1.1',
+        },
+        method: 'POST',
+        body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
+      });
     });
 
-    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/shipments', {
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'bearer apiKey',
-        'Content-Type': 'application/vnd.shipment+json;charset=utf-8;version=1.1',
-      },
-      method: 'POST',
-      body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
+    it('formats request body correctly without a property', async () => {
+      expect.assertions(1);
+
+      const sdk = createPublicSdk(new FetchClient(), [new TestPostWithoutPropertyEndpoint()]);
+      await sdk.postWithoutPropertyEndpoint({
+        body: POST_BODY_SHIPMENTS[0],
+      });
+
+      expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
+        method: 'POST',
+        body: '{"data":{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}}',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
     });
   });
 
