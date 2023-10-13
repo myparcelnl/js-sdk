@@ -26,6 +26,10 @@ export class FetchClient extends AbstractClient {
     clearTimeout(id);
 
     if (response.body) {
+      if (response.headers.get('Content-Disposition')?.includes('attachment')) {
+        return response.blob();
+      }
+
       const text = await response.text();
 
       if (response.headers.get('Content-Type')?.includes('application/json') && isJson(text)) {

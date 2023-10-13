@@ -1,0 +1,9 @@
+import {AbstractPublicEndpoint} from '@/model';
+import {type HttpMethod} from '@/types';
+
+export class TestGetAttachmentEndpoint extends AbstractPublicEndpoint {
+  public readonly method: HttpMethod = 'GET';
+  public readonly name = 'getAttachment';
+  public readonly path = 'endpoint/attachment';
+  public readonly property = 'none';
+}
