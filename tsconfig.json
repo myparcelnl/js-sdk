@@ -4,10 +4,9 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "noEmit": true,
-    "resolveJsonModule": true,
-    "rootDir": ".",
-    "target": "esnext",
     "paths": {
       "@/*": [
         "./src/*"
@@ -15,7 +14,10 @@
       "@Test/*": [
         "./test/*"
       ]
-    }
+    },
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "target": "ESNext"
   },
   "include": [
     "*.js",
