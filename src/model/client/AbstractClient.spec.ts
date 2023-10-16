@@ -13,6 +13,8 @@ import {FetchClient} from '@/model/client/FetchClient';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
+import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
+import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
 import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
@@ -290,6 +292,50 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/text', {
       headers: {
         Accept: 'text/plain',
+      },
+      method: 'GET',
+    });
+  });
+
+  it('handles receiving a response with a blob content', async () => {
+    expect.assertions(7);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetAttachmentEndpoint()]);
+    const response = await sdk.getAttachment();
+
+    // the Blob presented by vitest is not the same as the fetcher, so check for blob-like properties:
+    expect(response).toHaveProperty('size');
+    expect(response).toHaveProperty('type');
+    expect(response.size).toBe(6);
+    expect(response.type).toBe('image/jpeg');
+
+    const result = await fetchMock.mock.results[0].value;
+    expect(result.status).toBe(200);
+    expect(result.statusText).toBe('OK');
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/attachment', {
+      headers: {
+        Accept: 'application/json',
+      },
+      method: 'GET',
+    });
+  });
+
+  it('handles receiving a response with content-disposition: inline header', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetInlineContentEndpoint()]);
+    const response = await sdk.getInline();
+
+    expect(response).toBe('"Test"');
+
+    const result = await fetchMock.mock.results[0].value;
+    expect(result.status).toBe(200);
+    expect(result.statusText).toBe('OK');
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/inline', {
+      headers: {
+        Accept: 'application/json',
       },
       method: 'GET',
     });
