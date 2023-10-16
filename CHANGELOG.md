@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.0](https://github.com/myparcelnl/js-sdk/compare/v3.1.0...v3.2.0) (2023-10-16)
+
+
+### :sparkles: New Features
+
+* **client:** support attachment responses ([#137](https://github.com/myparcelnl/js-sdk/issues/137)) ([0676fb5](https://github.com/myparcelnl/js-sdk/commit/0676fb53121b665f27c5267e7c37f7cdbfafebee))
+
 ## [3.1.0](https://github.com/myparcelnl/js-sdk/compare/v3.0.1...v3.1.0) (2023-09-27)
 
 
