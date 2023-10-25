@@ -67,7 +67,7 @@ export default defineMockResponse<GetCarriers>({
           },
           {
             id: 7,
-            name: 'bol',
+            name: 'bol.com',
             human: 'bol',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/bol.com.svg',
