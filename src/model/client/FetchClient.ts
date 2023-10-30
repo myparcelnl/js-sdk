@@ -19,7 +19,12 @@ export class FetchClient extends AbstractClient {
     };
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
-      config.body = JSON.stringify(options.body);
+      if (options.body instanceof FormData) {
+        // FormData should be set as body directly.
+        config.body = options.body;
+      } else {
+        config.body = JSON.stringify(options.body);
+      }
     }
 
     const response = await fetch(this.createUrl(endpoint, options), config);

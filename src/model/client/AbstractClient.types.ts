@@ -41,7 +41,9 @@ export type EndpointBody<E extends AbstractEndpoint> = E['definition']['body'];
 
 export type EndpointResponseProperty<E extends AbstractEndpoint> = E['responseProperty'] extends string
   ? E['responseProperty']
-  : E['property'];
+  : E['property'] extends string
+  ? E['property']
+  : never;
 
 type EndpointResponseBodyWrapper<E extends AbstractEndpoint> = EndpointResponseProperty<E>;
 
