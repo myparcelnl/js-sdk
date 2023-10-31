@@ -1,4 +1,6 @@
 import {beforeEach, describe, expect, it} from 'vitest';
+import {isOfType} from '@myparcel/ts-utils';
+import {CarrierName, PlatformName} from '@myparcel/constants';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
@@ -27,7 +29,7 @@ const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
   cc: 'NL',
   number: 31,
-  platform: 'myparcel',
+  platform: PlatformName.MyParcel,
   postal_code: '2132JE',
   cutoff_time: '17:00',
 };
@@ -55,7 +57,7 @@ describe('AbstractClient', () => {
   it('substitutes path', async () => {
     const response = await sdk.getCarrier({
       path: {
-        carrier: 'postnl',
+        carrier: CarrierName.PostNl,
       },
     });
 
@@ -188,7 +190,7 @@ describe('AbstractClient', () => {
           'Content-Type': 'application/vnd.shipment+json;charset=utf-8;version=1.1',
         },
         method: 'POST',
-        body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}]}}',
+        body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE"}}]}}',
       });
     });
 
@@ -202,7 +204,7 @@ describe('AbstractClient', () => {
 
       expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
         method: 'POST',
-        body: '{"data":{"carrier":1,"options":{"package_type":1},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31"}}}',
+        body: '{"data":{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE"}}}',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -229,7 +231,7 @@ describe('AbstractClient', () => {
         },
       });
       // the body should be a FormData instance
-      expect(fetchMock.mock.calls[0][1].body).toBeInstanceOf(FormData);
+      expect(fetchMock.mock.calls?.[0]?.[1]?.body).toBeInstanceOf(FormData);
     });
   });
 
@@ -320,16 +322,20 @@ describe('AbstractClient', () => {
   });
 
   it('handles receiving a response with a blob content', async () => {
-    expect.assertions(7);
+    expect.assertions(6);
 
     const sdk = createPublicSdk(new FetchClient(), [new TestGetAttachmentEndpoint()]);
     const response = await sdk.getAttachment();
 
     // the Blob presented by vitest is not the same as the fetcher, so check for blob-like properties:
-    expect(response).toHaveProperty('size');
-    expect(response).toHaveProperty('type');
-    expect(response.size).toBe(6);
-    expect(response.type).toBe('image/jpeg');
+    const ofType = isOfType<Blob>(response, 'size');
+
+    expect(ofType).toBe(true);
+
+    if (ofType) {
+      expect(response.size).toBe(6);
+      expect(response.type).toBe('image/jpeg');
+    }
 
     const result = await fetchMock.mock.results[0].value;
     expect(result.status).toBe(200);

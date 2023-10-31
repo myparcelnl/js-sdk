@@ -10,7 +10,12 @@ export default defineMockResponse<PostShipments>({
     headers: {'Content-Type': 'application/json'},
     body: {
       data: {
-        ids: [1234567],
+        ids: [
+          {
+            id: 1234567,
+            reference_identifier: '',
+          },
+        ],
       },
     },
   }),

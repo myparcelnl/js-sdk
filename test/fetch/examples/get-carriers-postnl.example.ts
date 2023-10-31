@@ -1,5 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
+import {CarrierName} from '@myparcel/constants';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 import {type GetCarrier} from '@/endpoints/public/carriers';
 
@@ -13,7 +14,7 @@ export default defineMockResponse<GetCarrier>({
         carriers: [
           {
             id: 1,
-            name: 'postnl',
+            name: CarrierName.PostNl,
             human: 'PostNL',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/postnl.svg',

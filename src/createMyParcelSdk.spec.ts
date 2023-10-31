@@ -61,7 +61,7 @@ describe('sdk', () => {
       expect.assertions(1);
       await expect(
         privateSdk.postShipments({body: POST_BODY_SHIPMENTS, headers: {Authorization: 'base64 encoded api key'}}),
-      ).resolves.toStrictEqual([1234567]);
+      ).resolves.toStrictEqual([{id: 1234567, reference_identifier: ''}]);
     });
   });
 });

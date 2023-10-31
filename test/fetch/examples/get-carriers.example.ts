@@ -1,5 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
+import {CarrierId, CarrierName} from '@myparcel/constants';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 import {type GetCarriers} from '@/endpoints/public/carriers';
 
@@ -12,8 +13,8 @@ export default defineMockResponse<GetCarriers>({
       data: {
         carriers: [
           {
-            id: 1,
-            name: 'postnl',
+            id: CarrierId.PostNl,
+            name: CarrierName.PostNl,
             human: 'PostNL',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/postnl.svg',
@@ -21,8 +22,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 2,
-            name: 'bpost',
+            id: CarrierId.Bpost,
+            name: CarrierName.Bpost,
             human: 'bpost',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/bpost.svg',
@@ -30,8 +31,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 3,
-            name: 'cheapcargo',
+            id: CarrierId.CheapCargo,
+            name: CarrierName.CheapCargo,
             human: 'Cheap Cargo',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/cheapcargo.svg',
@@ -39,8 +40,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 4,
-            name: 'dpd',
+            id: CarrierId.Dpd,
+            name: CarrierName.Dpd,
             human: 'DPD',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/dpd.svg',
@@ -48,8 +49,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 6,
-            name: 'dhl',
+            id: CarrierId.Dhl,
+            name: CarrierName.Dhl,
             human: 'DHL',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/dhl.svg',
@@ -57,8 +58,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 8,
-            name: 'ups',
+            id: CarrierId.Ups,
+            name: CarrierName.Ups,
             human: 'UPS',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/ups.svg',
@@ -66,8 +67,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 7,
-            name: 'bol.com',
+            id: CarrierId.BolCom,
+            name: CarrierName.BolCom,
             human: 'bol',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/bol.com.svg',
@@ -75,8 +76,8 @@ export default defineMockResponse<GetCarriers>({
             },
           },
           {
-            id: 5,
-            name: 'instabox',
+            id: CarrierId.Instabox,
+            name: CarrierName.Instabox,
             human: 'Instabox',
             meta: {
               logo_svg: '/skin/general-images/carrier-logos/svg/instabox.svg',

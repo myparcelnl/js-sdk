@@ -29,4 +29,5 @@ export interface PickupPossibility {
   moment: {
     start: Timestamp;
   };
+  price?: number;
 }

@@ -14,7 +14,7 @@ export interface Address {
   region?: string;
   state?: string;
   street: string;
-  street_additional_info: string;
+  street_additional_info?: string;
   vat_number?: string;
 }
 

@@ -1,7 +1,8 @@
 // noinspection JSUnusedGlobalSymbols
 
+import {DeliveryTypeId, DeliveryTypeName} from '@myparcel/constants';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
-import {type GetPickupLocations} from '@/endpoints';
+import {type GetPickupLocations, type PickupLocation} from '@/endpoints';
 
 export default defineMockResponse<GetPickupLocations>({
   match: (path: string, init?: RequestInit) =>
@@ -24,8 +25,8 @@ export default defineMockResponse<GetPickupLocations>({
             },
             possibilities: [
               {
-                delivery_type_id: 4,
-                delivery_type_name: 'pickup',
+                delivery_type_id: DeliveryTypeId.Pickup,
+                delivery_type_name: DeliveryTypeName.Pickup,
                 moment: {
                   start: {
                     date: '2022-04-14 16:00:00.000000',
@@ -157,8 +158,8 @@ export default defineMockResponse<GetPickupLocations>({
             },
             possibilities: [
               {
-                delivery_type_id: 4,
-                delivery_type_name: 'pickup',
+                delivery_type_id: DeliveryTypeId.Pickup,
+                delivery_type_name: DeliveryTypeName.Pickup,
                 moment: {
                   start: {
                     date: '2022-04-14 16:00:00.000000',
@@ -279,7 +280,7 @@ export default defineMockResponse<GetPickupLocations>({
               },
             },
           },
-        ],
+        ] satisfies PickupLocation[],
       },
     },
   }),
