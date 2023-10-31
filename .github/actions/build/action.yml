@@ -4,14 +4,10 @@ description: 'Build the project'
 runs:
   using: composite
   steps:
-    - name: 'Cache build'
-      uses: actions/cache@v3
-      with:
-        path: lib
-        key: build-${{ hashFiles('yarn.lock', 'src/**/*') }}
-
     - name: 'Build'
       shell: bash
       #language=sh
       run: |
+        yarn run typecheck
+
         yarn run build
