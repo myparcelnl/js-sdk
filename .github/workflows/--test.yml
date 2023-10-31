@@ -14,8 +14,8 @@ jobs:
         uses: actions/cache@v3
         id: coverage-cache
         with:
-          path: coverage
-          key: coverage-${{ hashFiles('yarn.lock', 'src/**/*', 'test/**/*') }}
+          path: coverage/clover.xml
+          key: coverage-${{ hashFiles('package.json', 'yarn.lock', 'tsconfig.json', 'src/**/*', 'test/**/*') }}
 
       - uses: myparcelnl/actions/yarn-install@v3
         if: steps.coverage-cache.outputs.cache-hit != 'true'
