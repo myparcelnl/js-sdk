@@ -64,7 +64,7 @@
     "vitest": "^0.34.0",
     "vitest-fetch-mock": "^0.2.1"
   },
-  "packageManager": "yarn@3.2.4",
+  "packageManager": "yarn@4.0.1",
   "publishConfig": {
     "access": "public"
   }
