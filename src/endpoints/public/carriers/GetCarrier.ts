@@ -1,7 +1,7 @@
+import {type CarrierNameOrId} from '@myparcel/constants';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
-import {Carrier} from '@/endpoints/public/carriers/Carrier.types';
-import {CarrierNameOrId} from '@myparcel/constants';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type Carrier} from '@/endpoints/public/carriers/Carrier.types';
 
 export type GetCarrierDefinition = CreateDefinition<{
   name: typeof GetCarrier.name;

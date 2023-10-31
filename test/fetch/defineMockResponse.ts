@@ -1,6 +1,6 @@
-import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
-import {EndpointResponseBody} from '@/model/client/AbstractClient.types';
-import {ResponseWrapper} from '@/types/request.types';
+import {type ResponseWrapper} from '@/types/request.types';
+import {type AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {type EndpointResponseBody} from '@/model/client/AbstractClient.types';
 
 export interface MockedResponse<E = unknown> extends ResponseInit {
   body?: E extends AbstractEndpoint

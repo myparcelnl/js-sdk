@@ -1,5 +1,5 @@
-import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
-import {EndpointParameters} from '@/model/client/AbstractClient.types';
+import {type AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {type EndpointParameters} from '@/model/client/AbstractClient.types';
 
 export const addParameters = <E extends AbstractEndpoint>(path: string, parameters?: EndpointParameters<E>): string => {
   if (parameters) {

@@ -20,6 +20,7 @@ export interface EnumSchema<Type> {
 export interface Timestamp {
   date: string;
   timezone: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   timezone_type: number;
 }
 

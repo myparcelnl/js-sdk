@@ -1,3 +1,16 @@
+import {beforeEach, describe, expect, it} from 'vitest';
+import {POST_BODY_SHIPMENTS} from '@Test/mockData';
+import {createFetchMock} from '@Test/fetch/createFetchMock';
+import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
+import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
+import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
+import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
+import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
+import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
+import {UserException} from '@/model/exception/UserException';
+import {ApiException} from '@/model/exception/ApiException';
+import {FetchClient} from '@/model/client/FetchClient';
 import {AbstractPublicEndpoint, type EndpointParameters} from '@/model';
 import {
   GetCarrier,
@@ -7,21 +20,8 @@ import {
   GetShipments,
   PostShipments,
 } from '@/endpoints';
-import {beforeEach, describe, expect, it} from 'vitest';
-import {ApiException} from '@/model/exception/ApiException';
-import {FetchClient} from '@/model/client/FetchClient';
-import {POST_BODY_SHIPMENTS} from '@Test/mockData';
-import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
-import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
-import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
-import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
-import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
-import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
-import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
-import {UserException} from '@/model/exception/UserException';
-import {createFetchMock} from '@Test/fetch/createFetchMock';
-import {createPrivateSdk} from '@/createPrivateSdk';
 import {createPublicSdk} from '@/createPublicSdk';
+import {createPrivateSdk} from '@/createPrivateSdk';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,

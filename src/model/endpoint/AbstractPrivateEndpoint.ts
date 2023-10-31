@@ -1,6 +1,6 @@
+import {type RequestHeaders} from '@/types/request.types';
+import {type EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
-import {EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {RequestHeaders} from '@/types/request.types';
 
 type PrivateEndpointDefinition = {
   headers: RequestHeaders & {Authorization: string};

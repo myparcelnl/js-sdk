@@ -1,9 +1,14 @@
-import {CarrierNameOrId, DeliveryTypeId, PackageTypeName, PlatformNameOrId} from '@myparcel/constants';
+import {
+  type CarrierNameOrId,
+  type DeliveryTypeId,
+  type PackageTypeName,
+  type PlatformNameOrId,
+} from '@myparcel/constants';
+import {type RequestHeaders} from '@/types/request.types';
+import {type WithRequired} from '@/types/global.types';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {DeliveryOption} from '@/endpoints/public/delivery-options/DeliveryOption.types';
-import {RequestHeaders} from '@/types/request.types';
-import {WithRequired} from '@/types/global.types';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type DeliveryOption} from '@/endpoints/public/delivery-options/DeliveryOption.types';
 
 type Parameters = {
   /* eslint-disable @typescript-eslint/naming-convention */

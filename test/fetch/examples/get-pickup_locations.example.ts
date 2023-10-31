@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {GetPickupLocations} from '@/endpoints';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
+import {type GetPickupLocations} from '@/endpoints';
 
 export default defineMockResponse<GetPickupLocations>({
   match: (path: string, init?: RequestInit) =>

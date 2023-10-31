@@ -1,6 +1,6 @@
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
-import {Carrier} from '@/endpoints/public/carriers/Carrier.types';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type Carrier} from '@/endpoints/public/carriers/Carrier.types';
 
 export type GetCarriersDefinition = CreateDefinition<{
   name: typeof GetCarriers.name;

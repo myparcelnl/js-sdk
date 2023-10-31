@@ -1,4 +1,4 @@
-import {HttpMethod, RequestHeaders} from '@/types';
+import {type HttpMethod, type RequestHeaders} from '@/types';
 import {AbstractPublicEndpoint} from '@/model';
 
 export class TestGetTextEndpoint extends AbstractPublicEndpoint {

@@ -1,5 +1,5 @@
-import {AbstractEndpoint, AbstractPublicEndpoint} from '@/model';
-import {HttpMethod} from '@/types';
+import {type HttpMethod} from '@/types';
+import {type AbstractEndpoint, AbstractPublicEndpoint} from '@/model';
 
 export class TestGet200Endpoint extends AbstractPublicEndpoint {
   public readonly method: HttpMethod = 'GET';

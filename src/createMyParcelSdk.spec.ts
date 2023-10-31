@@ -1,14 +1,14 @@
-import {GetShipment, GetShipments} from '@/endpoints';
 import {beforeEach, describe, expect, it} from 'vitest';
-import {FetchClient} from '@/model/client/FetchClient';
-import {GetCarrier} from '@/endpoints/public/carriers/GetCarrier';
-import {GetCarriers} from '@/endpoints/public/carriers/GetCarriers';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
-import {PostShipments} from '@/endpoints/private/shipments/PostShipments';
-import {UserException} from '@/model';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
-import {createPrivateSdk} from '@/createPrivateSdk';
+import {FetchClient} from '@/model/client/FetchClient';
+import {UserException} from '@/model';
+import {GetCarriers} from '@/endpoints/public/carriers/GetCarriers';
+import {GetCarrier} from '@/endpoints/public/carriers/GetCarrier';
+import {PostShipments} from '@/endpoints/private/shipments/PostShipments';
+import {GetShipment, GetShipments} from '@/endpoints';
 import {createPublicSdk} from '@/createPublicSdk';
+import {createPrivateSdk} from '@/createPrivateSdk';
 
 describe('sdk', () => {
   const fetchMock = createFetchMock();

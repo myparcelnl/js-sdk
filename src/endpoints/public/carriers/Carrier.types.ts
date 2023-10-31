@@ -1,4 +1,4 @@
-import {CarrierId, CarrierName} from '@myparcel/constants';
+import {type CarrierId, type CarrierName} from '@myparcel/constants';
 
 export interface Carrier {
   id: CarrierId;

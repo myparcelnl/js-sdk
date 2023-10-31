@@ -1,5 +1,5 @@
-import {originalFetch} from './originalFetch';
 import {writeExample} from './writeExample';
+import {originalFetch} from './originalFetch';
 
 /**
  * Execute a real fetch request and save its results as a new example.

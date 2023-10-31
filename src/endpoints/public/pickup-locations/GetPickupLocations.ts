@@ -1,7 +1,7 @@
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {DeliveryOptionsParameters} from '@/endpoints';
-import {PickupLocation} from '@/endpoints/public/pickup-locations/PickupLocation.types';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type PickupLocation} from '@/endpoints/public/pickup-locations/PickupLocation.types';
+import {type DeliveryOptionsParameters} from '@/endpoints';
 
 export type GetPickupLocationsDefinition = CreateDefinition<{
   name: typeof GetPickupLocations.name;

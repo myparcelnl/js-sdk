@@ -1,5 +1,5 @@
+import {type HttpMethod} from '@/types';
 import {AbstractPublicEndpoint} from '@/model';
-import {HttpMethod} from '@/types';
 
 export class TestPut204Endpoint extends AbstractPublicEndpoint {
   public readonly method: HttpMethod = 'PUT';

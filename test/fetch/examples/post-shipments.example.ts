@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {PostShipments} from '@/endpoints';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
+import {type PostShipments} from '@/endpoints';
 
 export default defineMockResponse<PostShipments>({
   match: (path: string, init?: RequestInit) => init?.method === 'POST' && path === '/shipments',

@@ -1,6 +1,6 @@
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
-import {CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {MyParcelShipment} from '@/endpoints';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type MyParcelShipment} from '@/endpoints';
 
 type GetShipmentDefinition = CreateDefinition<{
   name: typeof GetShipment.name;

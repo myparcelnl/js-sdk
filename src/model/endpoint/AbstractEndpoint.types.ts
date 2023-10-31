@@ -1,5 +1,5 @@
-import {NoInfer} from '@/types/global.types';
-import {RequestHeaders} from '@/types/request.types';
+import {type RequestHeaders} from '@/types/request.types';
+import {type NoInfer} from '@/types/global.types';
 
 type Pagination = {
   page?: number;

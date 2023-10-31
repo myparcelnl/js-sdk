@@ -1,5 +1,5 @@
+import {type HttpMethod} from '@/types';
 import {AbstractPublicEndpoint} from '@/model';
-import {HttpMethod} from '@/types';
 
 export class TestDeleteEndpoint extends AbstractPublicEndpoint {
   public readonly method: HttpMethod = 'DELETE';

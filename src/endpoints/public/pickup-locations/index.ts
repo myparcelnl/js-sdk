@@ -1,2 +1,2 @@
-export * from './PickupLocation.types';
 export * from './GetPickupLocations';
+export * from './PickupLocation.types';

@@ -1,7 +1,7 @@
 import {type HttpMethod, type RequestHeaders} from '@/types/request.types';
-import {type PostedShipmentReference, type ShipmentPostData} from '@/endpoints/private/shipments/Shipment.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type PostedShipmentReference, type ShipmentPostData} from '@/endpoints/private/shipments/Shipment.types';
 
 type PostShipmentsDefinition = CreateDefinition<{
   name: typeof PostShipments.name;

@@ -1,7 +1,7 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {GetCarrier} from '@/endpoints/public/carriers';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
+import {type GetCarrier} from '@/endpoints/public/carriers';
 
 export default defineMockResponse<GetCarrier>({
   match: (path: string, init?: RequestInit) => init?.method === 'GET' && path === '/carriers/postnl',

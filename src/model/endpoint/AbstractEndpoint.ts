@@ -1,5 +1,5 @@
-import {type EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {type HttpMethod} from '@/types/request.types';
+import {type EndpointDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 
 interface EndpointOptions {
   headers?: AbstractEndpoint['definition']['headers'];

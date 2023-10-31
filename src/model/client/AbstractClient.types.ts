@@ -1,6 +1,6 @@
-import {RequestHeaders, ResponseWrapper} from '@/types/request.types';
-import {AbstractClient} from '@/model/client/AbstractClient';
-import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {type RequestHeaders, type ResponseWrapper} from '@/types/request.types';
+import {type AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {type AbstractClient} from '@/model/client/AbstractClient';
 
 interface ClientPlugin {
   getClient?: () => void;

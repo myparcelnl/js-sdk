@@ -1,6 +1,6 @@
-import {MyParcelSdk, createMyParcelSdk} from '@/createMyParcelSdk';
-import {AbstractClient} from '@/model/client/AbstractClient';
-import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
+import {type AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
+import {type AbstractClient} from '@/model/client/AbstractClient';
+import {type MyParcelSdk, createMyParcelSdk} from '@/createMyParcelSdk';
 
 /**
  * Create a private SDK which requires an Authorization header on all its endpoints.

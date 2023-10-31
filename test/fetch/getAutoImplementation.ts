@@ -1,8 +1,8 @@
-import {BASE_URL} from '@/model/client/AbstractClient';
-import {MockedResponse} from '@Test/fetch/defineMockResponse';
-import {doActualFetch} from './doActualFetch';
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
+import {type MockedResponse} from '@Test/fetch/defineMockResponse';
+import {doActualFetch} from './doActualFetch';
+import {BASE_URL} from '@/model/client/AbstractClient';
 
 export const DIR_EXAMPLES = path.resolve(__dirname, 'examples');
 

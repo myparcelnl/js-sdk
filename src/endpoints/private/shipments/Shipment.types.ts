@@ -6,8 +6,8 @@ import {
   type PackageTypeId,
   type ShipmentStatus,
 } from '@myparcel/constants';
+import {type Address, type AddressWithContactDetails, type RetailLocation} from '../../../types';
 import {type IntBoolean, type Price, type WithRequired} from '@/types';
-import {type Address, type AddressWithContactDetails, type RetailLocation} from '../../../types/common.types';
 
 export interface PostedShipmentReference {
   id: number;

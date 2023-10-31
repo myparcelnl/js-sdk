@@ -1,7 +1,7 @@
-import {BASE_URL} from '@/model/client/AbstractClient';
-import {DIR_EXAMPLES} from '@Test/fetch/getAutoImplementation';
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
+import {DIR_EXAMPLES} from '@Test/fetch/getAutoImplementation';
+import {BASE_URL} from '@/model/client/AbstractClient';
 
 const TEMPLATE = `
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';

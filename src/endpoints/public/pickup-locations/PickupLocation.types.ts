@@ -1,5 +1,5 @@
-import {DeliveryTypeId, DeliveryTypeName} from '@myparcel/constants';
-import {StartEndDate, Timestamp, Weekday} from '@/types';
+import {type DeliveryTypeId, type DeliveryTypeName} from '@myparcel/constants';
+import {type StartEndDate, type Timestamp, type Weekday} from '@/types';
 
 export interface PickupLocation {
   address: {

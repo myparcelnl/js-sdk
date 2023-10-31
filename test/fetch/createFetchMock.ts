@@ -1,5 +1,5 @@
-import {FetchMock} from 'vitest-fetch-mock';
-import {MockedResponse} from '@Test/fetch/defineMockResponse';
+import {type FetchMock} from 'vitest-fetch-mock';
+import {type MockedResponse} from '@Test/fetch/defineMockResponse';
 import {getAutoImplementation} from './getAutoImplementation';
 
 export const createFetchMock = <T>(

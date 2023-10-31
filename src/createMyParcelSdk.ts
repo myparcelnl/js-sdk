@@ -1,6 +1,6 @@
-import {EndpointResponse, Options, OptionsWithoutBody} from '@/model/client/AbstractClient.types';
-import {AbstractClient} from '@/model/client/AbstractClient';
-import {AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {type AbstractEndpoint} from '@/model/endpoint/AbstractEndpoint';
+import {type EndpointResponse, type Options, type OptionsWithoutBody} from '@/model/client/AbstractClient.types';
+import {type AbstractClient} from '@/model/client/AbstractClient';
 import {UserException} from '@/model';
 
 type EndpointMethod<E extends AbstractEndpoint> = (options?: Options<E>) => Promise<EndpointResponse<E>>;

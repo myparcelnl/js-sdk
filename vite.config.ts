@@ -1,6 +1,6 @@
+import path from 'path';
 import {defineConfig} from 'vitest/config';
 import dts from 'vite-plugin-dts';
-import path from 'path';
 
 const config = defineConfig((env) => {
   return {

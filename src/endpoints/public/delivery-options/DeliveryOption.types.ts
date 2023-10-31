@@ -1,5 +1,6 @@
-import {DeliveryTypeName, PackageTypeName, ShipmentOptionName} from '@myparcel/constants';
-import {EnumSchema, Timestamp} from '@/types';
+/* eslint-disable @typescript-eslint/naming-convention */
+import {type DeliveryTypeName, type PackageTypeName, type ShipmentOptionName} from '@myparcel/constants';
+import {type EnumSchema, type Timestamp} from '@/types';
 
 interface PossibleShipmentOption {
   name: ShipmentOptionName;

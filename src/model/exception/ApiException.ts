@@ -1,4 +1,4 @@
-import {ErrorResponse} from '@/types/request.types';
+import {type ErrorResponse} from '@/types/request.types';
 
 export class ApiException extends Error {
   public data: ErrorResponse;
