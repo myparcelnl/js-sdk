@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@myparcel-eslint/eslint-config-esnext": "^1.2.0",
+    "@myparcel-eslint/eslint-config-import": "^1.2.1",
     "@myparcel-eslint/eslint-config-prettier": "^1.2.0",
     "@myparcel-eslint/eslint-config-prettier-typescript": "^1.2.0",
     "@myparcel/semantic-release-config": "^5.0.0",
@@ -54,6 +55,7 @@
     "@vitest/coverage-v8": "^0.34.6",
     "@vitest/ui": "^0.34.6",
     "eslint": "^8.34.0",
+    "eslint-plugin-sort-exports": "^0.8.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.4",
     "publint": "^0.2.0",
