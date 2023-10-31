@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.0](https://github.com/myparcelnl/js-sdk/compare/v3.2.0...v3.3.0) (2023-10-31)
+
+
+### :sparkles: New Features
+
+* add support for formData ([#142](https://github.com/myparcelnl/js-sdk/issues/142)) ([8752c43](https://github.com/myparcelnl/js-sdk/commit/8752c43bcf848fb94ba29f49396c8aeea667d01e))
+
 ## [3.2.0](https://github.com/myparcelnl/js-sdk/compare/v3.1.0...v3.2.0) (2023-10-16)
 
 
