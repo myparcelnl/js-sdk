@@ -31,10 +31,12 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:run": "vitest run",
+    "typecheck": "tsc --noEmit",
     "watch": "yarn build:dev --watch"
   },
   "lint-staged": {
-    "*.ts": "eslint --fix",
+    "*.{ts,js,cjs.mjs}": "eslint --fix",
+    "*.{json,yml,md}": "prettier --write",
     "package.json": [
       "sort-package-json",
       "sh -c \"publint\""
