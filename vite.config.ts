@@ -27,6 +27,7 @@ const config = defineConfig((env) => {
     },
     test: {
       coverage: {
+        provider: 'istanbul',
         100: true,
         enabled: false,
         reporter: ['text', 'clover', 'html'],

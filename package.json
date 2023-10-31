@@ -51,7 +51,7 @@
     "@myparcel-eslint/eslint-config-prettier-typescript": "^1.2.0",
     "@myparcel/semantic-release-config": "^5.0.0",
     "@tsconfig/recommended": "^1.0.2",
-    "@vitest/coverage-v8": "^0.34.4",
+    "@vitest/coverage-istanbul": "^0.34.6",
     "@vitest/ui": "^0.34.6",
     "eslint": "^8.34.0",
     "husky": "^8.0.3",
