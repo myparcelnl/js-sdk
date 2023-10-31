@@ -29,7 +29,7 @@ const config = defineConfig((env) => {
       coverage: {
         100: true,
         enabled: false,
-        reporter: ['text', 'clover'],
+        reporter: ['text', 'clover', 'html'],
       },
       setupFiles: ['./test/mockFetch.ts', './test/mockAbortController.ts'],
     },
