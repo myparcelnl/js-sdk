@@ -209,6 +209,28 @@ describe('AbstractClient', () => {
         },
       });
     });
+
+    it('formats request with formData correctly', async () => {
+      expect.assertions(2);
+
+      const sdk = createPublicSdk(new FetchClient(), [new TestPostWithoutPropertyEndpoint()]);
+      const formData = new FormData();
+      formData.append('file', new Blob(['test'], {type: 'text/plain'}), 'test.txt');
+
+      await sdk.postWithoutPropertyEndpoint({
+        body: formData,
+      });
+
+      expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+      // the body should be a FormData instance
+      expect(fetchMock.mock.calls[0][1].body).toBeInstanceOf(FormData);
+    });
   });
 
   it('handles having no response body', async () => {

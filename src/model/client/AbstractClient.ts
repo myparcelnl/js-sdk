@@ -239,6 +239,14 @@ export abstract class AbstractClient {
     if (isOfType<OptionsWithBody<E>>(options, 'body')) {
       const property = endpoint.getProperty();
 
+      if (options.body instanceof FormData) {
+        // FormData should be set as body directly.
+        newOptions.body = options.body;
+        // FormData should not be handled by the browser itself.
+        delete newOptions.headers['Content-Type'];
+        return newOptions;
+      }
+
       if (property === undefined) {
         newOptions.body = {
           data: options.body,
