@@ -27,7 +27,7 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
    * property differs, set responseProperty alongside property.
    * If the property is undefined, the endpoint will be called without a namespace.
    */
-  public abstract readonly property: string | undefined;
+  public readonly property: string | undefined;
 
   /**
    * Property used in the response. Falls back to `this.property` if it's not
