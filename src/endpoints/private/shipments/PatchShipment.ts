@@ -1,25 +1,23 @@
 import {type HttpMethod, type RequestHeaders} from '@/types/request.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type PostedShipmentReference, type ShipmentPostData} from '@/endpoints/private/shipments/Shipment.types';
+import {type ShipmentPatchData} from '@/endpoints/private/shipments/Shipment.types';
 
-type PostShipmentsDefinition = CreateDefinition<{
-  name: typeof PostShipments.name;
-  body: ShipmentPostData[];
-  response: PostedShipmentReference[];
+type PatchShipmentsDefinition = CreateDefinition<{
+  name: typeof PatchShipments.name;
+  body: ShipmentPatchData[];
 }>;
 
 /**
- * Create a shipment.
+ * Patch an existing shipment.
  *
  * @see https://developer.myparcel.nl/api-reference/06.shipments.html
  */
-export class PostShipments extends AbstractPrivateEndpoint<PostShipmentsDefinition> {
-  public readonly method: HttpMethod = 'POST';
-  public readonly name = 'postShipments';
+export class PatchShipments extends AbstractPrivateEndpoint<PatchShipmentsDefinition> {
+  public readonly method: HttpMethod = 'PATCH';
+  public readonly name = 'patchShipments';
   public readonly path = 'shipments';
   public readonly property = 'shipments';
-  public readonly responseProperty = 'ids';
 
   public getHeaders(): RequestHeaders {
     return {

@@ -15,7 +15,7 @@ export interface EndpointDefinition {
   headers?: RequestHeaders;
   parameters?: NoInfer<Record<string, string | number | boolean>>;
   path?: Record<string, string | number>;
-  response?: NoInfer<unknown[]> | PaginatedResponse<NoInfer<unknown[]>>;
+  response?: boolean | string | number | NoInfer<unknown[]> | PaginatedResponse<NoInfer<unknown[]>>;
 }
 
 export type CreateDefinition<D extends EndpointDefinition> = D;

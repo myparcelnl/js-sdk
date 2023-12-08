@@ -183,3 +183,10 @@ export interface MyParcelShipment {
   transaction_status: string;
   user_agent: string | null;
 }
+
+export interface ShipmentPatchData {
+  id: number;
+  hidden?: IntBoolean;
+  status?: ShipmentStatus;
+  delivered?: IntBoolean;
+}
