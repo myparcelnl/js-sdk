@@ -41,7 +41,7 @@ export interface MyParcelAccount {
   email: string;
   first_name: string;
   gender: string;
-  general_Settings: ;
+  general_Settings: AccountSettings;
   id: number;
   last_name: string;
   modified: string;
