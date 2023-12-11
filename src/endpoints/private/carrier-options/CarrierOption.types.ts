@@ -2,12 +2,6 @@
 import {type CarrierId, type CarrierName} from '@myparcel/constants';
 import {type IntBoolean} from '@/types';
 
-// @TODO - move to frontend types
-export const ContractType = {
-  Main: 'main',
-  Custom: 'custom',
-} as const;
-
 export interface MyParcelCarrierOption {
   api_key: string;
   carrier: {

@@ -1,20 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-export enum SystemMessageType {
-  SHIPMENT_FORM = 1,
-  DASHBOARD = 2,
-  GLOBAL_MESSAGE = 3,
-  COLLECTION_TRIP_MESSAGE = 4,
-  CASES_OVERVIEW = 5,
-}
-
-export enum SystemNotificationType {
-  ALERT = 'alert',
-  WARNING = 'warning',
-  SUCCESS = 'success',
-  INFO = 'info',
-  DEFAULT = 'info',
-}
-
 export interface MyParcelSystemMessage {
   id: number;
   content: string;

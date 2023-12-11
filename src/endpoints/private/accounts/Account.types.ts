@@ -9,13 +9,6 @@ export interface AccountAdditionalInfo {
   coupon: string;
 }
 
-// @TODO - move to frontend types
-export const ShipmentLabel = {
-  Apart: 'apart',
-  Nested: 'nested',
-  None: 'none',
-} as const;
-
 export interface AccountSettings {
   affiliate_bcc: IntBoolean;
   affiliate_fee: Price;

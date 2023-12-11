@@ -1,10 +1,11 @@
-import {AbstractPrivateEndpoint, type CreateDefinition, type HttpMethod} from '@myparcel/sdk';
-import {type SubscriptionProductId} from './Subscriptions.types';
-
+import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
+import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type HttpMethod} from '@/types';
+import {SubscriptionPostData} from './Subscriptions.types';
 
 type PostSubscriptionsDefinition = CreateDefinition<{
   name: typeof PostSubscriptions.name;
-  body: PostSubscription[];
+  body: SubscriptionPostData[];
   response: {
     id: number;
   }[];

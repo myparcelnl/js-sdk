@@ -9,20 +9,6 @@ export interface ShopBranding {
   use_consumer_portal: boolean;
 }
 
-// @TODO - move to frontend types
-export const BillingCycle = {
-  Monthly: 'monthly',
-  Weekly: 'weekly',
-} as const;
-
-// @TODO - move to frontend types
-export const BillingMethod = {
-  PrePay: 1,
-  PostPay: 2,
-  Incasso: 3,
-  IncassoPending: 4,
-} as const;
-
 export interface ShopBilling {
   address: Address;
   billing_method: 1 | 2 | 3 | 4;
