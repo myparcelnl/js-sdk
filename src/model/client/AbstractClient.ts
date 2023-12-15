@@ -97,7 +97,7 @@ export abstract class AbstractClient {
     if (isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
       const property = endpoint.getResponseProperty() as EndpointResponseProperty<E>;
 
-      if (typeof property === 'undefined') {
+      if (typeof property !== 'string') {
         return response.data;
       }
 
