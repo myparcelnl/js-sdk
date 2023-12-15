@@ -1,5 +1,7 @@
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
+import {type SubscriptionType} from '@/endpoints/private/subscriptions/Subscriptions.types';
+import {type SubscriptionCapability} from './SubscriptionCapability.types';
 
 type GetSubscriptionsCapabilitiesDefinition = CreateDefinition<{
   name: typeof GetSubscriptionsCapabilities.name;
