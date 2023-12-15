@@ -96,6 +96,11 @@ export abstract class AbstractClient {
 
     if (isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
       const property = endpoint.getResponseProperty() as EndpointResponseProperty<E>;
+
+      if (typeof property === 'undefined') {
+        return response.data;
+      }
+
       let wrappedResponse: EndpointResponse<E> = response.data[property];
 
       // If the response is paginated, wrap it.

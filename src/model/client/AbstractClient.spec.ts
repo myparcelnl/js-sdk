@@ -9,6 +9,7 @@ import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
+import {TestGet200NoResponseProperty} from '@Test/endpoints/TestGet200NoResponseProperty';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
 import {UserException} from '@/model/exception/UserException';
 import {ApiException} from '@/model/exception/ApiException';
@@ -399,5 +400,15 @@ describe('AbstractClient', () => {
 
     expect(response).toHaveProperty('shipments', []);
     expect(response).toHaveProperty('results', 0);
+  });
+
+  it('returns all contents from data property when no property is defined', async () => {
+    expect.assertions(2);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGet200NoResponseProperty()]);
+    const response = await sdk.get200NoResponseProperty();
+
+    expect(response).toHaveProperty('token', 'test');
+    expect(response).toHaveProperty('credentials', {username: 'test', password: 'test'});
   });
 });
