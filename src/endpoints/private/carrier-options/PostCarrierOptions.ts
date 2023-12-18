@@ -9,9 +9,6 @@ type PostCarrierOptionsDefinition = CreateDefinition<{
   response: {id: number}[];
 }>;
 
-/**
- * Update a single invitation.
- */
 export class PostCarrierOptions extends AbstractPrivateEndpoint<PostCarrierOptionsDefinition> {
   public readonly method: HttpMethod = 'POST';
   public readonly name = 'postCarrierOptions';

@@ -11,9 +11,6 @@ type PutAccountDefinition = CreateDefinition<{
   response: MyParcelAccount[];
 }>;
 
-/**
- * Retrieve a single account object by ID.
- */
 export class PutAccount extends AbstractPrivateEndpoint<PutAccountDefinition> {
   public readonly method: HttpMethod = 'PUT';
   public readonly name = 'putAccount';
