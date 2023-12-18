@@ -37,6 +37,12 @@ export type EndpointPath<E extends AbstractEndpoint> = E['definition']['path'];
 
 export type EndpointResponse<E extends AbstractEndpoint> = E['definition']['response'];
 
+export type PaginatedEndpointResponse<E extends AbstractEndpoint> = E['definition']['response'] & {
+  page?: number;
+  size?: number;
+  results?: number;
+};
+
 export type EndpointBody<E extends AbstractEndpoint> = E['definition']['body'];
 
 export type EndpointResponseProperty<E extends AbstractEndpoint> = E['responseProperty'] extends string

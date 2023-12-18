@@ -19,6 +19,7 @@ import {
   type EndpointResponse,
   type EndpointResponseBody,
   type EndpointResponseProperty,
+  type PaginatedEndpointResponse,
   type Options,
   type OptionsWithBody,
 } from '@/model/client/AbstractClient.types';
@@ -94,40 +95,44 @@ export abstract class AbstractClient {
       throw new ApiException(response);
     }
 
-    if (isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
-      const property = endpoint.getResponseProperty() as EndpointResponseProperty<E>;
+    return this.getResponseBody(endpoint, response);
+  }
 
-      if (!property) {
-        return response.data;
-      }
-
-      let wrappedResponse: EndpointResponse<E> = response.data[property];
-
-      // If the response is paginated, wrap it.
-      const {page, size, results} = response.data;
-
-      if (page !== undefined || size !== undefined || results !== undefined) {
-        wrappedResponse = {
-          [property]: response.data[property] as NoInfer<unknown[]>,
-        };
-
-        if (page !== undefined) {
-          wrappedResponse.page = page;
-        }
-
-        if (size !== undefined) {
-          wrappedResponse.size = size;
-        }
-
-        if (results !== undefined) {
-          wrappedResponse.results = results;
-        }
-      }
-
-      return wrappedResponse;
+  getResponseBody<E extends AbstractEndpoint>(endpoint: E, response: EndpointResponse<E>): EndpointResponse<E> | PaginatedEndpointResponse<E> {
+    if (!isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
+      return response;
     }
 
-    return response;
+    const property = endpoint.getResponseProperty() as EndpointResponseProperty<E>;
+
+    if (!property) {
+      return response.data as EndpointResponse<E>;
+    }
+
+    const { page, size, results } = response.data;
+
+    if (page === undefined && size === undefined && results === undefined) {
+      return response.data[property]
+    }
+
+    // If the response is paginated, wrap it.
+    let paginatedResponse: PaginatedEndpointResponse<E> = {
+      [property]: response.data[property] as NoInfer<unknown[]>,
+    };
+
+    if (page !== undefined) {
+      paginatedResponse.page = page;
+    }
+
+    if (size !== undefined) {
+      paginatedResponse.size = size;
+    }
+
+    if (results !== undefined) {
+      paginatedResponse.results = results;
+    }
+
+    return paginatedResponse;
   }
 
   /**
