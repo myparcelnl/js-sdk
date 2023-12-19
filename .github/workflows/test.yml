@@ -11,7 +11,7 @@ jobs:
       matrix:
         node-version: [18, 20]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: 'Handle coverage cache'
         if: matrix.node-version == vars.NODE_VERSION
