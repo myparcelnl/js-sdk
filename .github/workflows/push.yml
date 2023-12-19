@@ -43,6 +43,7 @@ jobs:
 
   rebase-prs:
     needs: release
+    if: always()
     runs-on: ubuntu-22.04
     steps:
       - uses: myparcelnl/actions/setup-git-credentials@v3
