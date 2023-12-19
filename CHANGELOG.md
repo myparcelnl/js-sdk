@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.0](https://github.com/myparcelnl/js-sdk/compare/v3.3.1...v3.4.0) (2023-12-19)
+
+
+### :sparkles: New Features
+
+* add private endpoints ([#144](https://github.com/myparcelnl/js-sdk/issues/144)) ([aed019f](https://github.com/myparcelnl/js-sdk/commit/aed019f07343e3dadba08ba78081ea069e111f90))
+* return all content in data when no response property is defined ([#145](https://github.com/myparcelnl/js-sdk/issues/145)) ([5b6e274](https://github.com/myparcelnl/js-sdk/commit/5b6e274e8709201177fa8e975a56dab6f217d62d))
+
+
+### :bug: Bug Fixes
+
+* add missing exports for endpoints ([#146](https://github.com/myparcelnl/js-sdk/issues/146)) ([b3a349f](https://github.com/myparcelnl/js-sdk/commit/b3a349f4709039630bdcc25d5dfba71cc63a8dc4))
+
 ## [3.3.1](https://github.com/myparcelnl/js-sdk/compare/v3.3.0...v3.3.1) (2023-10-31)
 
 
