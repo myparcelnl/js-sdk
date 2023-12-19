@@ -33,7 +33,7 @@ jobs:
           yarn test:coverage
 
       - name: 'Run tests'
-        if: matrix.node-version == vars.NODE_VERSION
+        if: matrix.node-version != vars.NODE_VERSION
         #language=sh
         run: |
           yarn test:run
