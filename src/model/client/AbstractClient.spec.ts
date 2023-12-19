@@ -25,6 +25,9 @@ import {
 } from '@/endpoints';
 import {createPublicSdk} from '@/createPublicSdk';
 import {createPrivateSdk} from '@/createPrivateSdk';
+import { TestGetPaginatedSizeEndpoint } from '@Test/endpoints/TestGetPaginatedSizeEndpoint';
+import { TestGetPaginatedPageEndpoint } from '@Test/endpoints/TestGetPaginatedPageEndpoint';
+import { TestGetPaginatedResultsEndpoint } from '@Test/endpoints/TestGetPaginatedResultsEndpoint';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -410,5 +413,41 @@ describe('AbstractClient', () => {
 
     expect(response).toHaveProperty('token', 'test');
     expect(response).toHaveProperty('credentials', {username: 'test', password: 'test'});
+  });
+
+  it('returns size when size is defined', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetPaginatedSizeEndpoint()]);
+    const response = await sdk.getPaginatedSizeEndpoint();
+
+    expect(response).toHaveProperty('shipments', []);
+    expect(response).toHaveProperty('size', 0);
+    expect(response).not.toHaveProperty('page');
+    expect(response).not.toHaveProperty('results');
+  });
+
+  it('returns page when page is defined', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetPaginatedPageEndpoint()]);
+    const response = await sdk.getPaginatedPageEndpoint();
+
+    expect(response).toHaveProperty('shipments', []);
+    expect(response).toHaveProperty('page', 1);
+    expect(response).not.toHaveProperty('size');
+    expect(response).not.toHaveProperty('results');
+  });
+
+  it('returns results when results is defined', async () => {
+    expect.assertions(4);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetPaginatedResultsEndpoint()]);
+    const response = await sdk.getPaginatedResultsEndpoint();
+
+    expect(response).toHaveProperty('shipments', []);
+    expect(response).toHaveProperty('results', 0);
+    expect(response).not.toHaveProperty('page');
+    expect(response).not.toHaveProperty('size');
   });
 });
