@@ -98,7 +98,10 @@ export abstract class AbstractClient {
     return this.getResponseBody(endpoint, response);
   }
 
-  getResponseBody<E extends AbstractEndpoint>(endpoint: E, response: EndpointResponse<E>): EndpointResponse<E> | PaginatedEndpointResponse<E> {
+  public getResponseBody<E extends AbstractEndpoint>(
+    endpoint: E,
+    response: EndpointResponse<E>,
+  ): EndpointResponse<E> | PaginatedEndpointResponse<E> {
     if (!isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
       return response;
     }
@@ -109,18 +112,18 @@ export abstract class AbstractClient {
       return response.data as EndpointResponse<E>;
     }
 
-    const { page, size, results } = response.data;
+    const {page, size, results} = response.data;
 
     if (page === undefined && size === undefined && results === undefined) {
-      return response.data[property]
+      return response.data[property];
     }
 
     // If the response is paginated, wrap it.
     return {
       [property]: response.data[property] as NoInfer<unknown[]>,
-      ...(page !== undefined && { page }),
-      ...(size !== undefined && { size }),
-      ...(results !== undefined && { results }),
+      ...(page !== undefined && {page}),
+      ...(size !== undefined && {size}),
+      ...(results !== undefined && {results}),
     };
   }
 
