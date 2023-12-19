@@ -486,6 +486,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@myparcel-eslint/eslint-config-node@npm:^1.2.0":
+  version: 1.3.1
+  resolution: "@myparcel-eslint/eslint-config-node@npm:1.3.1"
+  dependencies:
+    "@myparcel-eslint/eslint-config": "npm:^1.3.1"
+  peerDependencies:
+    eslint: 7 - 8
+  checksum: 61e236dd9f892822fd2ec40b8f76ea3dbb8ab376f3aac005c386c1be02700ffe105d7eadff87263ecfc13b9a8ba71a20f3748ec6915ba1e05836e5338e15e292
+  languageName: node
+  linkType: hard
+
 "@myparcel-eslint/eslint-config-prettier-typescript@npm:^1.2.0":
   version: 1.3.1
   resolution: "@myparcel-eslint/eslint-config-prettier-typescript@npm:1.3.1"
@@ -558,6 +569,7 @@ __metadata:
   dependencies:
     "@myparcel-eslint/eslint-config-esnext": "npm:^1.2.0"
     "@myparcel-eslint/eslint-config-import": "npm:^1.2.1"
+    "@myparcel-eslint/eslint-config-node": "npm:^1.2.0"
     "@myparcel-eslint/eslint-config-prettier": "npm:^1.2.0"
     "@myparcel-eslint/eslint-config-prettier-typescript": "npm:^1.2.0"
     "@myparcel/constants": "npm:^1.0.0"

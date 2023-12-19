@@ -50,6 +50,7 @@
   "devDependencies": {
     "@myparcel-eslint/eslint-config-esnext": "^1.2.0",
     "@myparcel-eslint/eslint-config-import": "^1.2.1",
+    "@myparcel-eslint/eslint-config-node": "^1.2.0",
     "@myparcel-eslint/eslint-config-prettier": "^1.2.0",
     "@myparcel-eslint/eslint-config-prettier-typescript": "^1.2.0",
     "@myparcel/semantic-release-config": "^5.0.0",
