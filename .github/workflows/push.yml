@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   test:
-    uses: ./.github/workflows/--test.yml
+    uses: ./.github/workflows/test.yml
     secrets: inherit
 
   release:
@@ -31,7 +31,7 @@ jobs:
 
       - uses: myparcelnl/actions/yarn-install@v3
         with:
-          node-version: 18
+          node-version: ${{ vars.NODE_VERSION }}
 
       - uses: ./.github/actions/build
 
