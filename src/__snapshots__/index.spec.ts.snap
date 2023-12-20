@@ -14,6 +14,7 @@ exports[`module exports > exposes the correct data from index.ts 1`] = `
   "FetchClient": [Function],
   "GetAccount": [Function],
   "GetAccountMessages": [Function],
+  "GetAccounts": [Function],
   "GetApiKeys": [Function],
   "GetCarrier": [Function],
   "GetCarrierOptions": [Function],
