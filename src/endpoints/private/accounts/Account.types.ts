@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import {type PlatformId} from '@myparcel/constants';
 import {type Address} from '@/types/common.types';
+import {type PaginationParameters, type IntBoolean, type Price} from '@/types';
 import {type MyParcelShop} from '@/endpoints/private/shops/Shop.types';
-import { IntBoolean, Price } from '@/types';
 
 export interface AccountAdditionalInfo {
   ecommerce_platform: string;
@@ -24,6 +25,8 @@ export interface AccountSettings {
   use_mfa: IntBoolean;
 }
 
+export type AccountStatus = 1 | 2 | 3 | 4;
+
 export interface MyParcelAccount {
   additional_info: AccountAdditionalInfo;
   carrier_references: [];
@@ -43,8 +46,16 @@ export interface MyParcelAccount {
   platform_id: number;
   shipment_estimates: Record<string, unknown>;
   shops: MyParcelShop[];
-  status: number;
+  status: AccountStatus;
   terms_agreed: boolean;
   username: string;
   users: Record<string, unknown>;
 }
+
+export type GetAccountsParams = PaginationParameters & {
+  status?: AccountStatus;
+  from?: string;
+  to?: string;
+  q?: string;
+  platform_id?: PlatformId;
+};
