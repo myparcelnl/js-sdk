@@ -3,12 +3,16 @@ import {type MockedResponse} from '@Test/fetch/defineMockResponse';
 import {getAutoImplementation} from './getAutoImplementation';
 
 export const createFetchMock = <T>(
-  implementation?: MockedResponse<T>,
+  implementation?: MockedResponse<T> | (() => Promise<MockedResponse<T>>),
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   options?: Record<string, unknown>,
 ): FetchMock => {
   return fetchMock.mockImplementation(async (info, init) => {
     let resolvedImplementation = implementation;
+
+    if (typeof implementation === 'function') {
+      resolvedImplementation = await implementation();
+    }
 
     if (!implementation && info) {
       resolvedImplementation = await getAutoImplementation(info, init);
