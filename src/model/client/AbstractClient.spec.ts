@@ -1,4 +1,4 @@
-import {beforeEach, describe, expect, it} from 'vitest';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {isOfType} from '@myparcel/ts-utils';
 import {CarrierName, PlatformName} from '@myparcel/constants';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
@@ -6,10 +6,14 @@ import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
 import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestGetPaginatedSizeEndpoint} from '@Test/endpoints/TestGetPaginatedSizeEndpoint';
+import {TestGetPaginatedResultsEndpoint} from '@Test/endpoints/TestGetPaginatedResultsEndpoint';
+import {TestGetPaginatedPageEndpoint} from '@Test/endpoints/TestGetPaginatedPageEndpoint';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
+import {TestGetExtendedTimeout} from '@Test/endpoints/TestGetExtendedTimeout';
 import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
-import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {TestGet200NoResponseProperty} from '@Test/endpoints/TestGet200NoResponseProperty';
+import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {TestDeleteEndpoint} from '@Test/endpoints/TestDeleteEndpoint';
 import {UserException} from '@/model/exception/UserException';
 import {ApiException} from '@/model/exception/ApiException';
@@ -25,9 +29,6 @@ import {
 } from '@/endpoints';
 import {createPublicSdk} from '@/createPublicSdk';
 import {createPrivateSdk} from '@/createPrivateSdk';
-import { TestGetPaginatedSizeEndpoint } from '@Test/endpoints/TestGetPaginatedSizeEndpoint';
-import { TestGetPaginatedPageEndpoint } from '@Test/endpoints/TestGetPaginatedPageEndpoint';
-import { TestGetPaginatedResultsEndpoint } from '@Test/endpoints/TestGetPaginatedResultsEndpoint';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -449,5 +450,37 @@ describe('AbstractClient', () => {
     expect(response).toHaveProperty('results', 0);
     expect(response).not.toHaveProperty('page');
     expect(response).not.toHaveProperty('size');
+  });
+
+  it('can have the timeout overwritten by the endpoint definition', async () => {
+    expect.assertions(2);
+    vi.useFakeTimers();
+    fetchMock.mockClear();
+    const localFetchMock = createFetchMock(undefined, {timeout: 10});
+    const sdk = createPublicSdk(
+      new FetchClient({
+        options: {
+          timeout: 100,
+        },
+      }),
+      [new TestGetExtendedTimeout()],
+    );
+
+    const response = sdk.getExtendedTimeout();
+    vi.advanceTimersByTime(200);
+    void expect(response).resolves.toStrictEqual([]);
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/timeout', {
+      headers: {
+        Accept: 'application/json',
+      },
+      method: 'GET',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
+    });
+
+    localFetchMock.mockClear();
+    vi.useRealTimers();
   });
 });

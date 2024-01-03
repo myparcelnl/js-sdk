@@ -36,6 +36,12 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
   public readonly responseProperty: string | undefined;
 
   /**
+   * Timeout in milliseconds.
+   * This is used to override the default timeout of the client.
+   */
+  public readonly timeout: number | undefined;
+
+  /**
    * Used to expose EndpointDefinition type.
    */
   public declare readonly definition: D;
@@ -73,5 +79,9 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
 
   public getResponseProperty(): AbstractEndpoint['responseProperty'] {
     return this.responseProperty ?? this.property;
+  }
+
+  public getTimeout(): AbstractEndpoint['timeout'] {
+    return this.timeout;
   }
 }

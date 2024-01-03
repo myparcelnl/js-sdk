@@ -9,13 +9,14 @@ export class FetchClient extends AbstractClient {
   }
 
   protected request: ClientRequest = async (endpoint, options) => {
+    const timeout = endpoint.getTimeout() ?? options.timeout;
     const timeoutController = new AbortController();
-    const id = setTimeout(() => timeoutController.abort(), options.timeout);
+    const id = setTimeout(() => timeoutController.abort(), timeout);
 
     const config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
-      ...(options.timeout && {signal: timeoutController.signal}),
+      ...(timeout && {signal: timeoutController.signal}),
     };
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {

@@ -17,6 +17,7 @@ export interface EndpointDefinition {
   parameters?: NoInfer<Record<string, string | number | boolean>>;
   path?: Record<string, string | number>;
   response?: NoInfer<OneOrMore<unknown>> | PaginatedResponse<NoInfer<unknown[]>>;
+  timeout?: number;
 }
 
 export type CreateDefinition<D extends EndpointDefinition> = D;
