@@ -1,12 +1,12 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {defineMockResponse} from '@Test/fetch/defineMockResponse';
+import {type MockedResponse, defineMockResponse} from '@Test/fetch/defineMockResponse';
 
 export default defineMockResponse({
   match: (path: string, init?: RequestInit) => init?.method === 'GET' && path === '/timeout',
 
   response: () => {
-    return new Promise((resolve) => {
+    return new Promise<MockedResponse>((resolve) => {
       setTimeout(() => {
         resolve({
           headers: {'Content-Type': 'application/json'},

@@ -10,7 +10,7 @@ export interface MockedResponse<E = unknown> extends ResponseInit {
 
 export interface MockResponse<E> {
   match(url: string, init?: RequestInit): boolean;
-  response(): MockedResponse<E>;
+  response(): MockedResponse<E> | Promise<MockedResponse<E>>;
 }
 
 export const defineMockResponse = <E>(responseObject: MockResponse<E>): MockResponse<E> => {
