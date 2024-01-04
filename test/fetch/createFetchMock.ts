@@ -8,10 +8,12 @@ export const createFetchMock = <T>(
   options?: Record<string, unknown>,
 ): FetchMock => {
   return fetchMock.mockImplementation(async (info, init) => {
-    let resolvedImplementation = implementation;
+    let resolvedImplementation;
 
     if (typeof implementation === 'function') {
       resolvedImplementation = await implementation();
+    } else {
+      resolvedImplementation = implementation;
     }
 
     if (!implementation && info) {
