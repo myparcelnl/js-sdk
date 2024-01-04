@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.0](https://github.com/myparcelnl/js-sdk/compare/v3.5.0...v3.6.0) (2024-01-04)
+
+
+### :sparkles: New Features
+
+* add option to overwrite timeout for individual endpoints ([#150](https://github.com/myparcelnl/js-sdk/issues/150)) ([5e81e18](https://github.com/myparcelnl/js-sdk/commit/5e81e18a5d8b06fce4a3b70d5f333bec3f5d63b8))
+
 ## [3.5.0](https://github.com/myparcelnl/js-sdk/compare/v3.4.0...v3.5.0) (2023-12-21)
 
 
