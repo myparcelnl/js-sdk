@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.0](https://github.com/myparcelnl/js-sdk/compare/v3.6.0...v3.7.0) (2024-02-07)
+
+
+### :sparkles: New Features
+
+* add put carrier endpoint ([#158](https://github.com/myparcelnl/js-sdk/issues/158)) ([02bfaaf](https://github.com/myparcelnl/js-sdk/commit/02bfaaf4d05339c364506cc0e6008f1096d8d187))
+
 ## [3.6.0](https://github.com/myparcelnl/js-sdk/compare/v3.5.0...v3.6.0) (2024-01-04)
 
 
