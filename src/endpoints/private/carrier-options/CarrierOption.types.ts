@@ -37,3 +37,8 @@ export interface CarrierOptionPostData {
   options?: Record<string, unknown>;
   api_key?: string;
 }
+
+export interface CarrierOptionPutData {
+  carrier_id: CarrierId;
+  enabled: IntBoolean;
+}
