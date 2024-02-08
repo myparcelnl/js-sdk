@@ -24,18 +24,18 @@ jobs:
           persist-credentials: false
           token: ${{ secrets.GH_REPO_TOKEN }}
 
-      # TODO: Switch to v3 with app credentials when GitHub apps are allowed to bypass status checks. https://github.com/orgs/community/discussions/43460
+      # TODO: Switch to v4 with app credentials when GitHub apps are allowed to bypass status checks. https://github.com/orgs/community/discussions/43460
       - uses: myparcelnl/actions/setup-git-credentials@v2
         with:
           token: ${{ secrets.GH_REPO_TOKEN }}
 
-      - uses: myparcelnl/actions/yarn-install@v3
+      - uses: myparcelnl/actions/yarn-install@v4
         with:
           node-version: ${{ vars.NODE_VERSION }}
 
       - uses: ./.github/actions/build
 
-      - uses: myparcelnl/actions/semantic-release@v3
+      - uses: myparcelnl/actions/semantic-release@v4
         with:
           token: ${{ secrets.GH_REPO_TOKEN }}
         env:
@@ -46,13 +46,13 @@ jobs:
     if: always()
     runs-on: ubuntu-22.04
     steps:
-      - uses: myparcelnl/actions/setup-git-credentials@v3
+      - uses: myparcelnl/actions/setup-git-credentials@v4
         id: credentials
         with:
           app-id: ${{ secrets.MYPARCEL_APP_ID }}
           private-key: ${{ secrets.MYPARCEL_APP_PRIVATE_KEY }}
 
-      - uses: peter-evans/rebase@v2
+      - uses: peter-evans/rebase@v3
         with:
           token: ${{ steps.credentials.outputs.token }}
           base: ${{ github.ref_name }}
