@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: 'Run typecheck'
-        if: matrix.node-version == vars.NODE_VERSION || steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == vars.NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
         run: |
           yarn run typecheck
 
