@@ -83,3 +83,8 @@ export interface MyParcelShop {
   return: ShopReturn;
   tracktrace: ShopTrackTrace;
 }
+
+export interface DuplicateShop {
+  name: string;
+  account_id: number;
+}
