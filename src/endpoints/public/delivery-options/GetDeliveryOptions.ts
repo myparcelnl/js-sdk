@@ -33,6 +33,7 @@ type Parameters = {
   number?: number;
   package_type?: PackageTypeName;
   saturday_delivery?: boolean;
+  same_day_delivery?: boolean;
   street?: string;
   /* eslint-enable @typescript-eslint/naming-convention */
 };
