@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.8.1](https://github.com/myparcelnl/js-sdk/compare/v3.8.0...v3.8.1) (2024-02-14)
+
+
+### :bug: Bug Fixes
+
+* **delivery-options:** add same_day_delivery parameter ([#160](https://github.com/myparcelnl/js-sdk/issues/160)) ([5207892](https://github.com/myparcelnl/js-sdk/commit/5207892fd2c9e0d827d4905b65fe41de806e76c7))
+
 ## [3.8.0](https://github.com/myparcelnl/js-sdk/compare/v3.7.0...v3.8.0) (2024-02-09)
 
 
