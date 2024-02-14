@@ -1,13 +1,10 @@
+import {type SystemCountryCodesPerCountry, type GetSystemCountryCodesParams} from './SystemCountryCodes.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
-import {type CarrierId} from '@myparcel/constants';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type SystemCountryCodesPerCountry} from './SystemCountryCodes.types';
 
 type GetSystemCountryCodesDefinition = CreateDefinition<{
   name: typeof GetSystemCountryCodes.name;
-  parameters: {
-    carrier_id?: CarrierId;
-  };
+  parameters: GetSystemCountryCodesParams;
   response: SystemCountryCodesPerCountry;
 }>;
 

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.8.0](https://github.com/myparcelnl/js-sdk/compare/v3.7.0...v3.8.0) (2024-02-09)
+
+
+### :sparkles: New Features
+
+* add filters for system country codes ([#157](https://github.com/myparcelnl/js-sdk/issues/157)) ([e985004](https://github.com/myparcelnl/js-sdk/commit/e985004e3170516e3794c187cabbbed9ece3b8ce))
+
 ## [3.7.0](https://github.com/myparcelnl/js-sdk/compare/v3.6.0...v3.7.0) (2024-02-07)
 
 
