@@ -36,6 +36,7 @@ exports[`module exports > exposes the correct data from index.ts 1`] = `
   "PostCarrierOptions": [Function],
   "PostShipments": [Function],
   "PostShop": [Function],
+  "PostShopDuplicate": [Function],
   "PostSubscriptions": [Function],
   "PostWebhookSubscriptions": [Function],
   "PutAccount": [Function],
