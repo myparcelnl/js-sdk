@@ -22,7 +22,10 @@ export interface AccountSettings {
   show_cumulio_dashboard: IntBoolean;
   has_carrier_contract: IntBoolean;
   has_carrier_mail_contract: IntBoolean;
+  has_carrier_small_package_contract: IntBoolean;
   use_mfa: IntBoolean;
+  postnl_weight_unit_grams: IntBoolean;
+  allow_printerless_return: IntBoolean;
 }
 
 export type AccountStatus = 1 | 2 | 3 | 4;
