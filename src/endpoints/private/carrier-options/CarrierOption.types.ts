@@ -42,3 +42,11 @@ export interface CarrierOptionPutData {
   carrier_id: CarrierId;
   enabled: IntBoolean;
 }
+
+export interface CarrierOptionsParameters {
+  enabled?: IntBoolean;
+  // You can pass multiple carrier_ids in a string when joined with `;`
+  carrier_id?: CarrierId | string;
+  subscription_id?: number;
+  type: 'main' | 'custom';
+}
