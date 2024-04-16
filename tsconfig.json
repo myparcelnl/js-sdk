@@ -8,22 +8,13 @@
     "moduleResolution": "Node",
     "noEmit": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@Test/*": [
-        "./test/*"
-      ]
+      "@/*": ["./src/*"],
+      "@Test/*": ["./test/*"]
     },
     "resolveJsonModule": true,
     "rootDir": ".",
-    "target": "ESNext"
+    "target": "ESNext",
+    "types": ["node", "vite/client"]
   },
-  "include": [
-    "*.js",
-    "*.ts",
-    "private/**/*.ts",
-    "src/**/*.ts",
-    "test/**/*.ts"
-  ]
+  "include": ["*.js", "*.ts", "private/**/*.ts", "src/**/*.ts", "test/**/*.ts"]
 }
