@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.9.0](https://github.com/myparcelnl/js-sdk/compare/v3.8.1...v3.9.0) (2024-04-16)
+
+
+### :sparkles: New Features
+
+* add delete subscription endpoint ([#167](https://github.com/myparcelnl/js-sdk/issues/167)) ([4d435b3](https://github.com/myparcelnl/js-sdk/commit/4d435b336345c97176898fe5f4d547c1d3a0744e))
+* add duplicate shop endpoint ([#161](https://github.com/myparcelnl/js-sdk/issues/161)) ([5c80d3f](https://github.com/myparcelnl/js-sdk/commit/5c80d3f45560bd0931555c87187e3c76c7685ab8))
+* add types for carrier options parameters ([#165](https://github.com/myparcelnl/js-sdk/issues/165)) ([33e5624](https://github.com/myparcelnl/js-sdk/commit/33e562467cd873e9c8e3bd131369cb35b224a634))
+* update account type ([#166](https://github.com/myparcelnl/js-sdk/issues/166)) ([0ca1da3](https://github.com/myparcelnl/js-sdk/commit/0ca1da3a04516e4b9785c11dbd04462ee1997784))
+
 ## [3.8.1](https://github.com/myparcelnl/js-sdk/compare/v3.8.0...v3.8.1) (2024-02-14)
 
 
