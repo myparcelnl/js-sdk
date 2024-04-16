@@ -2,7 +2,7 @@
 import {type CarrierId, type CarrierName} from '@myparcel/constants';
 import {type IntBoolean} from '@/types';
 
-export interface MyParcelCarrierOption {
+export type MyParcelCarrierOption = {
   api_key: string;
   carrier: {
     id: CarrierId;
@@ -28,17 +28,25 @@ export interface MyParcelCarrierOption {
   username: string;
   subscription_id?: number;
   label?: string;
-}
+};
 
-export interface CarrierOptionPostData {
+export type CarrierOptionPostData = {
   carrier_id: CarrierId;
   username?: string;
   password?: string;
   options?: Record<string, unknown>;
   api_key?: string;
-}
+};
 
-export interface CarrierOptionPutData {
+export type CarrierOptionPutData = {
   carrier_id: CarrierId;
   enabled: IntBoolean;
-}
+};
+
+export type CarrierOptionsParameters = {
+  enabled?: IntBoolean;
+  // You can pass multiple carrier_ids in a string when joined with `;`
+  carrier_id?: CarrierId | string;
+  subscription_id?: number;
+  type: 'main' | 'custom';
+};
