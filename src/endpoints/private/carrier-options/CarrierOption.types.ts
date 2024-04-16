@@ -2,7 +2,7 @@
 import {type CarrierId, type CarrierName} from '@myparcel/constants';
 import {type IntBoolean} from '@/types';
 
-export interface MyParcelCarrierOption {
+export type MyParcelCarrierOption = {
   api_key: string;
   carrier: {
     id: CarrierId;
@@ -28,7 +28,7 @@ export interface MyParcelCarrierOption {
   username: string;
   subscription_id?: number;
   label?: string;
-}
+};
 
 export interface CarrierOptionPostData {
   carrier_id: CarrierId;
