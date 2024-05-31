@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/myparcelnl/js-sdk/compare/v3.9.0...v4.0.0) (2024-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* FE-2118 - update the DeleteCarrierOptions path (#170)
+
+### :bug: Bug Fixes
+
+* FE-2118 - update the DeleteCarrierOptions path ([#170](https://github.com/myparcelnl/js-sdk/issues/170)) ([b56fe5a](https://github.com/myparcelnl/js-sdk/commit/b56fe5ac145f36eb67f512b9b0d4f82b7199e646))
+
 ## [3.9.0](https://github.com/myparcelnl/js-sdk/compare/v3.8.1...v3.9.0) (2024-04-16)
 
 
