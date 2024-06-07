@@ -10,4 +10,5 @@ export * from './subscriptions';
 export * from './system-country-codes';
 export * from './system-messages';
 export * from './track-traces';
+export * from './users';
 export * from './webhook-subscriptions';
