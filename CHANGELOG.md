@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://github.com/myparcelnl/js-sdk/compare/v4.0.0...v4.1.0) (2024-06-07)
+
+
+### :sparkles: New Features
+
+* expose helper methods ([#171](https://github.com/myparcelnl/js-sdk/issues/171)) ([ae186f0](https://github.com/myparcelnl/js-sdk/commit/ae186f042eca51fb93781e871e31315079409285))
+
 ## [4.0.0](https://github.com/myparcelnl/js-sdk/compare/v3.9.0...v4.0.0) (2024-05-31)
 
 
