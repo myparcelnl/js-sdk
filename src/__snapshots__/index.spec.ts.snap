@@ -44,8 +44,10 @@ exports[`module exports > exposes the correct data from index.ts 1`] = `
   "PutCarrierOptions": [Function],
   "PutShop": [Function],
   "UserException": [Function],
+  "addParameters": [Function],
   "createMyParcelSdk": [Function],
   "createPrivateSdk": [Function],
   "createPublicSdk": [Function],
+  "isJson": [Function],
 }
 `;
