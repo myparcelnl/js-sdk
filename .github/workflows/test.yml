@@ -23,10 +23,13 @@ jobs:
           path: coverage/clover.xml
           key: coverage-${{ hashFiles('package.json', 'yarn.lock', 'tsconfig.json', 'src/**/*', 'test/**/*') }}
 
-      - uses: myparcelnl/actions/yarn-install@v4
-        if: matrix.node-version != env.DEFAULT_NODE_VERSION || steps.coverage-cache.outputs.cache-hit != 'true'
+      - uses: volta-cli/action@v4
+        if: steps.coverage-cache.outputs.cache-hit != 'true'
         with:
           node-version: ${{ matrix.node-version }}
+
+      - run: yarn install --frozen-lockfile
+        if: steps.coverage-cache.outputs.cache-hit != 'true'
 
       - name: 'Run typecheck'
         if: matrix.node-version == env.DEFAULT_NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
