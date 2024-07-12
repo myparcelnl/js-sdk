@@ -22,9 +22,12 @@ jobs:
           key: coverage-${{ hashFiles('package.json', 'yarn.lock', 'tsconfig.json', 'src/**/*', 'test/**/*') }}
 
       - uses: myparcelnl/actions/yarn-install@v4
-        if: steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
+
+      - uses: myparcelnl/actions/yarn-install@v4
+        if: matrix.node-version != 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
         with:
-          node-version: ${{ matrix.node-version == 'current' && '' || matrix.node-version }}
+          node-version: ${{ matrix.node-version }}
 
       - name: 'Run typecheck'
         if: matrix.node-version == 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
