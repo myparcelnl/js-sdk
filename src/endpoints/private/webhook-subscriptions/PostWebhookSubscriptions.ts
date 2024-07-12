@@ -1,7 +1,7 @@
+import {type MyParcelWebhook} from './Webhook.types';
+import {type HttpMethod} from '@/types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type HttpMethod} from '@/types';
-import {type MyParcelWebhook} from './Webhook.types';
 
 type PostWebhookSubscriptionsDefinition = CreateDefinition<{
   name: typeof PostWebhookSubscriptions.name;

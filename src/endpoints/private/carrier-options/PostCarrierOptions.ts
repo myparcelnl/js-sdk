@@ -1,6 +1,6 @@
+import {type CarrierOptionPostData} from './CarrierOption.types';
 import {type HttpMethod} from '@/types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
-import {type CarrierOptionPostData} from './CarrierOption.types';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 
 type PostCarrierOptionsDefinition = CreateDefinition<{

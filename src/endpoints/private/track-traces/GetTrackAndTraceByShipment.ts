@@ -1,6 +1,6 @@
+import {type TrackAndTrace} from './TrackTraces.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type TrackAndTrace} from './TrackTraces.types';
 
 type GetTrackAndTraceDefinition = CreateDefinition<{
   name: typeof GetTrackAndTrace.name;

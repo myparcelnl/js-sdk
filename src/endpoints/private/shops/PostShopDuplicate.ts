@@ -1,7 +1,7 @@
+import {type DuplicateShop} from './Shop.types';
+import {type HttpMethod} from '@/types/request.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type HttpMethod} from '@/types/request.types';
-import {type DuplicateShop} from './Shop.types';
 
 type PostShopDuplicateDefinition = CreateDefinition<{
   name: typeof PostShopDuplicate.name;

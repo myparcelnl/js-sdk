@@ -1,6 +1,6 @@
+import {type MyParcelAccount} from './Account.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type MyParcelAccount} from './Account.types';
 
 type GetAccountDefinition = CreateDefinition<{
   name: typeof GetAccount.name;

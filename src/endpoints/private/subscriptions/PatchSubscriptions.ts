@@ -1,7 +1,7 @@
+import {type SubscriptionPatchData} from './Subscriptions.types';
+import {type HttpMethod} from '@/types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type HttpMethod} from '@/types';
-import {type SubscriptionPatchData} from './Subscriptions.types';
 
 type PatchSubscriptionsDefinition = CreateDefinition<{
   name: typeof PatchSubscriptions.name;

@@ -1,7 +1,7 @@
 import {type ApiKeyPostData, type MyParcelApiKey} from './ApiKey.types';
+import {type HttpMethod} from '@/types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type HttpMethod} from '@/types';
 
 type PostApiKeyDefinition = CreateDefinition<{
   name: typeof PostApiKeys.name;

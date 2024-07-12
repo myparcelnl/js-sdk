@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import {type Address, type AddressWithContactDetails} from '@/types';
 import {type CarrierId} from '@myparcel/constants';
-import {type PickupLocation} from '@/endpoints/public';
 import {type ShipmentOptions} from '../shipments';
+import {type Address, type AddressWithContactDetails} from '@/types';
+import {type PickupLocation} from '@/endpoints/public';
 
 export interface PartnerTrackTraceLink {
   barcode: string;

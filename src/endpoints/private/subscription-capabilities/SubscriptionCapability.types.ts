@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import {type Price} from '@/types';
 import {
   type SubscriptionProductId,
   type SubscriptionTier,
   type SubscriptionTierName,
   type SubscriptionType,
 } from '@/endpoints/private/subscriptions/Subscriptions.types';
-import {type Price} from '@/types';
 
 export type DashboardSlug =
   | 'shipments'
