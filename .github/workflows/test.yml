@@ -7,6 +7,8 @@ jobs:
   test:
     name: 'Run unit tests'
     runs-on: ubuntu-22.04
+    env:
+      DEFAULT_NODE_VERSION: 20
     strategy:
       matrix:
         node-version: [18, 20]
@@ -22,29 +24,29 @@ jobs:
           key: coverage-${{ hashFiles('package.json', 'yarn.lock', 'tsconfig.json', 'src/**/*', 'test/**/*') }}
 
       - uses: myparcelnl/actions/yarn-install@v4
-        if: matrix.node-version != vars.NODE_VERSION || steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version != env.DEFAULT_NODE_VERSION || steps.coverage-cache.outputs.cache-hit != 'true'
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: 'Run typecheck'
-        if: matrix.node-version == vars.NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == env.DEFAULT_NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
         run: |
           yarn run typecheck
 
       - name: 'Run tests with coverage'
-        if: matrix.node-version == vars.NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == env.DEFAULT_NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
         #language=sh
         run: |
           yarn test:coverage
 
       - name: 'Run tests'
-        if: matrix.node-version != vars.NODE_VERSION
+        if: matrix.node-version != env.DEFAULT_NODE_VERSION
         #language=sh
         run: |
           yarn test:run
 
       - uses: codecov/codecov-action@v4
-        if: matrix.node-version == vars.NODE_VERSION
+        if: matrix.node-version == env.DEFAULT_NODE_VERSION
         with:
           files: coverage/clover.xml
           token: ${{ secrets.CODECOV_TOKEN }}
