@@ -12,6 +12,9 @@ global.AbortController = class AbortController {
     reason: null,
     throwIfAborted: vi.fn(),
     dispatchEvent: vi.fn(),
+    any(signals: Iterable<AbortSignal>): AbortSignal {
+      return signals[Symbol.iterator]().next().value;
+    },
   };
 
   abort() {
