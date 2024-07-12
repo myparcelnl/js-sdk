@@ -3,6 +3,7 @@ import {type PlatformId} from '@myparcel/constants';
 import {type Address} from '@/types/common.types';
 import {type PaginationParameters, type IntBoolean, type Price} from '@/types';
 import {type MyParcelShop} from '@/endpoints/private/shops/Shop.types';
+import {type User} from '@/endpoints/private/users/User.types';
 
 export interface AccountAdditionalInfo {
   ecommerce_platform: string;
@@ -52,7 +53,7 @@ export interface MyParcelAccount {
   status: AccountStatus;
   terms_agreed: boolean;
   username: string;
-  users: Record<string, unknown>;
+  users: User[];
 }
 
 export type GetAccountsParams = PaginationParameters & {
