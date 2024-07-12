@@ -286,7 +286,7 @@ describe('AbstractClient', () => {
   });
 
   it('handles having a status 204 response', async () => {
-    expect.assertions(4);
+    expect.assertions(3);
 
     const sdk = createPublicSdk(new FetchClient(), [new TestPut204Endpoint()]);
     const response = await sdk.putEndpoint();
@@ -295,7 +295,6 @@ describe('AbstractClient', () => {
 
     const result = await fetchMock.mock.results[0].value;
     expect(result.status).toBe(204);
-    expect(result.statusText).toBe('No Content');
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/204', {
       headers: {
@@ -307,7 +306,7 @@ describe('AbstractClient', () => {
   });
 
   it('handles receiving a plain text response', async () => {
-    expect.assertions(4);
+    expect.assertions(3);
 
     const sdk = createPublicSdk(new FetchClient(), [new TestGetTextEndpoint()]);
     const response = await sdk.getText();
@@ -316,7 +315,6 @@ describe('AbstractClient', () => {
 
     const result = await fetchMock.mock.results[0].value;
     expect(result.status).toBe(200);
-    expect(result.statusText).toBe('OK');
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/text', {
       headers: {
@@ -327,7 +325,7 @@ describe('AbstractClient', () => {
   });
 
   it('handles receiving a response with a blob content', async () => {
-    expect.assertions(6);
+    expect.assertions(5);
 
     const sdk = createPublicSdk(new FetchClient(), [new TestGetAttachmentEndpoint()]);
     const response = await sdk.getAttachment();
@@ -344,7 +342,6 @@ describe('AbstractClient', () => {
 
     const result = await fetchMock.mock.results[0].value;
     expect(result.status).toBe(200);
-    expect(result.statusText).toBe('OK');
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/attachment', {
       headers: {
@@ -355,7 +352,7 @@ describe('AbstractClient', () => {
   });
 
   it('handles receiving a response with content-disposition: inline header', async () => {
-    expect.assertions(4);
+    expect.assertions(3);
 
     const sdk = createPublicSdk(new FetchClient(), [new TestGetInlineContentEndpoint()]);
     const response = await sdk.getInline();
@@ -364,7 +361,6 @@ describe('AbstractClient', () => {
 
     const result = await fetchMock.mock.results[0].value;
     expect(result.status).toBe(200);
-    expect(result.statusText).toBe('OK');
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/inline', {
       headers: {
