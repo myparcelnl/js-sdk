@@ -195,7 +195,7 @@ describe('AbstractClient', () => {
           'Content-Type': 'application/vnd.shipment+json;charset=utf-8;version=1.1',
         },
         method: 'POST',
-        body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE"}}]}}',
+        body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE","email":"example@myparcel.nl"}}]}}',
       });
     });
 
@@ -209,7 +209,7 @@ describe('AbstractClient', () => {
 
       expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
         method: 'POST',
-        body: '{"data":{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE"}}}',
+        body: '{"data":{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE","email":"example@myparcel.nl"}}}',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
