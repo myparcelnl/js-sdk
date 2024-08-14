@@ -52,3 +52,12 @@ jobs:
           base: ${{ github.ref_name }}
           exclude-drafts: true
           exclude-labels: 'dependencies'
+
+  notify-on-failure:
+    needs:
+      - test
+      - release
+      - rebase-prs
+    if: always() && contains(needs.*.result, 'failure')
+    uses: myparcelnl/actions/.github/workflows/notify-on-failure.yml@v4
+    secrets: inherit
