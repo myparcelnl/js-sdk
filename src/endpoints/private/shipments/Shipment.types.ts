@@ -6,7 +6,10 @@ import {
   type PackageTypeId,
   type ShipmentStatus,
 } from '@myparcel/constants';
-import {type Address, type AddressWithContactDetails, type RetailLocation} from '../../../types';
+import {
+  type AddressWithContactDetails,
+  type RetailLocation,
+} from '../../../types';
 import {type IntBoolean, type Price, type WithRequired} from '@/types';
 
 export interface PostedShipmentReference {
@@ -103,7 +106,9 @@ export interface ShipmentPostData {
   options?: ShipmentOptions;
   physical_properties?: PhysicalProperties;
   pickup?: ShipmentPickup | null;
-  recipient: WithRequired<Address, 'number'> | WithRequired<Address, 'street'>;
+  recipient:
+    | WithRequired<AddressWithContactDetails, 'number'>
+    | WithRequired<AddressWithContactDetails, 'street'>;
   reference_identifier?: number | string;
   shop_id?: number;
   status?: ShipmentStatus;
