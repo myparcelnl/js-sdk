@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/myparcelnl/js-sdk/compare/v4.1.0...v4.1.1) (2024-10-03)
+
+
+### :bug: Bug Fixes
+
+* allow passing recipient email when posting shipments ([#169](https://github.com/myparcelnl/js-sdk/issues/169)) ([d999aeb](https://github.com/myparcelnl/js-sdk/commit/d999aeb8fcc0e7559085f379e081a739b3688233)), closes [/developer.myparcel.nl/api-reference/06.shipments.html#_6-b-4](https://github.com/myparcelnl//developer.myparcel.nl/api-reference/06.shipments.html/issues/_6-b-4)
+
 ## [4.1.0](https://github.com/myparcelnl/js-sdk/compare/v4.0.0...v4.1.0) (2024-06-07)
 
 
