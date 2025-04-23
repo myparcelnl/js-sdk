@@ -32,7 +32,10 @@ export class FetchClient extends AbstractClient {
     clearTimeout(id);
 
     if (response.body) {
-      if (response.headers.get('Content-Disposition')?.includes('attachment')) {
+      if (
+        response.headers.get('Content-Disposition')?.includes('attachment') ||
+        response.headers.get('Content-Type')?.includes('application/pdf')
+      ) {
         return response.blob();
       }
 
