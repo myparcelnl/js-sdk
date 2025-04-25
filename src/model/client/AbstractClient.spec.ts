@@ -6,6 +6,7 @@ import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
 import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestGetPdfEndpoint} from '@Test/endpoints/TestGetPdfEndpoint';
 import {TestGetPaginatedSizeEndpoint} from '@Test/endpoints/TestGetPaginatedSizeEndpoint';
 import {TestGetPaginatedResultsEndpoint} from '@Test/endpoints/TestGetPaginatedResultsEndpoint';
 import {TestGetPaginatedPageEndpoint} from '@Test/endpoints/TestGetPaginatedPageEndpoint';
@@ -344,6 +345,33 @@ describe('AbstractClient', () => {
     expect(result.status).toBe(200);
 
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint/attachment', {
+      headers: {
+        Accept: 'application/json',
+      },
+      method: 'GET',
+    });
+  });
+
+  it('handles receiving a response with content-type application/pdf as a blob', async () => {
+    expect.assertions(5);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetPdfEndpoint()]);
+    const response = await sdk.getPdf();
+
+    // the Blob presented by vitest is not the same as the fetcher, so check for blob-like properties:
+    const ofType = isOfType<Blob>(response, 'size');
+
+    expect(ofType).toBe(true);
+
+    if (ofType) {
+      expect(response.size).toBe(6);
+      expect(response.type).toBe('application/pdf');
+    }
+
+    const result = await fetchMock.mock.results[0].value;
+    expect(result.status).toBe(200);
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/pdf', {
       headers: {
         Accept: 'application/json',
       },
