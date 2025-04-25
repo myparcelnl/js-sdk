@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.0](https://github.com/myparcelnl/js-sdk/compare/v4.1.1...v4.2.0) (2025-04-25)
+
+
+### :sparkles: New Features
+
+* return pdf responses as blobs for content-type `application/pdf` ([#178](https://github.com/myparcelnl/js-sdk/issues/178)) ([f733b61](https://github.com/myparcelnl/js-sdk/commit/f733b61685a4dba07094c317386ab449f54f085b))
+
 ## [4.1.1](https://github.com/myparcelnl/js-sdk/compare/v4.1.0...v4.1.1) (2024-10-03)
 
 
