@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.0](https://github.com/myparcelnl/js-sdk/compare/v4.2.0...v4.3.0) (2025-05-06)
+
+
+### :sparkles: New Features
+
+* export the PossibleShipmentOption interface ([#179](https://github.com/myparcelnl/js-sdk/issues/179)) ([b5bb116](https://github.com/myparcelnl/js-sdk/commit/b5bb1162dccf9883d6a6e37a0daf954b49299b57))
+
 ## [4.2.0](https://github.com/myparcelnl/js-sdk/compare/v4.1.1...v4.2.0) (2025-04-25)
 
 
