@@ -13,7 +13,7 @@ export class FetchClient extends AbstractClient {
     const timeoutController = new AbortController();
     const id = setTimeout(() => timeoutController.abort(), timeout);
 
-    const config: RequestInit = {
+    let config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
       ...(timeout && {signal: timeoutController.signal}),
@@ -26,6 +26,11 @@ export class FetchClient extends AbstractClient {
       } else {
         config.body = JSON.stringify(options.body);
       }
+    }
+
+    // Run the request interceptors.
+    for (const interceptor of this.interceptors.request.fns) {
+      config = await interceptor(config);
     }
 
     const response = await fetch(this.createUrl(endpoint, options), config);
