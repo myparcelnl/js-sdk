@@ -17,7 +17,7 @@ export function createMyParcelSdk<E extends AbstractEndpoint>(client: AbstractCl
     throw new UserException('At least one endpoint must be passed.');
   }
 
-  const result = endpoints.reduce(
+  return endpoints.reduce(
     (acc, endpoint) => ({
       ...acc,
       [endpoint.name]: async (options?: OptionsWithoutBody<E>): Promise<EndpointResponse<E>> => {
@@ -26,6 +26,4 @@ export function createMyParcelSdk<E extends AbstractEndpoint>(client: AbstractCl
     }),
     {} as MyParcelSdk<E>,
   );
-
-  return result;
 }
