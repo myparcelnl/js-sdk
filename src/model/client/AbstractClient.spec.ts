@@ -555,19 +555,16 @@ describe('AbstractClient', () => {
     });
 
     it('logs error in response interceptor', async () => {
-      expect.assertions(2);
+      expect.assertions(3);
 
       const consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {});
 
       const client = new FetchClient();
 
       client.interceptors.response.use((response) => {
+        // @ts-ignore The response object may not have an errors property, but we want to log it if it exists.
         if (response.errors.length) {
-          console.error('API Error:', {
-            url: response.url,
-            status: response.status,
-            statusText: response.statusText,
-          });
+          console.error('API Error:', response);
         }
 
         return response;
@@ -589,7 +586,22 @@ describe('AbstractClient', () => {
       );
 
       expect(consoleErrorMock).toHaveBeenCalledTimes(1);
-
+      expect(consoleErrorMock).toHaveBeenCalledWith(
+        'API Error:',
+        expect.objectContaining({
+          message:
+            'The cc field is required. The carrier field is required. The platform field is required. (request_id: 1649780852.44186255a8746bdec)',
+          request_id: '1649780852.44186255a8746bdec',
+          errors: [
+            {
+              status: 400,
+              code: 3224,
+              title: 'The cc field is required. The carrier field is required. The platform field is required.',
+              message: 'The cc field is required. The carrier field is required. The platform field is required.'
+            },
+          ],
+        }),
+      );
       consoleErrorMock.mockRestore();
     });
   });
