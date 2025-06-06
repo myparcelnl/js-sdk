@@ -1,5 +1,5 @@
 import path from 'path';
-import {defineConfig} from 'vitest/config';
+import {configDefaults, defineConfig} from 'vitest/config';
 import dts from 'vite-plugin-dts';
 
 const config = defineConfig((env) => {
@@ -32,6 +32,7 @@ const config = defineConfig((env) => {
         reporter: ['text', 'clover', 'html'],
       },
       setupFiles: ['./test/mockFetch.ts', './test/mockAbortController.ts'],
+      exclude: [...configDefaults.exclude],
     },
   };
 });
