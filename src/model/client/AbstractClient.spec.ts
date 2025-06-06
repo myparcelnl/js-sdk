@@ -610,9 +610,7 @@ describe('AbstractClient', () => {
     it('calls request interceptors and modifies config', async () => {
       expect.assertions(3);
 
-      // Create a spy interceptor
       const interceptor = vi.fn((config) => {
-        // Add a custom header
         return {
           ...config,
           headers: {
