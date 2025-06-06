@@ -1,4 +1,4 @@
-import {beforeEach, describe, expect, it} from 'vitest';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
@@ -38,5 +38,34 @@ describe('createMyParcelSdk', () => {
 
     await expect(sdk.getEndpoint()).resolves.toStrictEqual([]);
     await expect(sdk.getInline()).resolves.toStrictEqual('"Test"');
+  });
+
+  it('should handle timeout', async () => {
+    vi.useFakeTimers();
+    expect.assertions(2);
+
+    const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
+
+    const getEndpoint = new TestGet200Endpoint();
+
+    const sdk = createMyParcelSdk(
+      new FetchClient({
+        options: {
+          timeout: 1000,
+        },
+      }),
+      [getEndpoint],
+    );
+
+    const fetchPromise = sdk.getEndpoint();
+
+    vi.advanceTimersByTime(999);
+    expect(abortSpy).not.toHaveBeenCalled();
+
+    vi.advanceTimersByTime(1);
+    expect(abortSpy).toHaveBeenCalledTimes(1);
+
+    await fetchPromise;
+    abortSpy.mockRestore();
   });
 });
