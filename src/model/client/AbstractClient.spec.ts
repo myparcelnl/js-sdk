@@ -605,4 +605,49 @@ describe('AbstractClient', () => {
       consoleErrorMock.mockRestore();
     });
   });
+
+  describe('request interceptors', () => {
+    it('calls request interceptors and modifies config', async () => {
+      expect.assertions(3);
+
+      // Create a spy interceptor
+      const interceptor = vi.fn((config) => {
+        // Add a custom header
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            'X-Intercepted': 'true',
+          },
+        };
+      });
+
+      const client = new FetchClient();
+
+      client.interceptors.request.use(interceptor);
+
+      const sdk = createPublicSdk(client, [new TestGet200Endpoint()]);
+      await sdk.getEndpoint();
+
+      expect(interceptor).toHaveBeenCalledTimes(1);
+      expect(interceptor).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: 'GET',
+          headers: expect.any(Object),
+        }),
+      );
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        'https://api.myparcel.nl/endpoint?X-Static-Parameter=value',
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Accept: 'application/json',
+            'X-Intercepted': 'true',
+            'X-Static-Header': 'value',
+          }),
+          method: 'GET',
+        }),
+      );
+    });
+  });
 });
