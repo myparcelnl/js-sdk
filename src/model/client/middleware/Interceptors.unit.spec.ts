@@ -50,4 +50,13 @@ describe('Interceptors', () => {
     expect(fn2).toHaveBeenCalledWith(6);
     expect(result).toBe(12);
   });
+
+  it('should call use and delete', () => {
+    const interceptors = new Interceptors();
+
+    const fn = vi.fn();
+    interceptors.use(fn);
+
+    interceptors.delete(fn);
+  });
 });
