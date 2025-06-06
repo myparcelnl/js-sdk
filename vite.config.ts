@@ -30,9 +30,10 @@ const config = defineConfig((env) => {
         100: true,
         enabled: false,
         reporter: ['text', 'clover', 'html'],
+        exclude: [...configDefaults.exclude],
+        include: ['src/**/*.ts'],
       },
       setupFiles: ['./test/mockFetch.ts', './test/mockAbortController.ts'],
-      exclude: [...configDefaults.exclude],
     },
   };
 });
