@@ -1,17 +1,10 @@
-import {beforeEach, describe, expect, it, vi} from 'vitest';
-import {createFetchMock} from '@Test/fetch/createFetchMock';
+import {describe, expect, it, vi} from 'vitest';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {createMyParcelSdk} from './createMyParcelSdk';
 import {FetchClient} from '@/model/client/FetchClient';
 
 describe('createMyParcelSdk', () => {
-  const fetchMock = createFetchMock();
-
-  beforeEach(() => {
-    fetchMock.mockClear();
-  });
-
   it('can not be instantiated without endpoints', () => {
     expect(() => createMyParcelSdk(new FetchClient(), [])).toThrow('At least one endpoint must be passed.');
   });
