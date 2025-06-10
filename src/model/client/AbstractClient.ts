@@ -1,4 +1,5 @@
 import {isOfType} from '@myparcel/ts-utils';
+import {Interceptors} from './middleware/Interceptors';
 import {
   type ErrorResponse,
   type HttpMethod,
@@ -29,6 +30,16 @@ export const BASE_URL = 'https://api.myparcel.nl';
 const HTTP_METHODS_WITH_CONTENT: HttpMethod[] = ['POST', 'PUT'];
 
 export abstract class AbstractClient {
+  /**
+   * Interceptors for request and response.
+   *
+   * @protected
+   */
+  public interceptors: {
+    request: Interceptors<RequestInit>;
+    response: Interceptors<ResponseWrapper<EndpointResponseBody<AbstractEndpoint>>>;
+  };
+
   /**
    * Executes the request. Should return a promise containing the response json as object.
    */
@@ -72,6 +83,10 @@ export abstract class AbstractClient {
     this.headers = config?.headers ?? {};
     this.parameters = config?.parameters ?? {};
     this.options = config?.options ?? {};
+    this.interceptors = {
+      request: new Interceptors(),
+      response: new Interceptors(),
+    };
   }
 
   public get requiredHeaders(): (RequestHeader | string)[] {
@@ -89,7 +104,12 @@ export abstract class AbstractClient {
     const newOptions = this.normalizeOptions(endpoint, {...options, ...this.options});
     this.validateHeaders(endpoint, newOptions);
 
-    const response = await this.request(endpoint, newOptions);
+    let response = await this.request(endpoint, newOptions);
+
+    // Run the response interceptors.
+    for (const interceptor of this.interceptors.response.fns) {
+      response = (await interceptor(response)) as ResponseWrapper<EndpointResponseBody<E>>;
+    }
 
     if (isOfType<ErrorResponse>(response, 'errors')) {
       throw new ApiException(response);
