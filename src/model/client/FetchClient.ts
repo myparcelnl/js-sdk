@@ -33,6 +33,10 @@ export class FetchClient extends AbstractClient {
       config = await interceptor(config);
     }
 
+    if (timeout && !config.signal) {
+      config.signal = timeoutController.signal;
+    }
+
     const response = await fetch(this.createUrl(endpoint, options), config);
     clearTimeout(id);
 
