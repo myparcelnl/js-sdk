@@ -9,13 +9,22 @@ describe('createMyParcelSdk', () => {
     expect(() => createMyParcelSdk(new FetchClient(), [])).toThrow('At least one endpoint must be passed.');
   });
 
+  it('should always return a client within the response', () => {
+    const getEndpoint = new TestGet200Endpoint();
+
+    const sdk = createMyParcelSdk(new FetchClient(), [getEndpoint]);
+
+    expect(sdk.client).toBeInstanceOf(FetchClient);
+    expect(sdk.getEndpoint).toStrictEqual(expect.any(Function));
+  });
+
   it('adds method for each passed endpoint', () => {
     const getEndpoint = new TestGet200Endpoint();
     const getInline = new TestGetInlineContentEndpoint();
 
     const sdk = createMyParcelSdk(new FetchClient(), [getEndpoint, getInline]);
 
-    expect(Object.keys(sdk)).toStrictEqual([getEndpoint.name, getInline.name]);
+    expect(Object.keys(sdk)).toStrictEqual([getEndpoint.name, getInline.name, 'client']);
 
     expect(sdk.getEndpoint).toStrictEqual(expect.any(Function));
     expect(sdk.getInline).toStrictEqual(expect.any(Function));
