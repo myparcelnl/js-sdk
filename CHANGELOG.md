@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.0](https://github.com/myparcelnl/js-sdk/compare/v4.3.0...v4.4.0) (2025-06-10)
+
+
+### :sparkles: New Features
+
+* **interceptors:** add interceptors for requests and responses ([#180](https://github.com/myparcelnl/js-sdk/issues/180)) ([d4941c3](https://github.com/myparcelnl/js-sdk/commit/d4941c309eb802bf96ac3a79e5f88cda5cf3b5d2))
+
 ## [4.3.0](https://github.com/myparcelnl/js-sdk/compare/v4.2.0...v4.3.0) (2025-05-06)
 
 
