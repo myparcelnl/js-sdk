@@ -87,7 +87,7 @@ describe('createMyParcelSdk', () => {
         [getEndpoint],
       );
 
-      await expect(sdk.getEndpoint()).rejects.toThrowError(/aborted/i);
+      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
 
       expect(fetchMock).toHaveBeenCalledOnce();
     });
@@ -106,7 +106,8 @@ describe('createMyParcelSdk', () => {
             if (signal.aborted) {
               return;
             }
-            reject(new Error('Not aborted (unexpected)'));
+
+            reject();
           }, 20);
         });
       });
@@ -131,7 +132,7 @@ describe('createMyParcelSdk', () => {
         return options;
       });
 
-      await expect(sdk.getEndpoint()).rejects.toThrowError(/aborted/i);
+      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
 
       expect(fetchMock).toHaveBeenCalledOnce();
     });
