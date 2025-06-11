@@ -8,7 +8,25 @@ import {FetchClient} from '@/model/client/FetchClient';
 
 describe('createMyParcelSdk', () => {
   const fetchMock = createFetchMock();
-  
+  const fetchMockwithTimeout = (url: string, config: RequestInit) => {
+    // Simulate aborting after a delay
+    const signal = config.signal as AbortSignal;
+
+    return new Promise((_, reject) => {
+      signal?.addEventListener('abort', () => {
+        reject(new DOMException('The operation was aborted.', 'AbortError'));
+      });
+
+      setTimeout(() => {
+        if (signal.aborted) {
+          return;
+        }
+
+        reject(new Error('Some other fetch error'));
+      }, 20);
+    });
+  };
+
   beforeEach(() => {
     fetchMock.mockClear();
   });
@@ -52,24 +70,7 @@ describe('createMyParcelSdk', () => {
 
   describe('timeout', () => {
     it('should handle timeout', async () => {
-      fetchMock.mockImplementation((_, config) => {
-        // Simulate aborting after a delay
-        const signal = config.signal as AbortSignal;
-
-        return new Promise((_, reject) => {
-          signal?.addEventListener('abort', () => {
-            reject(new DOMException('The operation was aborted.', 'AbortError'));
-          });
-
-          setTimeout(() => {
-            if (signal.aborted) {
-              return;
-            }
-
-            reject();
-          }, 20);
-        });
-      });
+      fetchMock.mockImplementation(fetchMockwithTimeout);
 
       expect.assertions(2);
 
@@ -93,24 +94,7 @@ describe('createMyParcelSdk', () => {
     });
 
     it('should handle timeout with a request interceptor given', async () => {
-      fetchMock.mockImplementation((url, config) => {
-        // Simulate aborting after a delay
-        const signal = config.signal as AbortSignal;
-
-        return new Promise((_, reject) => {
-          signal?.addEventListener('abort', () => {
-            reject(new DOMException('The operation was aborted.', 'AbortError'));
-          });
-
-          setTimeout(() => {
-            if (signal.aborted) {
-              return;
-            }
-
-            reject();
-          }, 20);
-        });
-      });
+      fetchMock.mockImplementation(fetchMockwithTimeout);
 
       expect.assertions(2);
 
@@ -133,6 +117,30 @@ describe('createMyParcelSdk', () => {
       });
 
       await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
+
+    it('should not abort before the timeout is over', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
+
+      expect.assertions(2);
+
+      const getEndpoint = new TestGet200Endpoint();
+
+      const sdk = createMyParcelSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 50,
+          },
+        }),
+        [getEndpoint],
+      );
+
+      await expect(sdk.getEndpoint()).rejects.toThrowError('Some other fetch error');
 
       expect(fetchMock).toHaveBeenCalledOnce();
     });
