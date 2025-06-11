@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.1](https://github.com/myparcelnl/js-sdk/compare/v4.4.0...v4.4.1) (2025-06-11)
+
+
+### :bug: Bug Fixes
+
+* **fetchclient:** fix fetch abort client not working with interceptors ([#183](https://github.com/myparcelnl/js-sdk/issues/183)) ([e4543d2](https://github.com/myparcelnl/js-sdk/commit/e4543d2e40f83cc152e7bd2b852a03b9a74c44a3))
+
 ## [4.4.0](https://github.com/myparcelnl/js-sdk/compare/v4.3.0...v4.4.0) (2025-06-10)
 
 
