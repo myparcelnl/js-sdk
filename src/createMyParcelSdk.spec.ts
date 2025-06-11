@@ -65,7 +65,8 @@ describe('createMyParcelSdk', () => {
             if (signal.aborted) {
               return;
             }
-            reject(new Error('Not aborted (unexpected)'));
+
+            reject();
           }, 20);
         });
       });
