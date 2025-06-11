@@ -1,10 +1,36 @@
-import {describe, expect, it, vi} from 'vitest';
+/* eslint-disable max-nested-callbacks */
+import {beforeEach, describe, expect, it} from 'vitest';
+import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {createMyParcelSdk} from './createMyParcelSdk';
 import {FetchClient} from '@/model/client/FetchClient';
 
 describe('createMyParcelSdk', () => {
+  const fetchMock = createFetchMock();
+  const fetchMockwithTimeout = (url: string, config: RequestInit) => {
+    // Simulate aborting after a delay
+    const signal = config.signal as AbortSignal;
+
+    return new Promise((_, reject) => {
+      signal?.addEventListener('abort', () => {
+        reject(new DOMException('The operation was aborted.', 'AbortError'));
+      });
+
+      setTimeout(() => {
+        if (signal.aborted) {
+          return;
+        }
+
+        reject(new Error('Some other fetch error'));
+      }, 20);
+    });
+  };
+
+  beforeEach(() => {
+    fetchMock.mockClear();
+  });
+
   it('can not be instantiated without endpoints', () => {
     expect(() => createMyParcelSdk(new FetchClient(), [])).toThrow('At least one endpoint must be passed.');
   });
@@ -42,32 +68,81 @@ describe('createMyParcelSdk', () => {
     await expect(sdk.getInline()).resolves.toStrictEqual('"Test"');
   });
 
-  it('should handle timeout', async () => {
-    vi.useFakeTimers();
-    expect.assertions(2);
+  describe('timeout', () => {
+    it('should handle timeout', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
 
-    const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
+      expect.assertions(2);
 
-    const getEndpoint = new TestGet200Endpoint();
+      const getEndpoint = new TestGet200Endpoint();
 
-    const sdk = createMyParcelSdk(
-      new FetchClient({
-        options: {
-          timeout: 1000,
-        },
-      }),
-      [getEndpoint],
-    );
+      const sdk = createMyParcelSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 10,
+          },
+        }),
+        [getEndpoint],
+      );
 
-    const fetchPromise = sdk.getEndpoint();
+      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
 
-    vi.advanceTimersByTime(999);
-    expect(abortSpy).not.toHaveBeenCalled();
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
 
-    vi.advanceTimersByTime(1);
-    expect(abortSpy).toHaveBeenCalledTimes(1);
+    it('should handle timeout with a request interceptor given', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
 
-    await fetchPromise;
-    abortSpy.mockRestore();
+      expect.assertions(2);
+
+      const getEndpoint = new TestGet200Endpoint();
+
+      const sdk = createMyParcelSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 10,
+          },
+        }),
+        [getEndpoint],
+      );
+
+      sdk.client.interceptors.request.use((options) => {
+        return options;
+      });
+
+      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
+
+    it('should not abort before the timeout is over', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
+
+      expect.assertions(2);
+
+      const getEndpoint = new TestGet200Endpoint();
+
+      const sdk = createMyParcelSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 50,
+          },
+        }),
+        [getEndpoint],
+      );
+
+      await expect(sdk.getEndpoint()).rejects.toThrowError('Some other fetch error');
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
   });
 });
