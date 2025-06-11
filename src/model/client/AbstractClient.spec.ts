@@ -630,8 +630,13 @@ describe('AbstractClient', () => {
       expect(interceptor).toHaveBeenCalledTimes(1);
       expect(interceptor).toHaveBeenCalledWith(
         expect.objectContaining({
-          method: 'GET',
-          headers: expect.any(Object),
+          headers: {
+            Accept: 'application/json',
+            'X-Static-Header': 'value',
+          },
+          parameters: expect.objectContaining({
+            'X-Static-Parameter': 'value',
+          }),
         }),
       );
 

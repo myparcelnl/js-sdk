@@ -1,11 +1,30 @@
-import {beforeEach, describe, expect, it, vi} from 'vitest';
+/* eslint-disable max-nested-callbacks */
+import {beforeEach, describe, expect, it} from 'vitest';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestGet200PrivateEndpoint} from '@Test/endpoints/TestGet200PrivateEndpoint';
 import {FetchClient} from '@/model/client/FetchClient';
 import {createPrivateSdk} from '@/createPrivateSdk';
 
 describe('createPrivateSdk', () => {
-    const fetchMock = createFetchMock();
+  const fetchMock = createFetchMock();
+  const fetchMockwithTimeout = (url: string, config: RequestInit) => {
+    // Simulate aborting after a delay
+    const signal = config.signal as AbortSignal;
+
+    return new Promise((_, reject) => {
+      signal?.addEventListener('abort', () => {
+        reject(new DOMException('The operation was aborted.', 'AbortError'));
+      });
+
+      setTimeout(() => {
+        if (signal.aborted) {
+          return;
+        }
+
+        reject(new Error('Some other fetch error'));
+      }, 20);
+    });
+  };
 
   beforeEach(() => {
     fetchMock.mockClear();
@@ -46,36 +65,81 @@ describe('createPrivateSdk', () => {
     });
   });
 
-  it('should handle timeout', async () => {
-    vi.useFakeTimers();
-    expect.assertions(2);
+  describe('timeout', () => {
+    it('should handle timeout', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
 
-    const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
+      expect.assertions(2);
 
-    const getEndpoint = new TestGet200PrivateEndpoint();
+      const getEndpoint = new TestGet200PrivateEndpoint();
 
-    const sdk = createPrivateSdk(
-      new FetchClient({
-        headers: {
-          Authorization: 'bearer apiKey',
-        },
-        options: {
-          timeout: 1000,
-        },
-      }),
-      [getEndpoint],
-    );
+      const sdk = createPrivateSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 10,
+          },
+        }),
+        [getEndpoint],
+      );
 
-    const fetchPromise = sdk.getEndpoint();
+      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
 
-    vi.advanceTimersByTime(999);
-    expect(abortSpy).not.toHaveBeenCalled();
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
 
-    vi.advanceTimersByTime(1);
-    expect(abortSpy).toHaveBeenCalledTimes(1);
+    it('should handle timeout with a request interceptor given', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
 
-    await fetchPromise;
-    abortSpy.mockRestore();
-    vi.useRealTimers();
+      expect.assertions(2);
+
+      const getEndpoint = new TestGet200PrivateEndpoint();
+
+      const sdk = createPrivateSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 10,
+          },
+        }),
+        [getEndpoint],
+      );
+
+      sdk.client.interceptors.request.use((options) => {
+        return options;
+      });
+
+      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
+
+    it('should not abort before the timeout is over', async () => {
+      fetchMock.mockImplementation(fetchMockwithTimeout);
+
+      expect.assertions(2);
+
+      const getEndpoint = new TestGet200PrivateEndpoint();
+
+      const sdk = createPrivateSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 50,
+          },
+        }),
+        [getEndpoint],
+      );
+
+      await expect(sdk.getEndpoint()).rejects.toThrowError('Some other fetch error');
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
   });
 });
