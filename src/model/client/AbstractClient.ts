@@ -37,7 +37,7 @@ export abstract class AbstractClient {
    * @protected
    */
   public interceptors: {
-    request: Interceptors<OptionsWithBody<E> | OptionsWithoutBody<E>>;
+    request: Interceptors<OptionsWithBody<AbstractEndpoint> | OptionsWithoutBody<AbstractEndpoint>>;
     response: Interceptors<ResponseWrapper<EndpointResponseBody<AbstractEndpoint>>>;
   };
 
