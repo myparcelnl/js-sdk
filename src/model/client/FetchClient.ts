@@ -22,6 +22,7 @@ export class FetchClient extends AbstractClient {
     const config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
+      signal: controller.signal,
     };
 
     let timeoutId: NodeJS.Timeout | undefined;
