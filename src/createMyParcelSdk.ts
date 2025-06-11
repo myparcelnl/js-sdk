@@ -5,7 +5,11 @@ import {UserException} from '@/model';
 
 type EndpointMethod<E extends AbstractEndpoint> = (options?: Options<E>) => Promise<EndpointResponse<E>>;
 
-export type MyParcelSdk<E extends AbstractEndpoint> = {
+export type MyParcelSdk<E extends AbstractEndpoint> = MyParcelSdkEndpoints<E> & {
+  client: AbstractClient;
+};
+
+type MyParcelSdkEndpoints<E extends AbstractEndpoint> = {
   [K in E['name']]: EndpointMethod<Extract<E, {name: K}>>;
 };
 
@@ -17,13 +21,16 @@ export function createMyParcelSdk<E extends AbstractEndpoint>(client: AbstractCl
     throw new UserException('At least one endpoint must be passed.');
   }
 
-  return endpoints.reduce(
-    (acc, endpoint) => ({
-      ...acc,
-      [endpoint.name]: async (options?: OptionsWithoutBody<E>): Promise<EndpointResponse<E>> => {
-        return client.doRequest(endpoint, options ?? {});
-      },
-    }),
-    {} as MyParcelSdk<E>,
-  );
+  return {
+    ...endpoints.reduce(
+      (acc, endpoint) => ({
+        ...acc,
+        [endpoint.name]: async (options?: OptionsWithoutBody<E>): Promise<EndpointResponse<E>> => {
+          return client.doRequest(endpoint, options ?? {});
+        },
+      }),
+      {} as MyParcelSdk<E>,
+    ),
+    client,
+  };
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-nested-callbacks */
 import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {isOfType} from '@myparcel/ts-utils';
 import {CarrierName, PlatformName} from '@myparcel/constants';
@@ -6,6 +7,7 @@ import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
 import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestGetPdfEndpoint} from '@Test/endpoints/TestGetPdfEndpoint';
 import {TestGetPaginatedSizeEndpoint} from '@Test/endpoints/TestGetPaginatedSizeEndpoint';
 import {TestGetPaginatedResultsEndpoint} from '@Test/endpoints/TestGetPaginatedResultsEndpoint';
 import {TestGetPaginatedPageEndpoint} from '@Test/endpoints/TestGetPaginatedPageEndpoint';
@@ -140,42 +142,46 @@ describe('AbstractClient', () => {
     );
   });
 
-  it('parses all headers correctly', async () => {
-    expect.assertions(1);
+  describe('headers', () => {
+    it('parses all headers correctly', async () => {
+      expect.assertions(1);
 
-    const client = new FetchClient({headers: {'X-Client-Header': '1'}});
-    const sdk = createPublicSdk(client, [new TestGet200Endpoint({headers: {'X-Random': '12345'}})]);
+      const client = new FetchClient({headers: {'X-Client-Header': '1'}});
+      const sdk = createPublicSdk(client, [new TestGet200Endpoint({headers: {'X-Random': '12345'}})]);
 
-    await sdk.getEndpoint({headers: {'X-Additional-Header': '1'}});
+      await sdk.getEndpoint({headers: {'X-Additional-Header': '1'}});
 
-    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint?X-Static-Parameter=value', {
-      headers: {
-        Accept: 'application/json',
-        'X-Additional-Header': '1',
-        'X-Client-Header': '1',
-        'X-Random': '12345',
-        'X-Static-Header': 'value',
-      },
-      method: 'GET',
-    });
-  });
-
-  it('parses all parameters correctly', async () => {
-    expect.assertions(1);
-    const client = new FetchClient({parameters: {XDEBUG_SESSION_START: 'phpstorm'}});
-    const sdk = createPublicSdk(client, [new TestGet200Endpoint({parameters: {number: 32, test: 1}})]);
-    await sdk.getEndpoint({parameters: {now: '1234', number: 31, param: 'sdk'}});
-
-    expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.myparcel.nl/endpoint?XDEBUG_SESSION_START=phpstorm&now=1234&number=32&param=sdk&test=1&X-Static-Parameter=value',
-      {
+      expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint?X-Static-Parameter=value', {
         headers: {
           Accept: 'application/json',
+          'X-Additional-Header': '1',
+          'X-Client-Header': '1',
+          'X-Random': '12345',
           'X-Static-Header': 'value',
         },
         method: 'GET',
-      },
-    );
+      });
+    });
+  });
+
+  describe('parameters', () => {
+    it('parses all parameters correctly', async () => {
+      expect.assertions(1);
+      const client = new FetchClient({parameters: {XDEBUG_SESSION_START: 'phpstorm'}});
+      const sdk = createPublicSdk(client, [new TestGet200Endpoint({parameters: {number: 32, test: 1}})]);
+      await sdk.getEndpoint({parameters: {now: '1234', number: 31, param: 'sdk'}});
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        'https://api.myparcel.nl/endpoint?XDEBUG_SESSION_START=phpstorm&now=1234&number=32&param=sdk&test=1&X-Static-Parameter=value',
+        {
+          headers: {
+            Accept: 'application/json',
+            'X-Static-Header': 'value',
+          },
+          method: 'GET',
+        },
+      );
+    });
   });
 
   describe('formats request body correctly on post', () => {
@@ -351,6 +357,33 @@ describe('AbstractClient', () => {
     });
   });
 
+  it('handles receiving a response with content-type application/pdf as a blob', async () => {
+    expect.assertions(5);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetPdfEndpoint()]);
+    const response = await sdk.getPdf();
+
+    // the Blob presented by vitest is not the same as the fetcher, so check for blob-like properties:
+    const ofType = isOfType<Blob>(response, 'size');
+
+    expect(ofType).toBe(true);
+
+    if (ofType) {
+      expect(response.size).toBe(6);
+      expect(response.type).toBe('application/pdf');
+    }
+
+    const result = await fetchMock.mock.results[0].value;
+    expect(result.status).toBe(200);
+
+    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/pdf', {
+      headers: {
+        Accept: 'application/json',
+      },
+      method: 'GET',
+    });
+  });
+
   it('handles receiving a response with content-disposition: inline header', async () => {
     expect.assertions(3);
 
@@ -448,7 +481,7 @@ describe('AbstractClient', () => {
     expect(response).not.toHaveProperty('size');
   });
 
-  it('can have the timeout overwritten by the endpoint definition', async () => {
+  it('can have the timeout overwritten by the endpoint definition', () => {
     expect.assertions(2);
     vi.useFakeTimers();
     fetchMock.mockClear();
@@ -478,5 +511,146 @@ describe('AbstractClient', () => {
 
     localFetchMock.mockClear();
     vi.useRealTimers();
+  });
+
+  describe('response interceptors', () => {
+    it('calls response interceptor with the response', async () => {
+      expect.assertions(2);
+      const interceptor = vi.fn((response) => response);
+
+      const client = new FetchClient();
+      client.interceptors.response.use(interceptor);
+
+      const sdk = createPublicSdk(client, [new TestGet200NoResponseProperty()]);
+      const response = await sdk.get200NoResponseProperty();
+
+      expect(interceptor).toHaveBeenCalledTimes(1);
+      expect(response).toStrictEqual({
+        token: 'test',
+        credentials: {
+          username: 'test',
+          password: 'test',
+        },
+      });
+    });
+
+    it('can modify the response in interceptor', async () => {
+      expect.assertions(2);
+
+      const client = new FetchClient();
+
+      client.interceptors.response.use((response) => {
+        expect(response.data).toHaveProperty('token', 'test');
+
+        // @ts-expect-error We are modifying the response object to add a property.
+        response.data.token = 'test1234';
+
+        return response;
+      });
+
+      const sdk = createPublicSdk(client, [new TestGet200NoResponseProperty()]);
+      const response = await sdk.get200NoResponseProperty();
+
+      expect(response).toHaveProperty('token', 'test1234');
+    });
+
+    it('logs error in response interceptor', async () => {
+      expect.assertions(3);
+
+      const consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+      const client = new FetchClient();
+
+      client.interceptors.response.use((response) => {
+        // @ts-ignore The response object may not have an errors property, but we want to log it if it exists.
+        if (response.errors.length) {
+          console.error('API Error:', response);
+        }
+
+        return response;
+      });
+
+      const sdk = createPublicSdk(client, [new GetDeliveryOptions()]);
+
+      await expect(sdk.getDeliveryOptions()).rejects.toThrow(
+        new ApiException({
+          message: 'The cc field is required. The carrier field is required. The platform field is required. (request_id: 1649780852.44186255a8746bdec)',
+          request_id: '1649768916.0403625579d409d84',
+          errors: [
+            {
+              code: 3212,
+              message: 'cc is required',
+            },
+          ],
+        }),
+      );
+
+      expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+      expect(consoleErrorMock).toHaveBeenCalledWith(
+        'API Error:',
+        expect.objectContaining({
+          message:
+            'The cc field is required. The carrier field is required. The platform field is required. (request_id: 1649780852.44186255a8746bdec)',
+          request_id: '1649780852.44186255a8746bdec',
+          errors: [
+            {
+              status: 400,
+              code: 3224,
+              title: 'The cc field is required. The carrier field is required. The platform field is required.',
+              message: 'The cc field is required. The carrier field is required. The platform field is required.'
+            },
+          ],
+        }),
+      );
+      consoleErrorMock.mockRestore();
+    });
+  });
+
+  describe('request interceptors', () => {
+    it('calls request interceptors and modifies config', async () => {
+      expect.assertions(3);
+
+      const interceptor = vi.fn((config) => {
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            'X-Intercepted': 'true',
+          },
+        };
+      });
+
+      const client = new FetchClient();
+
+      client.interceptors.request.use(interceptor);
+
+      const sdk = createPublicSdk(client, [new TestGet200Endpoint()]);
+      await sdk.getEndpoint();
+
+      expect(interceptor).toHaveBeenCalledTimes(1);
+      expect(interceptor).toHaveBeenCalledWith(
+        expect.objectContaining({
+          headers: {
+            Accept: 'application/json',
+            'X-Static-Header': 'value',
+          },
+          parameters: expect.objectContaining({
+            'X-Static-Parameter': 'value',
+          }),
+        }),
+      );
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        'https://api.myparcel.nl/endpoint?X-Static-Parameter=value',
+        expect.objectContaining({
+          headers: expect.objectContaining({
+            Accept: 'application/json',
+            'X-Intercepted': 'true',
+            'X-Static-Header': 'value',
+          }),
+          method: 'GET',
+        }),
+      );
+    });
   });
 });

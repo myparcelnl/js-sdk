@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.1](https://github.com/myparcelnl/js-sdk/compare/v4.4.0...v4.4.1) (2025-06-11)
+
+
+### :bug: Bug Fixes
+
+* **fetchclient:** fix fetch abort client not working with interceptors ([#183](https://github.com/myparcelnl/js-sdk/issues/183)) ([e4543d2](https://github.com/myparcelnl/js-sdk/commit/e4543d2e40f83cc152e7bd2b852a03b9a74c44a3))
+
+## [4.4.0](https://github.com/myparcelnl/js-sdk/compare/v4.3.0...v4.4.0) (2025-06-10)
+
+
+### :sparkles: New Features
+
+* **interceptors:** add interceptors for requests and responses ([#180](https://github.com/myparcelnl/js-sdk/issues/180)) ([d4941c3](https://github.com/myparcelnl/js-sdk/commit/d4941c309eb802bf96ac3a79e5f88cda5cf3b5d2))
+
+## [4.3.0](https://github.com/myparcelnl/js-sdk/compare/v4.2.0...v4.3.0) (2025-05-06)
+
+
+### :sparkles: New Features
+
+* export the PossibleShipmentOption interface ([#179](https://github.com/myparcelnl/js-sdk/issues/179)) ([b5bb116](https://github.com/myparcelnl/js-sdk/commit/b5bb1162dccf9883d6a6e37a0daf954b49299b57))
+
+## [4.2.0](https://github.com/myparcelnl/js-sdk/compare/v4.1.1...v4.2.0) (2025-04-25)
+
+
+### :sparkles: New Features
+
+* return pdf responses as blobs for content-type `application/pdf` ([#178](https://github.com/myparcelnl/js-sdk/issues/178)) ([f733b61](https://github.com/myparcelnl/js-sdk/commit/f733b61685a4dba07094c317386ab449f54f085b))
+
 ## [4.1.1](https://github.com/myparcelnl/js-sdk/compare/v4.1.0...v4.1.1) (2024-10-03)
 
 
