@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import {isOfType} from '@myparcel/ts-utils';
 import {isJson} from '@/model/client/helper/isJson';
 import {type ClientConfig, type ClientRequest, type OptionsWithBody} from '@/model/client/AbstractClient.types';
@@ -9,14 +10,17 @@ export class FetchClient extends AbstractClient {
   }
 
   protected request: ClientRequest = async (endpoint, options) => {
+    // Run the request interceptors.
+    for (const interceptor of this.interceptors.request.fns) {
+      options = await interceptor(options);
+    }
+
     const timeout = endpoint.getTimeout() ?? options.timeout;
-    const timeoutController = new AbortController();
-    const id = setTimeout(() => timeoutController.abort(), timeout);
 
     let config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
-      ...(timeout && {signal: timeoutController.signal}),
+      ...(timeout && {signal: AbortSignal.timeout(timeout)}),
     };
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
@@ -28,17 +32,7 @@ export class FetchClient extends AbstractClient {
       }
     }
 
-    // Run the request interceptors.
-    for (const interceptor of this.interceptors.request.fns) {
-      config = await interceptor(config);
-    }
-
-    if (timeout && !config.signal) {
-      config.signal = timeoutController.signal;
-    }
-
     const response = await fetch(this.createUrl(endpoint, options), config);
-    clearTimeout(id);
 
     if (response.body) {
       if (

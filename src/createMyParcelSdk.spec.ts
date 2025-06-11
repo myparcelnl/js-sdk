@@ -1,10 +1,18 @@
-import {describe, expect, it, vi} from 'vitest';
+/* eslint-disable max-nested-callbacks */
+import {beforeEach, describe, expect, it} from 'vitest';
+import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {createMyParcelSdk} from './createMyParcelSdk';
 import {FetchClient} from '@/model/client/FetchClient';
 
 describe('createMyParcelSdk', () => {
+  const fetchMock = createFetchMock();
+  
+  beforeEach(() => {
+    fetchMock.mockClear();
+  });
+
   it('can not be instantiated without endpoints', () => {
     expect(() => createMyParcelSdk(new FetchClient(), [])).toThrow('At least one endpoint must be passed.');
   });
@@ -42,32 +50,89 @@ describe('createMyParcelSdk', () => {
     await expect(sdk.getInline()).resolves.toStrictEqual('"Test"');
   });
 
-  it('should handle timeout', async () => {
-    vi.useFakeTimers();
-    expect.assertions(2);
+  describe('timeout', () => {
+    it('should handle timeout', async () => {
+      fetchMock.mockImplementation((_, config) => {
+        // Simulate aborting after a delay
+        const signal = config.signal as AbortSignal;
 
-    const abortSpy = vi.spyOn(AbortController.prototype, 'abort');
+        return new Promise((_, reject) => {
+          signal?.addEventListener('abort', () => {
+            reject(new DOMException('The operation was aborted.', 'AbortError'));
+          });
 
-    const getEndpoint = new TestGet200Endpoint();
+          setTimeout(() => {
+            if (signal.aborted) {
+              return;
+            }
+            reject(new Error('Not aborted (unexpected)'));
+          }, 20);
+        });
+      });
 
-    const sdk = createMyParcelSdk(
-      new FetchClient({
-        options: {
-          timeout: 1000,
-        },
-      }),
-      [getEndpoint],
-    );
+      expect.assertions(2);
 
-    const fetchPromise = sdk.getEndpoint();
+      const getEndpoint = new TestGet200Endpoint();
 
-    vi.advanceTimersByTime(999);
-    expect(abortSpy).not.toHaveBeenCalled();
+      const sdk = createMyParcelSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 10,
+          },
+        }),
+        [getEndpoint],
+      );
 
-    vi.advanceTimersByTime(1);
-    expect(abortSpy).toHaveBeenCalledTimes(1);
+      await expect(sdk.getEndpoint()).rejects.toThrowError(/aborted/i);
 
-    await fetchPromise;
-    abortSpy.mockRestore();
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
+
+    it('should handle timeout with a request interceptor given', async () => {
+      fetchMock.mockImplementation((url, config) => {
+        // Simulate aborting after a delay
+        const signal = config.signal as AbortSignal;
+
+        return new Promise((_, reject) => {
+          signal?.addEventListener('abort', () => {
+            reject(new DOMException('The operation was aborted.', 'AbortError'));
+          });
+
+          setTimeout(() => {
+            if (signal.aborted) {
+              return;
+            }
+            reject(new Error('Not aborted (unexpected)'));
+          }, 20);
+        });
+      });
+
+      expect.assertions(2);
+
+      const getEndpoint = new TestGet200Endpoint();
+
+      const sdk = createMyParcelSdk(
+        new FetchClient({
+          headers: {
+            Authorization: 'bearer apiKey',
+          },
+          options: {
+            timeout: 10,
+          },
+        }),
+        [getEndpoint],
+      );
+
+      sdk.client.interceptors.request.use((options) => {
+        return options;
+      });
+
+      await expect(sdk.getEndpoint()).rejects.toThrowError(/aborted/i);
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
   });
 });

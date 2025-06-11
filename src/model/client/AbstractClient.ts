@@ -23,6 +23,7 @@ import {
   type PaginatedEndpointResponse,
   type Options,
   type OptionsWithBody,
+  type OptionsWithoutBody,
 } from '@/model/client/AbstractClient.types';
 
 export const BASE_URL = 'https://api.myparcel.nl';
@@ -36,7 +37,7 @@ export abstract class AbstractClient {
    * @protected
    */
   public interceptors: {
-    request: Interceptors<RequestInit>;
+    request: Interceptors<OptionsWithBody<E> | OptionsWithoutBody<E>>;
     response: Interceptors<ResponseWrapper<EndpointResponseBody<AbstractEndpoint>>>;
   };
 
