@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
 import {isOfType} from '@myparcel/ts-utils';
 import {isJson} from '@/model/client/helper/isJson';
@@ -28,7 +29,9 @@ export class FetchClient extends AbstractClient {
     let timeoutId: NodeJS.Timeout | undefined;
 
     if (timeout) {
-      timeoutId = setTimeout(() => controller.abort(), timeout);
+      timeoutId = setTimeout(() => {
+        controller.abort();
+      }, timeout);
     }
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
@@ -59,8 +62,13 @@ export class FetchClient extends AbstractClient {
 
         return text;
       }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
+        throw new Error('The operation was aborted.');
+      }
+
+      throw error;
     } finally {
-      // Always clear timeout
       if (timeoutId) {
         clearTimeout(timeoutId);
       }

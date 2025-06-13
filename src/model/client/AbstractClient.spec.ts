@@ -31,6 +31,7 @@ import {
 } from '@/endpoints';
 import {createPublicSdk} from '@/createPublicSdk';
 import {createPrivateSdk} from '@/createPrivateSdk';
+import { sign } from 'crypto';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
@@ -71,6 +72,9 @@ describe('AbstractClient', () => {
     expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/carriers/postnl', {
       headers: {Accept: 'application/json'},
       method: 'GET',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
     expect(response.length).toBe(1);
   });
@@ -111,6 +115,9 @@ describe('AbstractClient', () => {
       {
         headers: {Accept: 'application/json;version=2.0'},
         method: 'GET',
+        signal: expect.objectContaining({
+          aborted: false,
+        }),
       },
     );
 
@@ -160,6 +167,9 @@ describe('AbstractClient', () => {
           'X-Static-Header': 'value',
         },
         method: 'GET',
+        signal: expect.objectContaining({
+          aborted: false,
+        }),
       });
     });
   });
@@ -179,6 +189,9 @@ describe('AbstractClient', () => {
             'X-Static-Header': 'value',
           },
           method: 'GET',
+          signal: expect.objectContaining({
+            aborted: false,
+          }),
         },
       );
     });
@@ -202,6 +215,9 @@ describe('AbstractClient', () => {
         },
         method: 'POST',
         body: '{"data":{"shipments":[{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE","email":"example@myparcel.nl"}}]}}',
+        signal: expect.objectContaining({
+          aborted: false,
+        }),
       });
     });
 
@@ -220,6 +236,9 @@ describe('AbstractClient', () => {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
+        signal: expect.objectContaining({
+          aborted: false,
+        }),
       });
     });
 
@@ -240,6 +259,9 @@ describe('AbstractClient', () => {
         headers: {
           Accept: 'application/json',
         },
+        signal: expect.objectContaining({
+          aborted: false,
+        }),
       });
       // the body should be a FormData instance
       expect(fetchMock.mock.calls?.[0]?.[1]?.body).toBeInstanceOf(FormData);
@@ -258,6 +280,9 @@ describe('AbstractClient', () => {
         Accept: 'application/json',
       },
       method: 'DELETE',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
   });
 
@@ -308,6 +333,9 @@ describe('AbstractClient', () => {
         'Content-Type': 'application/json',
       },
       method: 'PUT',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
   });
 
@@ -327,6 +355,9 @@ describe('AbstractClient', () => {
         Accept: 'text/plain',
       },
       method: 'GET',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
   });
 
@@ -354,6 +385,9 @@ describe('AbstractClient', () => {
         Accept: 'application/json',
       },
       method: 'GET',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
   });
 
@@ -381,6 +415,9 @@ describe('AbstractClient', () => {
         Accept: 'application/json',
       },
       method: 'GET',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
   });
 
@@ -400,6 +437,9 @@ describe('AbstractClient', () => {
         Accept: 'application/json',
       },
       method: 'GET',
+      signal: expect.objectContaining({
+        aborted: false,
+      }),
     });
   });
 
