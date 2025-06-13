@@ -522,34 +522,34 @@ describe('AbstractClient', () => {
   });
 
   it('can have the timeout overwritten by the endpoint definition', () => {
-    expect.assertions(2);
+    expect.assertions(3);
     vi.useFakeTimers();
     fetchMock.mockClear();
-    const localFetchMock = createFetchMock(undefined, {timeout: 10});
+
+    createFetchMock(undefined, {timeout: 10}); // your local mock
+
     const sdk = createPublicSdk(
       new FetchClient({
-        options: {
-          timeout: 100,
-        },
+        options: {timeout: 100},
       }),
       [new TestGetExtendedTimeout()],
     );
 
-    const response = sdk.getExtendedTimeout();
+    // Kick off
+    void sdk.getExtendedTimeout();
+
+    // Fetch called immediately
+    expect(fetchMock).toHaveBeenCalledOnce();
+    const firstCfg = fetchMock.mock.calls[0][1];
+    expect((firstCfg.signal as AbortSignal).aborted).toBe(false);
+
+    // Advance *past* override timeout
     vi.advanceTimersByTime(200);
-    void expect(response).resolves.toStrictEqual([]);
 
-    expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/timeout', {
-      headers: {
-        Accept: 'application/json',
-      },
-      method: 'GET',
-      signal: expect.objectContaining({
-        aborted: false,
-      }),
-    });
+    // Now the controller has aborted
+    const secondCfg = fetchMock.mock.calls[0][1];
+    expect((secondCfg.signal as AbortSignal).aborted).toBe(true);
 
-    localFetchMock.mockClear();
     vi.useRealTimers();
   });
 

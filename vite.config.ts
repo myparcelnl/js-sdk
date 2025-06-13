@@ -33,7 +33,7 @@ const config = defineConfig((env) => {
         exclude: [...configDefaults.exclude],
         include: ['src/**/*.ts'],
       },
-      setupFiles: ['./test/mockFetch.ts', './test/mockAbortController.ts'],
+      setupFiles: ['./test/mockFetch.ts'],
     },
   };
 });
