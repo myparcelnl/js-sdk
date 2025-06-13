@@ -1,5 +1,4 @@
-/* eslint-disable max-nested-callbacks */
-import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
@@ -8,26 +7,6 @@ import {FetchClient} from '@/model/client/FetchClient';
 
 describe('createMyParcelSdk', () => {
   const fetchMock = createFetchMock();
-
-  const fetchMockWithTimeout = vi.fn().mockImplementation((_, config: RequestInit) => {
-    console.log('fetchMockWithTimeout called with: ', _);
-    // Simulate aborting after a delay
-    const signal = config.signal as AbortController['signal'];
-
-    return new Promise((_, reject) => {
-      if (signal?.aborted) {
-        console.log('aborted');
-        return reject(new DOMException('The operation was aborted.', 'AbortError'));
-      }
-
-      signal?.addEventListener('abort', () => {
-        console.log('abort event triggered');
-        reject(new DOMException('The operation was aborted.', 'AbortError'));
-      });
-
-      console.log('not aborted, simulating fetch');
-    });
-  });
 
   beforeEach(() => {
     fetchMock.mockClear();

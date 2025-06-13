@@ -62,12 +62,6 @@ export class FetchClient extends AbstractClient {
 
         return text;
       }
-    } catch (error) {
-      if (error instanceof DOMException && error.name === 'AbortError') {
-        throw new Error('The operation was aborted.');
-      }
-
-      throw error;
     } finally {
       if (timeoutId) {
         clearTimeout(timeoutId);
