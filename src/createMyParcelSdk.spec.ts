@@ -60,10 +60,6 @@ describe('createMyParcelSdk', () => {
         const signal = config.signal as AbortSignal;
 
         return new Promise((_, reject) => {
-          if (signal.aborted) {
-            reject(new DOMException('The operation was aborted.', 'AbortError'));
-          }
-
           signal.addEventListener('abort', () => {
             reject(new DOMException('The operation was aborted.', 'AbortError'));
           });
