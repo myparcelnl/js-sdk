@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
 import {isOfType} from '@myparcel/ts-utils';
 import {isJson} from '@/model/client/helper/isJson';
@@ -17,11 +18,21 @@ export class FetchClient extends AbstractClient {
 
     const timeout = endpoint.getTimeout() ?? options.timeout;
 
-    let config: RequestInit = {
+    const controller = new AbortController();
+
+    const config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
-      ...(timeout && {signal: AbortSignal.timeout(timeout)}),
+      signal: controller.signal,
     };
+
+    let timeoutId: NodeJS.Timeout | undefined;
+
+    if (timeout) {
+      timeoutId = setTimeout(() => {
+        controller.abort();
+      }, timeout);
+    }
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
       if (options.body instanceof FormData) {
@@ -32,23 +43,29 @@ export class FetchClient extends AbstractClient {
       }
     }
 
-    const response = await fetch(this.createUrl(endpoint, options), config);
+    try {
+      const response = await fetch(this.createUrl(endpoint, options), config);
 
-    if (response.body) {
-      if (
-        response.headers.get('Content-Disposition')?.includes('attachment') ||
-        response.headers.get('Content-Type')?.includes('application/pdf')
-      ) {
-        return response.blob();
+      if (response.body) {
+        if (
+          response.headers.get('Content-Disposition')?.includes('attachment') ||
+          response.headers.get('Content-Type')?.includes('application/pdf')
+        ) {
+          return response.blob();
+        }
+
+        const text = await response.text();
+
+        if (response.headers.get('Content-Type')?.includes('application/json') && isJson(text)) {
+          return JSON.parse(text);
+        }
+
+        return text;
       }
-
-      const text = await response.text();
-
-      if (response.headers.get('Content-Type')?.includes('application/json') && isJson(text)) {
-        return JSON.parse(text);
+    } finally {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-
-      return text;
     }
   };
 }
