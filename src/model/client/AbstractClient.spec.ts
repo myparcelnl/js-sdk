@@ -31,7 +31,6 @@ import {
 } from '@/endpoints';
 import {createPublicSdk} from '@/createPublicSdk';
 import {createPrivateSdk} from '@/createPrivateSdk';
-import { sign } from 'crypto';
 
 const getDeliveryOptionsParameters: EndpointParameters<GetDeliveryOptions> = {
   carrier: 1,
