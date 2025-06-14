@@ -1,10 +1,14 @@
 /* eslint-disable max-nested-callbacks */
-import {afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi} from 'vitest';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
+import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {createMyParcelSdk} from './createMyParcelSdk';
 import {FetchClient} from '@/model/client/FetchClient';
+import { TestGetAttachmentEndpoint } from '@Test/endpoints/TestGetAttachmentEndpoint';
+import { TestGetPdfEndpoint } from '@Test/endpoints/TestGetPdfEndpoint';
+import { TestGetTextEndpoint } from '@Test/endpoints/TestGetTextEndpoint';
 
 describe('createMyParcelSdk', () => {
   const fetchMock = createFetchMock();
@@ -99,6 +103,56 @@ describe('createMyParcelSdk', () => {
 
       expect(fetchMock).toHaveBeenCalledOnce();
       expect((cfg.signal as AbortSignal).aborted).toBe(true);
+    });
+  });
+
+  describe('Responses with custom headers and body', () => {
+    it('returns blob on Content-Disposition attachment', async () => {
+      const fakeBlob = new Blob(['hi'], {type: 'image/png'});
+
+      fetchMock.mockResolvedValue({
+        body: true,
+        headers: new Map([['Content-Disposition', 'attachment;filename="x.png"']]),
+        blob: () => Promise.resolve(fakeBlob),
+      });
+
+      const endpoint = new TestGetAttachmentEndpoint();
+      const sdk = createMyParcelSdk(new FetchClient(), [endpoint]);
+
+      const result = await sdk.getAttachment();
+
+      expect(result).toBe(fakeBlob);
+    });
+
+    it('returns blob on Content-Type application/pdf', async () => {
+      const fakePdf = new Blob(['%PDF'], {type: 'application/pdf'});
+      fetchMock.mockResolvedValue({
+        body: true,
+        headers: new Map([['Content-Type', 'application/pdf;version=1']]),
+        blob: () => Promise.resolve(fakePdf),
+      });
+
+      const endpoint = new TestGetPdfEndpoint();
+      const sdk = createMyParcelSdk(new FetchClient(), [endpoint]);
+
+      const result = await sdk.getPdf();
+
+      expect(result).toBe(fakePdf);
+    });
+
+    it('parses plain text when no JSON header', async () => {
+      fetchMock.mockResolvedValue({
+        body: true,
+        headers: new Map([['Content-Type', 'text/plain']]),
+        text: () => Promise.resolve('hello world'),
+      });
+
+      const endpoint = new TestGetTextEndpoint();
+      const sdk = createMyParcelSdk(new FetchClient(), [endpoint]);
+
+      const result = await sdk.getText();
+
+      expect(result).toBe('hello world');
     });
   });
 });
