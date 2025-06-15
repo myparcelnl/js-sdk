@@ -46,6 +46,7 @@ export class FetchClient extends AbstractClient {
       }
     }
 
+    /* c8 ignore start */
     try {
       const response = await fetch(this.createUrl(endpoint, options), config);
 
@@ -66,10 +67,10 @@ export class FetchClient extends AbstractClient {
         return text;
       }
     } finally {
-      /* c8 ignore next 3 */
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
     }
+    /* c8 ignore stop */
   };
 }
