@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.2](https://github.com/myparcelnl/js-sdk/compare/v4.4.1...v4.4.2) (2025-06-15)
+
+
+### :bug: Bug Fixes
+
+* **FetchClient:** Move from the AbortSignal back to the AbortController because bigger browser/node support ([#184](https://github.com/myparcelnl/js-sdk/issues/184)) ([0cb48c2](https://github.com/myparcelnl/js-sdk/commit/0cb48c2d8d6d047230b7bcf237cd7cb44d32e1b1))
+
 ## [4.4.1](https://github.com/myparcelnl/js-sdk/compare/v4.4.0...v4.4.1) (2025-06-11)
 
 
