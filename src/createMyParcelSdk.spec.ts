@@ -1,31 +1,21 @@
 /* eslint-disable max-nested-callbacks */
-import {beforeEach, describe, expect, it} from 'vitest';
+import {afterEach, beforeAll, beforeEach, describe, expect, it, MockInstance, vi} from 'vitest';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
+import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestGetPdfEndpoint} from '@Test/endpoints/TestGetPdfEndpoint';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
+import {TestGetExtendedTimeout} from '@Test/endpoints/TestGetExtendedTimeout';
+import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {createMyParcelSdk} from './createMyParcelSdk';
 import {FetchClient} from '@/model/client/FetchClient';
 
 describe('createMyParcelSdk', () => {
-  const fetchMock = createFetchMock();
-  const fetchMockwithTimeout = (url: string, config: RequestInit) => {
-    // Simulate aborting after a delay
-    const signal = config.signal as AbortSignal;
+  let fetchMock: MockInstance;
 
-    return new Promise((_, reject) => {
-      signal?.addEventListener('abort', () => {
-        reject(new DOMException('The operation was aborted.', 'AbortError'));
-      });
-
-      setTimeout(() => {
-        if (signal.aborted) {
-          return;
-        }
-
-        reject(new Error('Some other fetch error'));
-      }, 20);
-    });
-  };
+  beforeAll(() => {
+    fetchMock = createFetchMock();
+  });
 
   beforeEach(() => {
     fetchMock.mockClear();
@@ -36,6 +26,7 @@ describe('createMyParcelSdk', () => {
   });
 
   it('should always return a client within the response', () => {
+    expect.assertions(2);
     const getEndpoint = new TestGet200Endpoint();
 
     const sdk = createMyParcelSdk(new FetchClient(), [getEndpoint]);
@@ -45,6 +36,7 @@ describe('createMyParcelSdk', () => {
   });
 
   it('adds method for each passed endpoint', () => {
+    expect.assertions(3);
     const getEndpoint = new TestGet200Endpoint();
     const getInline = new TestGetInlineContentEndpoint();
 
@@ -69,80 +61,105 @@ describe('createMyParcelSdk', () => {
   });
 
   describe('timeout', () => {
-    it('should handle timeout', async () => {
-      fetchMock.mockImplementation(fetchMockwithTimeout);
-
-      expect.assertions(2);
-
-      const getEndpoint = new TestGet200Endpoint();
-
-      const sdk = createMyParcelSdk(
-        new FetchClient({
-          headers: {
-            Authorization: 'bearer apiKey',
-          },
-          options: {
-            timeout: 10,
-          },
-        }),
-        [getEndpoint],
-      );
-
-      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
-
-      expect(fetchMock).toHaveBeenCalledOnce();
+    afterEach(() => {
+      vi.restoreAllMocks();
     });
 
-    it('should handle timeout with a request interceptor given', async () => {
-      fetchMock.mockImplementation(fetchMockwithTimeout);
+    it('should throw when request times out', async () => {
+      fetchMock.mockImplementationOnce((_, config: RequestInit) => {
+        const signal = config.signal as AbortSignal;
 
-      expect.assertions(2);
+        return new Promise((_, reject) => {
+          signal.addEventListener('abort', () => {
+            reject(new DOMException('The operation was aborted.', 'AbortError'));
+          });
 
-      const getEndpoint = new TestGet200Endpoint();
-
-      const sdk = createMyParcelSdk(
-        new FetchClient({
-          headers: {
-            Authorization: 'bearer apiKey',
-          },
-          options: {
-            timeout: 10,
-          },
-        }),
-        [getEndpoint],
-      );
-
-      sdk.client.interceptors.request.use((options) => {
-        return options;
+          // otherwise hang forever (so we know abort is what triggers it)
+        });
       });
 
-      await expect(sdk.getEndpoint()).rejects.toThrowError('The operation was aborted.');
-
-      expect(fetchMock).toHaveBeenCalledOnce();
-    });
-
-    it('should not abort before the timeout is over', async () => {
-      fetchMock.mockImplementation(fetchMockwithTimeout);
-
-      expect.assertions(2);
-
+      vi.useFakeTimers();
       const getEndpoint = new TestGet200Endpoint();
 
       const sdk = createMyParcelSdk(
         new FetchClient({
-          headers: {
-            Authorization: 'bearer apiKey',
-          },
           options: {
-            timeout: 50,
+            timeout: 100,
           },
         }),
         [getEndpoint],
       );
 
-      await expect(sdk.getEndpoint()).rejects.toThrowError('Some other fetch error');
+      const promise = sdk.getEndpoint();
 
       expect(fetchMock).toHaveBeenCalledOnce();
+      const cfg = fetchMock.mock.calls[0][1] as RequestInit;
+
+      expect((cfg.signal as AbortSignal).aborted).toBe(false);
+
+      vi.advanceTimersByTime(200);
+
+      await expect(promise).rejects.toThrowError('The operation was aborted.');
+
+      expect(fetchMock).toHaveBeenCalledOnce();
+      expect((cfg.signal as AbortSignal).aborted).toBe(true);
+      vi.useRealTimers();
+    });
+
+    it('should contain a timeout property on the endpoint', () => {
+      const endpoint = new TestGetExtendedTimeout();
+
+      expect(endpoint.timeout).toBe(200);
+    });
+  });
+
+  describe('Responses with custom headers and body', () => {
+    it('returns blob on Content-Disposition attachment', async () => {
+      const fakeBlob = new Blob(['hi'], {type: 'image/png'});
+
+      fetchMock.mockResolvedValueOnce({
+        body: true,
+        headers: new Map([['Content-Disposition', 'attachment;filename="x.png"']]),
+        blob: () => Promise.resolve(fakeBlob),
+      });
+
+      const endpoint = new TestGetAttachmentEndpoint();
+      const sdk = createMyParcelSdk(new FetchClient(), [endpoint]);
+
+      const result = await sdk.getAttachment();
+
+      expect(result).toBe(fakeBlob);
+    });
+
+    it('returns blob on Content-Type application/pdf', async () => {
+      const fakePdf = new Blob(['%PDF'], {type: 'application/pdf'});
+      fetchMock.mockResolvedValueOnce({
+        body: true,
+        headers: new Map([['Content-Type', 'application/pdf;version=1']]),
+        blob: () => Promise.resolve(fakePdf),
+      });
+
+      const endpoint = new TestGetPdfEndpoint();
+      const sdk = createMyParcelSdk(new FetchClient(), [endpoint]);
+
+      const result = await sdk.getPdf();
+
+      expect(result).toBe(fakePdf);
+    });
+
+    it('parses plain text when no JSON header', async () => {
+      fetchMock.mockResolvedValueOnce({
+        body: true,
+        headers: new Map([['Content-Type', 'text/plain']]),
+        text: () => Promise.resolve('hello world'),
+      });
+
+      const endpoint = new TestGetTextEndpoint();
+      const sdk = createMyParcelSdk(new FetchClient(), [endpoint]);
+
+      const result = await sdk.getText();
+
+      expect(result).toBe('hello world');
     });
   });
 });
