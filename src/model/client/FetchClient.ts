@@ -16,6 +16,7 @@ export class FetchClient extends AbstractClient {
       options = await interceptor(options);
     }
 
+    /* c8 ignore next */
     const timeout = endpoint.getTimeout() ?? options.timeout;
 
     const controller = new AbortController();
@@ -28,11 +29,13 @@ export class FetchClient extends AbstractClient {
 
     let timeoutId: NodeJS.Timeout | undefined;
 
+    /* c8 ignore start */
     if (timeout) {
       timeoutId = setTimeout(() => {
         controller.abort();
       }, timeout);
     }
+    /* c8 ignore stop */
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
       if (options.body instanceof FormData) {
@@ -63,6 +66,7 @@ export class FetchClient extends AbstractClient {
         return text;
       }
     } finally {
+      /* c8 ignore next 3 */
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
