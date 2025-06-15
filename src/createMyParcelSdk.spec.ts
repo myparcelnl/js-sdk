@@ -1,17 +1,21 @@
 /* eslint-disable max-nested-callbacks */
-import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {afterEach, beforeAll, beforeEach, describe, expect, it, MockInstance, vi} from 'vitest';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
-import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
+import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
+import {TestGetPdfEndpoint} from '@Test/endpoints/TestGetPdfEndpoint';
 import {TestGetInlineContentEndpoint} from '@Test/endpoints/TestGetInlineContentEndpoint';
+import {TestGetExtendedTimeout} from '@Test/endpoints/TestGetExtendedTimeout';
+import {TestGetAttachmentEndpoint} from '@Test/endpoints/TestGetAttachmentEndpoint';
 import {TestGet200Endpoint} from '@Test/endpoints/TestGet200Endpoint';
 import {createMyParcelSdk} from './createMyParcelSdk';
 import {FetchClient} from '@/model/client/FetchClient';
-import { TestGetAttachmentEndpoint } from '@Test/endpoints/TestGetAttachmentEndpoint';
-import { TestGetPdfEndpoint } from '@Test/endpoints/TestGetPdfEndpoint';
-import { TestGetTextEndpoint } from '@Test/endpoints/TestGetTextEndpoint';
 
 describe('createMyParcelSdk', () => {
-  const fetchMock = createFetchMock();
+  let fetchMock: MockInstance;
+
+  beforeAll(() => {
+    fetchMock = createFetchMock();
+  });
 
   beforeEach(() => {
     fetchMock.mockClear();
@@ -57,10 +61,12 @@ describe('createMyParcelSdk', () => {
   });
 
   describe('timeout', () => {
-    beforeEach(() => {
-      vi.useFakeTimers();
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
 
-      fetchMock.mockImplementation((_, config: RequestInit) => {
+    it('should throw when request times out', async () => {
+      fetchMock.mockImplementationOnce((_, config: RequestInit) => {
         const signal = config.signal as AbortSignal;
 
         return new Promise((_, reject) => {
@@ -71,14 +77,8 @@ describe('createMyParcelSdk', () => {
           // otherwise hang forever (so we know abort is what triggers it)
         });
       });
-    });
 
-    afterEach(() => {
-      vi.useRealTimers();
-      vi.restoreAllMocks();
-    });
-
-    it('should throw when request times out', async () => {
+      vi.useFakeTimers();
       const getEndpoint = new TestGet200Endpoint();
 
       const sdk = createMyParcelSdk(
@@ -103,6 +103,13 @@ describe('createMyParcelSdk', () => {
 
       expect(fetchMock).toHaveBeenCalledOnce();
       expect((cfg.signal as AbortSignal).aborted).toBe(true);
+      vi.useRealTimers();
+    });
+
+    it('should contain a timeout property on the endpoint', () => {
+      const endpoint = new TestGetExtendedTimeout();
+
+      expect(endpoint.timeout).toBe(200);
     });
   });
 
@@ -110,7 +117,7 @@ describe('createMyParcelSdk', () => {
     it('returns blob on Content-Disposition attachment', async () => {
       const fakeBlob = new Blob(['hi'], {type: 'image/png'});
 
-      fetchMock.mockResolvedValue({
+      fetchMock.mockResolvedValueOnce({
         body: true,
         headers: new Map([['Content-Disposition', 'attachment;filename="x.png"']]),
         blob: () => Promise.resolve(fakeBlob),
@@ -126,7 +133,7 @@ describe('createMyParcelSdk', () => {
 
     it('returns blob on Content-Type application/pdf', async () => {
       const fakePdf = new Blob(['%PDF'], {type: 'application/pdf'});
-      fetchMock.mockResolvedValue({
+      fetchMock.mockResolvedValueOnce({
         body: true,
         headers: new Map([['Content-Type', 'application/pdf;version=1']]),
         blob: () => Promise.resolve(fakePdf),
@@ -141,7 +148,7 @@ describe('createMyParcelSdk', () => {
     });
 
     it('parses plain text when no JSON header', async () => {
-      fetchMock.mockResolvedValue({
+      fetchMock.mockResolvedValueOnce({
         body: true,
         headers: new Map([['Content-Type', 'text/plain']]),
         text: () => Promise.resolve('hello world'),
