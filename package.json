@@ -44,7 +44,7 @@
   },
   "prettier": "@myparcel/prettier-config",
   "dependencies": {
-    "@myparcel/constants": "^2.0.0",
+    "@myparcel/constants": "^2.5.0",
     "@myparcel/ts-utils": "^1.6.0"
   },
   "devDependencies": {
