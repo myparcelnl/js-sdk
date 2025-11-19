@@ -38,7 +38,7 @@ jobs:
         with:
           token: ${{ steps.credentials.outputs.token }}
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_NEW }}
 
   rebase-prs:
     needs: release
