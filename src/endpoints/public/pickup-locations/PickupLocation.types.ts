@@ -1,4 +1,4 @@
-import {type DeliveryTypeId, type DeliveryTypeName} from '@myparcel/constants';
+import {type DeliveryTypeId, type DeliveryTypeName} from '@myparcel-dev/constants';
 import {type StartEndDate, type Timestamp, type Weekday} from '@/types';
 
 export interface PickupLocation {

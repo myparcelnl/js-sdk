@@ -1,6 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {CarrierName} from '@myparcel/constants';
+import {CarrierName} from '@myparcel-dev/constants';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 import {type GetCarrier} from '@/endpoints/public/carriers';
 

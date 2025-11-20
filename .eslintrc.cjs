@@ -3,7 +3,7 @@ module.exports = {
   overrides: [
     {
       files: ['./**/*.ts', './**/*.tsx'],
-      extends: ['@myparcel-eslint/eslint-config-prettier-typescript', '@myparcel-eslint/eslint-config-import'],
+      extends: ['@myparcel-dev/eslint-config-prettier-typescript', '@myparcel-dev/eslint-config-import'],
       rules: {
         'class-methods-use-this': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
@@ -20,9 +20,9 @@ module.exports = {
     {
       files: ['./**/*.js', './**/*.cjs', './**/*.mjs'],
       extends: [
-        '@myparcel-eslint/eslint-config-node',
-        '@myparcel-eslint/eslint-config-esnext',
-        '@myparcel-eslint/eslint-config-prettier',
+        '@myparcel-dev/eslint-config-node',
+        '@myparcel-dev/eslint-config-esnext',
+        '@myparcel-dev/eslint-config-prettier',
       ],
     },
     {

@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 import {beforeEach, describe, expect, it, vi} from 'vitest';
-import {isOfType} from '@myparcel/ts-utils';
-import {CarrierName, PlatformName} from '@myparcel/constants';
+import {isOfType} from '@myparcel-dev/ts-utils';
+import {CarrierName, PlatformName} from '@myparcel-dev/constants';
 import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
