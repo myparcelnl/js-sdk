@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/myparcelnl/js-sdk/compare/v4.4.2...v5.0.0) (2025-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to @myparcel-dev scope (#193)
+
+### :sparkles: New Features
+
+* migrate to [@myparcel-dev](https://github.com/myparcel-dev) scope ([#193](https://github.com/myparcelnl/js-sdk/issues/193)) ([8e4efbd](https://github.com/myparcelnl/js-sdk/commit/8e4efbd59ddebb4ddf8271b6521cc27cc814846b))
+
+
+### :bug: Bug Fixes
+
+* update release.config.cjs to use [@myparcel-dev](https://github.com/myparcel-dev) scope ([41d42ee](https://github.com/myparcelnl/js-sdk/commit/41d42ee5c7fcdf0420d7909516ab7b905e68cd17))
+
 ## [4.4.2](https://github.com/myparcelnl/js-sdk/compare/v4.4.1...v4.4.2) (2025-06-15)
 
 
