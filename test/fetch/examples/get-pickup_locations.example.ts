@@ -1,6 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
-import {DeliveryTypeId, DeliveryTypeName} from '@myparcel/constants';
+import {DeliveryTypeId, DeliveryTypeName} from '@myparcel-dev/constants';
 import {defineMockResponse} from '@Test/fetch/defineMockResponse';
 import {type GetPickupLocations, type PickupLocation} from '@/endpoints';
 

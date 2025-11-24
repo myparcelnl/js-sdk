@@ -1,4 +1,4 @@
-import {type CarrierNameOrId} from '@myparcel/constants';
+import {type CarrierNameOrId} from '@myparcel-dev/constants';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
 import {type Carrier} from '@/endpoints/public/carriers/Carrier.types';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import {type DeliveryTypeName, type PackageTypeName, type ShipmentOptionName} from '@myparcel/constants';
+import {type DeliveryTypeName, type PackageTypeName, type ShipmentOptionName} from '@myparcel-dev/constants';
 import {type EnumSchema, type Timestamp} from '@/types';
 
 export interface PossibleShipmentOption {

@@ -1,4 +1,4 @@
-import {type CarrierId} from '@myparcel/constants';
+import {type CarrierId} from '@myparcel-dev/constants';
 
 export interface SystemCountryCode {
   label: string;

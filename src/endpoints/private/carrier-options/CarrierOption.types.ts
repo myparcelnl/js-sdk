@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import {type CarrierId, type CarrierName} from '@myparcel/constants';
+import {type CarrierId, type CarrierName} from '@myparcel-dev/constants';
 import {type IntBoolean} from '@/types';
 
 export type MyParcelCarrierOption = {
