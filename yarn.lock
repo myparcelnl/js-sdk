@@ -593,8 +593,8 @@ __metadata:
   linkType: soft
 
 "@myparcel-dev/semantic-release-config@npm:^6.0.0":
-  version: 6.0.7
-  resolution: "@myparcel-dev/semantic-release-config@npm:6.0.7"
+  version: 6.0.8
+  resolution: "@myparcel-dev/semantic-release-config@npm:6.0.8"
   dependencies:
     "@iwavesmedia/semantic-release-composer": "npm:^1.0.0"
     "@semantic-release/changelog": "npm:^6.0.1"
@@ -606,7 +606,7 @@ __metadata:
     "@semantic-release/release-notes-generator": "npm:^10.0.0"
     conventional-changelog-conventionalcommits: "npm:^4.0.0 || ^5.0.0"
     semantic-release: "npm:^21.0.0"
-  checksum: 10c0/b4d48b6fcc8dc0d3e80a01a5dc2c6cde40ca767ac3d80e10ee2f968b8f10fab72a3845ad7eaae3280c779bb4127c6f285bac9fe2caf3e335e52558c8be0c62cb
+  checksum: 10c0/e499a16b1bb77b20e117726cc4f2b2f70f266ad484d8e248de5ad909a5342040f17cba0d2aa4aa0db91cc0b9c180ed747354e66f505f05cba744b4db32611517
   languageName: node
   linkType: hard
 
