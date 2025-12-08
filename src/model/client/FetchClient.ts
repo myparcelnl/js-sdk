@@ -1,4 +1,4 @@
-import {isOfType} from '@myparcel/ts-utils';
+import {isOfType} from '@myparcel-dev/ts-utils';
 import {isJson} from '@/model/client/helper/isJson';
 import {type ClientConfig, type ClientRequest, type OptionsWithBody} from '@/model/client/AbstractClient.types';
 import {AbstractClient} from '@/model/client/AbstractClient';

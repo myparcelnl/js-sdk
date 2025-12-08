@@ -5,7 +5,7 @@ import {
   type DeliveryTypeId,
   type PackageTypeId,
   type ShipmentStatus,
-} from '@myparcel/constants';
+} from '@myparcel-dev/constants';
 import {type Address, type AddressWithContactDetails, type RetailLocation} from '../../../types';
 import {type IntBoolean, type Price, type WithRequired} from '@/types';
 

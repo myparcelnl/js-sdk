@@ -1,6 +1,6 @@
 import {type RequestHeaders} from '@/types/request.types';
 import {type NoInfer} from '@/types/global.types';
-import { type OneOrMore } from '@myparcel/ts-utils';
+import { type OneOrMore } from '@myparcel-dev/ts-utils';
 
 type Pagination = {
   page?: number;

@@ -3,7 +3,7 @@ import {
   type DeliveryTypeId,
   type PackageTypeName,
   type PlatformNameOrId,
-} from '@myparcel/constants';
+} from '@myparcel-dev/constants';
 import {type RequestHeaders} from '@/types/request.types';
 import {type WithRequired} from '@/types/global.types';
 import {AbstractPublicEndpoint} from '@/model/endpoint/AbstractPublicEndpoint';

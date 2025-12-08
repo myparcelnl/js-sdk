@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import {type Address, type AddressWithContactDetails} from '@/types';
-import {type CarrierId} from '@myparcel/constants';
+import {type CarrierId} from '@myparcel-dev/constants';
 import {type PickupLocation} from '@/endpoints/public';
 import {type ShipmentOptions} from '../shipments';
 

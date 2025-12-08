@@ -1,5 +1,5 @@
 {
-  "name": "@myparcel/sdk",
+  "name": "@myparcel-dev/sdk",
   "version": "4.1.0",
   "description": "JavaScript SDK to connect to the MyParcel API via Node.js or browser",
   "keywords": [
@@ -42,18 +42,18 @@
       "sh -c \"publint\""
     ]
   },
-  "prettier": "@myparcel/prettier-config",
+  "prettier": "@myparcel-dev/prettier-config",
   "dependencies": {
-    "@myparcel/constants": "^2.0.0",
-    "@myparcel/ts-utils": "^1.6.0"
+    "@myparcel-dev/constants": "^2.0.0",
+    "@myparcel-dev/ts-utils": "^1.6.0"
   },
   "devDependencies": {
+    "@myparcel-dev/semantic-release-config": "^6.0.0",
     "@myparcel-eslint/eslint-config-esnext": "^1.2.0",
     "@myparcel-eslint/eslint-config-import": "^1.2.1",
     "@myparcel-eslint/eslint-config-node": "^1.2.0",
     "@myparcel-eslint/eslint-config-prettier": "^1.2.0",
     "@myparcel-eslint/eslint-config-prettier-typescript": "^1.2.0",
-    "@myparcel/semantic-release-config": "^5.0.0",
     "@tsconfig/recommended": "^1.0.2",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^1.0.0",

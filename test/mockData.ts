@@ -1,4 +1,4 @@
-import {CarrierId, DeliveryTypeId, PackageTypeId} from '@myparcel/constants';
+import {CarrierId, DeliveryTypeId, PackageTypeId} from '@myparcel-dev/constants';
 import {type EndpointBody} from '@/model';
 import {type PostShipments} from '@/endpoints';
 

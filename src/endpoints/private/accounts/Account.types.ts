@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import {type PlatformId} from '@myparcel/constants';
+import {type PlatformId} from '@myparcel-dev/constants';
 import {type Address} from '@/types/common.types';
 import {type PaginationParameters, type IntBoolean, type Price} from '@/types';
 import {type MyParcelShop} from '@/endpoints/private/shops/Shop.types';
