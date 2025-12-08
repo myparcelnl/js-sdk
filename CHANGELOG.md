@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/myparcelnl/js-sdk/compare/v4.4.2...v5.0.0) (2025-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to @myparcel-dev scope (#193)
+
+### :sparkles: New Features
+
+* migrate to [@myparcel-dev](https://github.com/myparcel-dev) scope ([#193](https://github.com/myparcelnl/js-sdk/issues/193)) ([8e4efbd](https://github.com/myparcelnl/js-sdk/commit/8e4efbd59ddebb4ddf8271b6521cc27cc814846b))
+
+
+### :bug: Bug Fixes
+
+* update release.config.cjs to use [@myparcel-dev](https://github.com/myparcel-dev) scope ([41d42ee](https://github.com/myparcelnl/js-sdk/commit/41d42ee5c7fcdf0420d7909516ab7b905e68cd17))
+
+## [4.4.2](https://github.com/myparcelnl/js-sdk/compare/v4.4.1...v4.4.2) (2025-06-15)
+
+
+### :bug: Bug Fixes
+
+* **FetchClient:** Move from the AbortSignal back to the AbortController because bigger browser/node support ([#184](https://github.com/myparcelnl/js-sdk/issues/184)) ([0cb48c2](https://github.com/myparcelnl/js-sdk/commit/0cb48c2d8d6d047230b7bcf237cd7cb44d32e1b1))
+
+## [4.4.1](https://github.com/myparcelnl/js-sdk/compare/v4.4.0...v4.4.1) (2025-06-11)
+
+
+### :bug: Bug Fixes
+
+* **fetchclient:** fix fetch abort client not working with interceptors ([#183](https://github.com/myparcelnl/js-sdk/issues/183)) ([e4543d2](https://github.com/myparcelnl/js-sdk/commit/e4543d2e40f83cc152e7bd2b852a03b9a74c44a3))
+
+## [4.4.0](https://github.com/myparcelnl/js-sdk/compare/v4.3.0...v4.4.0) (2025-06-10)
+
+
+### :sparkles: New Features
+
+* **interceptors:** add interceptors for requests and responses ([#180](https://github.com/myparcelnl/js-sdk/issues/180)) ([d4941c3](https://github.com/myparcelnl/js-sdk/commit/d4941c309eb802bf96ac3a79e5f88cda5cf3b5d2))
+
+## [4.3.0](https://github.com/myparcelnl/js-sdk/compare/v4.2.0...v4.3.0) (2025-05-06)
+
+
+### :sparkles: New Features
+
+* export the PossibleShipmentOption interface ([#179](https://github.com/myparcelnl/js-sdk/issues/179)) ([b5bb116](https://github.com/myparcelnl/js-sdk/commit/b5bb1162dccf9883d6a6e37a0daf954b49299b57))
+
+## [4.2.0](https://github.com/myparcelnl/js-sdk/compare/v4.1.1...v4.2.0) (2025-04-25)
+
+
+### :sparkles: New Features
+
+* return pdf responses as blobs for content-type `application/pdf` ([#178](https://github.com/myparcelnl/js-sdk/issues/178)) ([f733b61](https://github.com/myparcelnl/js-sdk/commit/f733b61685a4dba07094c317386ab449f54f085b))
+
+## [4.1.1](https://github.com/myparcelnl/js-sdk/compare/v4.1.0...v4.1.1) (2024-10-03)
+
+
+### :bug: Bug Fixes
+
+* allow passing recipient email when posting shipments ([#169](https://github.com/myparcelnl/js-sdk/issues/169)) ([d999aeb](https://github.com/myparcelnl/js-sdk/commit/d999aeb8fcc0e7559085f379e081a739b3688233)), closes [/developer.myparcel.nl/api-reference/06.shipments.html#_6-b-4](https://github.com/myparcelnl//developer.myparcel.nl/api-reference/06.shipments.html/issues/_6-b-4)
+
 ## [4.1.0](https://github.com/myparcelnl/js-sdk/compare/v4.0.0...v4.1.0) (2024-06-07)
 
 

@@ -1,6 +1,6 @@
+import {type MyParcelAccountMessage} from './AccountMessages.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type MyParcelAccountMessage} from './AccountMessages.types';
 
 type GetAccountMessagesDefinition = CreateDefinition<{
   name: typeof GetAccountMessages.name;

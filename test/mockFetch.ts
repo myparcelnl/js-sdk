@@ -1,6 +1,3 @@
-import createFetchMock from 'vitest-fetch-mock';
-import {vi} from 'vitest';
+import {createFetchMock} from './fetch/createFetchMock';
 
-const fetchMock = createFetchMock(vi);
-
-fetchMock.enableMocks();
+global.fetch = createFetchMock();

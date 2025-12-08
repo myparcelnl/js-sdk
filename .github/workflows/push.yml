@@ -31,8 +31,6 @@ jobs:
           token: ${{ steps.credentials.outputs.token }}
 
       - uses: myparcelnl/actions/yarn-install@v4
-        with:
-          node-version: ${{ vars.NODE_VERSION }}
 
       - uses: ./.github/actions/build
 
@@ -40,7 +38,7 @@ jobs:
         with:
           token: ${{ steps.credentials.outputs.token }}
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_NEW }}
 
   rebase-prs:
     needs: release
@@ -54,3 +52,11 @@ jobs:
           base: ${{ github.ref_name }}
           exclude-drafts: true
           exclude-labels: 'dependencies'
+
+  notify-on-failure:
+    needs:
+      - test
+      - release
+    if: always() && contains(needs.*.result, 'failure')
+    uses: myparcelnl/actions/.github/workflows/notify-on-failure.yml@v4
+    secrets: inherit

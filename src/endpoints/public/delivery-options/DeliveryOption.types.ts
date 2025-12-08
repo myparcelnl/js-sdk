@@ -2,7 +2,7 @@
 import {type DeliveryTypeName, type PackageTypeName, type ShipmentOptionName} from '@myparcel-dev/constants';
 import {type EnumSchema, type Timestamp} from '@/types';
 
-interface PossibleShipmentOption {
+export interface PossibleShipmentOption {
   name: ShipmentOptionName;
   schema: EnumSchema<boolean>;
 }

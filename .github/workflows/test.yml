@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [18, 20]
+        node-version: [18, 'current']
     steps:
       - uses: actions/checkout@v4
 
       - name: 'Handle coverage cache'
-        if: matrix.node-version == vars.NODE_VERSION
+        if: matrix.node-version == 'current'
         uses: actions/cache@v4
         id: coverage-cache
         with:
@@ -22,29 +22,33 @@ jobs:
           key: coverage-${{ hashFiles('package.json', 'yarn.lock', 'tsconfig.json', 'src/**/*', 'test/**/*') }}
 
       - uses: myparcelnl/actions/yarn-install@v4
-        if: matrix.node-version != vars.NODE_VERSION || steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
+
+      - uses: myparcelnl/actions/yarn-install@v4
+        if: matrix.node-version != 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: 'Run typecheck'
-        if: matrix.node-version == vars.NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
+        #language=sh
         run: |
           yarn run typecheck
 
       - name: 'Run tests with coverage'
-        if: matrix.node-version == vars.NODE_VERSION && steps.coverage-cache.outputs.cache-hit != 'true'
+        if: matrix.node-version == 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
         #language=sh
         run: |
           yarn test:coverage
 
       - name: 'Run tests'
-        if: matrix.node-version != vars.NODE_VERSION
+        if: matrix.node-version != 'current'
         #language=sh
         run: |
           yarn test:run
 
       - uses: codecov/codecov-action@v4
-        if: matrix.node-version == vars.NODE_VERSION
+        if: matrix.node-version == 'current'
         with:
           files: coverage/clover.xml
           token: ${{ secrets.CODECOV_TOKEN }}

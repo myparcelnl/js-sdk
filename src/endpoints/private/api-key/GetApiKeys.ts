@@ -1,6 +1,6 @@
+import {type MyParcelApiKey} from './ApiKey.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type MyParcelApiKey} from './ApiKey.types';
 
 type GetApiKeysDefinition = CreateDefinition<{
   name: typeof GetApiKeys.name;

@@ -1,6 +1,6 @@
+import {type MyParcelSystemMessage} from './SystemMessage.types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type MyParcelSystemMessage} from './SystemMessage.types';
 
 type GetSystemMessagesDefinition = CreateDefinition<{
   name: typeof GetSystemMessages.name;

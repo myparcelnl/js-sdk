@@ -1,6 +1,6 @@
+import {type HttpMethod} from '@/types';
 import {AbstractPrivateEndpoint} from '@/model/endpoint/AbstractPrivateEndpoint';
 import {type CreateDefinition} from '@/model/endpoint/AbstractEndpoint.types';
-import {type HttpMethod} from '@/types';
 
 type DeleteWebhookSubscriptionsDefinition = CreateDefinition<{
   name: typeof DeleteWebhookSubscriptions.name;

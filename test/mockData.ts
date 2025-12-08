@@ -15,6 +15,7 @@ export const POST_BODY_SHIPMENTS: EndpointBody<PostShipments> = [
       person: 'Ms. Parcel',
       street: 'Antareslaan 31',
       postal_code: '2132 JE',
+      email: 'example@myparcel.nl',
     },
   },
 ];

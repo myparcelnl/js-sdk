@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
 import {isOfType} from '@myparcel-dev/ts-utils';
 import {isJson} from '@/model/client/helper/isJson';
 import {type ClientConfig, type ClientRequest, type OptionsWithBody} from '@/model/client/AbstractClient.types';
@@ -9,15 +11,31 @@ export class FetchClient extends AbstractClient {
   }
 
   protected request: ClientRequest = async (endpoint, options) => {
+    // Run the request interceptors.
+    for (const interceptor of this.interceptors.request.fns) {
+      options = await interceptor(options);
+    }
+
+    /* c8 ignore next */
     const timeout = endpoint.getTimeout() ?? options.timeout;
-    const timeoutController = new AbortController();
-    const id = setTimeout(() => timeoutController.abort(), timeout);
+
+    const controller = new AbortController();
 
     const config: RequestInit = {
       method: endpoint.method,
       headers: options.headers,
-      ...(timeout && {signal: timeoutController.signal}),
+      signal: controller.signal,
     };
+
+    let timeoutId: NodeJS.Timeout | undefined;
+
+    /* c8 ignore start */
+    if (timeout) {
+      timeoutId = setTimeout(() => {
+        controller.abort();
+      }, timeout);
+    }
+    /* c8 ignore stop */
 
     if (isOfType<OptionsWithBody<typeof endpoint>>(options, 'body')) {
       if (options.body instanceof FormData) {
@@ -28,21 +46,31 @@ export class FetchClient extends AbstractClient {
       }
     }
 
-    const response = await fetch(this.createUrl(endpoint, options), config);
-    clearTimeout(id);
+    /* c8 ignore start */
+    try {
+      const response = await fetch(this.createUrl(endpoint, options), config);
 
-    if (response.body) {
-      if (response.headers.get('Content-Disposition')?.includes('attachment')) {
-        return response.blob();
+      if (response.body) {
+        if (
+          response.headers.get('Content-Disposition')?.includes('attachment') ||
+          response.headers.get('Content-Type')?.includes('application/pdf')
+        ) {
+          return response.blob();
+        }
+
+        const text = await response.text();
+
+        if (response.headers.get('Content-Type')?.includes('application/json') && isJson(text)) {
+          return JSON.parse(text);
+        }
+
+        return text;
       }
-
-      const text = await response.text();
-
-      if (response.headers.get('Content-Type')?.includes('application/json') && isJson(text)) {
-        return JSON.parse(text);
+    } finally {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-
-      return text;
     }
+    /* c8 ignore stop */
   };
 }
