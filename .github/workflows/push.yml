@@ -18,7 +18,7 @@ jobs:
     needs: test
     runs-on: ubuntu-22.04
     steps:
-      - uses: myparcelnl/actions/setup-git-credentials@v4
+      - uses: myparcelnl/actions/setup-git-credentials@v5
         id: credentials
         with:
           app-id: ${{ secrets.MYPARCEL_APP_ID }}
@@ -30,11 +30,11 @@ jobs:
           persist-credentials: false
           token: ${{ steps.credentials.outputs.token }}
 
-      - uses: myparcelnl/actions/yarn-install@v4
+      - uses: myparcelnl/actions/yarn-install@v5
 
       - uses: ./.github/actions/build
 
-      - uses: myparcelnl/actions/semantic-release@v4
+      - uses: myparcelnl/actions/semantic-release@v5
         with:
           token: ${{ steps.credentials.outputs.token }}
         env:
@@ -45,7 +45,7 @@ jobs:
     if: always()
     runs-on: ubuntu-22.04
     steps:
-      - uses: myparcelnl/actions/rebase-prs@v4
+      - uses: myparcelnl/actions/rebase-prs@v5
         with:
           app-id: ${{ secrets.MYPARCEL_APP_ID }}
           private-key: ${{ secrets.MYPARCEL_APP_PRIVATE_KEY }}
@@ -58,5 +58,5 @@ jobs:
       - test
       - release
     if: always() && contains(needs.*.result, 'failure')
-    uses: myparcelnl/actions/.github/workflows/notify-on-failure.yml@v4
+    uses: myparcelnl/actions/.github/workflows/notify-on-failure.yml@v5
     secrets: inherit
