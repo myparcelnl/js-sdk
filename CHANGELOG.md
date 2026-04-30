@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.2](https://github.com/myparcelnl/js-sdk/compare/v5.0.1...v5.0.2) (2026-04-30)
+
+
+### :bug: Bug Fixes
+
+* **security:** fix tar vulnerability ([#200](https://github.com/myparcelnl/js-sdk/issues/200)) ([aefcd39](https://github.com/myparcelnl/js-sdk/commit/aefcd39a3f43413a1765cc614a8f274feb66f0ac))
+
 ## [5.0.1](https://github.com/myparcelnl/js-sdk/compare/v5.0.0...v5.0.1) (2026-02-19)
 
 
