@@ -21,10 +21,10 @@ jobs:
           path: coverage/clover.xml
           key: coverage-${{ hashFiles('package.json', 'yarn.lock', 'tsconfig.json', 'src/**/*', 'test/**/*') }}
 
-      - uses: myparcelnl/actions/yarn-install@v4
+      - uses: myparcelnl/actions/yarn-install@v5
         if: matrix.node-version == 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
 
-      - uses: myparcelnl/actions/yarn-install@v4
+      - uses: myparcelnl/actions/yarn-install@v5
         if: matrix.node-version != 'current' && steps.coverage-cache.outputs.cache-hit != 'true'
         with:
           node-version: ${{ matrix.node-version }}
