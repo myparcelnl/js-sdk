@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://github.com/myparcelnl/js-sdk/compare/v5.0.3...v5.1.0) (2026-05-08)
+
+
+### :sparkles: New Features
+
+* **endpoint:** add useDataEnvelope opt-out ([#201](https://github.com/myparcelnl/js-sdk/issues/201)) ([17f53de](https://github.com/myparcelnl/js-sdk/commit/17f53de6a0f09ac92444b38133b10edcaaee5bf8))
+
 ## [5.0.3](https://github.com/myparcelnl/js-sdk/compare/v5.0.2...v5.0.3) (2026-05-08)
 
 ## [5.0.2](https://github.com/myparcelnl/js-sdk/compare/v5.0.1...v5.0.2) (2026-04-30)
