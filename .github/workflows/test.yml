@@ -47,7 +47,7 @@ jobs:
         run: |
           yarn test:run
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v5
         if: matrix.node-version == 'current'
         with:
           files: coverage/clover.xml
