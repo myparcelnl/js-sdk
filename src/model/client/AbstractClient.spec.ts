@@ -6,6 +6,8 @@ import {POST_BODY_SHIPMENTS} from '@Test/mockData';
 import {createFetchMock} from '@Test/fetch/createFetchMock';
 import {TestPut204Endpoint} from '@Test/endpoints/TestPut204Endpoint';
 import {TestPostWithoutPropertyEndpoint} from '@Test/endpoints/TestPostWithoutPropertyEndpoint';
+import {TestPostNoEnvelopeEndpoint} from '@Test/endpoints/TestPostNoEnvelopeEndpoint';
+import {TestGetNoEnvelopeEndpoint} from '@Test/endpoints/TestGetNoEnvelopeEndpoint';
 import {TestGetTextEndpoint} from '@Test/endpoints/TestGetTextEndpoint';
 import {TestGetPdfEndpoint} from '@Test/endpoints/TestGetPdfEndpoint';
 import {TestGetPaginatedSizeEndpoint} from '@Test/endpoints/TestGetPaginatedSizeEndpoint';
@@ -231,6 +233,27 @@ describe('AbstractClient', () => {
       expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/endpoint', {
         method: 'POST',
         body: '{"data":{"carrier":1,"options":{"package_type":1,"delivery_type":2},"recipient":{"cc":"NL","city":"Hoofddorp","person":"Ms. Parcel","street":"Antareslaan 31","postal_code":"2132 JE","email":"example@myparcel.nl"}}}',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        signal: expect.objectContaining({
+          aborted: false,
+        }),
+      });
+    });
+
+    it('sends body unwrapped when useDataEnvelope is false', async () => {
+      expect.assertions(1);
+
+      const sdk = createPublicSdk(new FetchClient(), [new TestPostNoEnvelopeEndpoint()]);
+      await sdk.postNoEnvelopeEndpoint({
+        body: {foo: 'bar', nested: {value: 1}},
+      });
+
+      expect(fetchMock).toHaveBeenCalledWith('https://api.myparcel.nl/no-envelope', {
+        method: 'POST',
+        body: '{"foo":"bar","nested":{"value":1}}',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -482,6 +505,16 @@ describe('AbstractClient', () => {
 
     expect(response).toHaveProperty('token', 'test');
     expect(response).toHaveProperty('credentials', {username: 'test', password: 'test'});
+  });
+
+  it('returns response unwrapped when useDataEnvelope is false', async () => {
+    expect.assertions(2);
+
+    const sdk = createPublicSdk(new FetchClient(), [new TestGetNoEnvelopeEndpoint()]);
+    const response = await sdk.getNoEnvelopeEndpoint();
+
+    expect(response).toHaveProperty('token', 'test');
+    expect(response).toHaveProperty('nested', {value: 1});
   });
 
   it('returns size when size is defined', async () => {

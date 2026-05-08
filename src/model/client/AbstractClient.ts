@@ -123,6 +123,10 @@ export abstract class AbstractClient {
     endpoint: E,
     response: EndpointResponse<E>,
   ): EndpointResponse<E> | PaginatedEndpointResponse<E> {
+    if (!endpoint.getUseDataEnvelope()) {
+      return response;
+    }
+
     if (!isOfType<ResponseWrapper<EndpointResponseBody<E>>>(response, 'data')) {
       return response;
     }
@@ -270,7 +274,9 @@ export abstract class AbstractClient {
         return newOptions;
       }
 
-      if (property === undefined) {
+      if (!endpoint.getUseDataEnvelope()) {
+        newOptions.body = options.body;
+      } else if (property === undefined) {
         newOptions.body = {
           data: options.body,
         };

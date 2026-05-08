@@ -42,6 +42,14 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
   public readonly timeout: number | undefined;
 
   /**
+   * Whether to wrap the request body in a `{ data: ... }` envelope and unwrap
+   * `response.data` from the response. Set to `false` for endpoints whose API
+   * does not use the data envelope; `property` and `responseProperty` are then
+   * also ignored, and the body is sent and returned as-is.
+   */
+  public readonly useDataEnvelope: boolean = true;
+
+  /**
    * Used to expose EndpointDefinition type.
    */
   public declare readonly definition: D;
@@ -83,5 +91,9 @@ export abstract class AbstractEndpoint<D = EndpointDefinition> {
 
   public getTimeout(): AbstractEndpoint['timeout'] {
     return this.timeout;
+  }
+
+  public getUseDataEnvelope(): AbstractEndpoint['useDataEnvelope'] {
+    return this.useDataEnvelope;
   }
 }
