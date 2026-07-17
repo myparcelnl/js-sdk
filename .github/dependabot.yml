@@ -4,3 +4,21 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: 'build'
+      include: 'scope'
+    versioning-strategy: increase-if-necessary
+    groups:
+      minor-js-updates:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
