@@ -453,11 +453,11 @@ __metadata:
   linkType: hard
 
 "@myparcel-dev/constants@npm:^2.7.0":
-  version: 2.9.1
-  resolution: "@myparcel-dev/constants@npm:2.9.1"
+  version: 2.10.0
+  resolution: "@myparcel-dev/constants@npm:2.10.0"
   dependencies:
     "@myparcel-dev/ts-utils": "npm:^1.15.0"
-  checksum: 10c0/f6e40fd6cc10a2cb064641edec844b9f391552f0e87319b270fb46b42d86bc820ef8b2dd2699b70d2b5863f2ae9b35180fa6e0358fb1608e3b4a7c532ca415a2
+  checksum: 10c0/b7f7907a694a6deb5458b25f2489b3c54c3fc7e640328f18b1f31e908006d57e514aa3bcde4ccd63bed0a5aab0813df0dded6251f4b1319f33a15d6d89006cfb
   languageName: node
   linkType: hard
 
@@ -576,7 +576,7 @@ __metadata:
     eslint-plugin-sort-exports: "npm:^0.9.0"
     husky: "npm:^9.0.0"
     prettier: "npm:^2.8.4"
-    publint: "npm:^0.2.0"
+    publint: "npm:^0.3.21"
     sort-package-json: "npm:^2.4.1"
     typescript: "npm:^5.2.0"
     vite: "npm:^5.0.0"
@@ -1175,6 +1175,15 @@ __metadata:
   version: 1.0.0-next.29
   resolution: "@polka/url@npm:1.0.0-next.29"
   checksum: 10c0/0d58e081844095cb029d3c19a659bfefd09d5d51a2f791bc61eba7ea826f13d6ee204a8a448c2f5a855c17df07b37517373ff916dd05801063c0568ae9937684
+  languageName: node
+  linkType: hard
+
+"@publint/pack@npm:^0.1.4":
+  version: 0.1.5
+  resolution: "@publint/pack@npm:0.1.5"
+  dependencies:
+    tinyexec: "npm:^1.2.4"
+  checksum: 10c0/b92344164e5e0c9b7103a8451bf8b0dede475c04ce6150d8d0c2b5a37260068ad35e3869fdc283f6fbaf7e9f19644e2d3728c13e05a35e200f08dce6981fbd97
   languageName: node
   linkType: hard
 
@@ -4322,15 +4331,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore-walk@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "ignore-walk@npm:5.0.1"
-  dependencies:
-    minimatch: "npm:^5.0.1"
-  checksum: 10c0/0d157a54d6d11af0c3059fdc7679eef3b074e9a663d110a76c72788e2fb5b22087e08b21ab767718187ac3396aca4d0aa6c6473f925b19a74d9a00480ca7a76e
-  languageName: node
-  linkType: hard
-
 "ignore-walk@npm:^6.0.0":
   version: 6.0.5
   resolution: "ignore-walk@npm:6.0.5"
@@ -5884,15 +5884,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-bundled@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "npm-bundled@npm:2.0.1"
-  dependencies:
-    npm-normalize-package-bin: "npm:^2.0.0"
-  checksum: 10c0/5b2dc1de455d38200e49c6205dee185ce919ea6b608672c693bec8907116bc5686dabcc150347630d351c1c533315fd60a1910ce00bdad6bb204cef016b90b7d
-  languageName: node
-  linkType: hard
-
 "npm-bundled@npm:^3.0.0":
   version: 3.0.1
   resolution: "npm-bundled@npm:3.0.1"
@@ -5908,13 +5899,6 @@ __metadata:
   dependencies:
     semver: "npm:^7.1.1"
   checksum: 10c0/b046ef1de9b40f5d3a9831ce198e1770140a1c3f253dae22eb7b06045191ef79f18f1dcc15a945c919b3c161426861a28050abd321bf439190185794783b6452
-  languageName: node
-  linkType: hard
-
-"npm-normalize-package-bin@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "npm-normalize-package-bin@npm:2.0.0"
-  checksum: 10c0/9b5283a2e423124c60fbc14244d36686b59e517d29156eacf9df8d3dc5d5bf4d9444b7669c607567ed2e089bbdbef5a2b3678cbf567284eeff3612da6939514b
   languageName: node
   linkType: hard
 
@@ -5934,20 +5918,6 @@ __metadata:
     semver: "npm:^7.3.5"
     validate-npm-package-name: "npm:^5.0.0"
   checksum: 10c0/ab56ed775b48e22755c324536336e3749b6a17763602bc0fb0d7e8b298100c2de8b5e2fb1d4fb3f451e9e076707a27096782e9b3a8da0c5b7de296be184b5a90
-  languageName: node
-  linkType: hard
-
-"npm-packlist@npm:^5.1.3":
-  version: 5.1.3
-  resolution: "npm-packlist@npm:5.1.3"
-  dependencies:
-    glob: "npm:^8.0.1"
-    ignore-walk: "npm:^5.0.1"
-    npm-bundled: "npm:^2.0.0"
-    npm-normalize-package-bin: "npm:^2.0.0"
-  bin:
-    npm-packlist: bin/index.js
-  checksum: 10c0/a8bea97661b2a7132bc8832d5560da24f823ee5324429bd16eb82b7873557de14641bc3fed8a7611b0d88b9771e59e99e01a9e551a53adb164327ded6128aada
   languageName: node
   linkType: hard
 
@@ -6330,6 +6300,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"package-manager-detector@npm:^1.6.0":
+  version: 1.7.0
+  resolution: "package-manager-detector@npm:1.7.0"
+  checksum: 10c0/49488e732ef854205b8c58f68f2315c5b1006169bf9b3a34ca3042c2995edf53e805ee720778f214f32bb80cf6e7cc1ac13508423e89decc691c28329ade6a7d
+  languageName: node
+  linkType: hard
+
 "pacote@npm:^15.0.0, pacote@npm:^15.0.8, pacote@npm:^15.2.0":
   version: 15.2.0
   resolution: "pacote@npm:15.2.0"
@@ -6669,16 +6646,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"publint@npm:^0.2.0":
-  version: 0.2.12
-  resolution: "publint@npm:0.2.12"
+"publint@npm:^0.3.21":
+  version: 0.3.21
+  resolution: "publint@npm:0.3.21"
   dependencies:
-    npm-packlist: "npm:^5.1.3"
+    "@publint/pack": "npm:^0.1.4"
+    package-manager-detector: "npm:^1.6.0"
     picocolors: "npm:^1.1.1"
     sade: "npm:^1.8.1"
   bin:
-    publint: lib/cli.js
-  checksum: 10c0/f95b81a39cb5ec63bc5cdc7a8dcf8f8fffe6d21020a13bbf79a9e582d79895537c2a316fa6be9bc5a10d66714c53f1658d5e684509f3d94f6fff44b5a919debe
+    publint: src/cli.js
+  checksum: 10c0/46f54061b112f852523e8b1357c5b454633008056de86f6acbbabcb155a8ab758d3e575df9f82fa37b7ba4a25bde8e68f98866763929eaef8c6d96ff1f761cea
   languageName: node
   linkType: hard
 
@@ -7781,6 +7759,13 @@ __metadata:
   version: 0.3.2
   resolution: "tinyexec@npm:0.3.2"
   checksum: 10c0/3efbf791a911be0bf0821eab37a3445c2ba07acc1522b1fa84ae1e55f10425076f1290f680286345ed919549ad67527d07281f1c19d584df3b74326909eb1f90
+  languageName: node
+  linkType: hard
+
+"tinyexec@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "tinyexec@npm:1.2.4"
+  checksum: 10c0/153b8db6b080194b558ff145b9cffc36b80a6e07babd644dcfbe49c807eee668c876049d28bdee90b96304476f883352f2dad91b3f86bc23832532f4363e66ff
   languageName: node
   linkType: hard
 
