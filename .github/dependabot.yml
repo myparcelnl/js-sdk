@@ -16,6 +16,11 @@ updates:
       prefix: 'build'
       include: 'scope'
     versioning-strategy: increase-if-necessary
+    cooldown:
+      exclude:
+        - '@myparcel/*'
+        - '@myparcel-dev/*'
+        - '@myparcel-eslint/*'
     groups:
       minor-js-updates:
         applies-to: version-updates
