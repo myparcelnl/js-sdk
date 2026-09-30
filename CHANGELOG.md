@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.4](https://github.com/myparcelnl/js-sdk/compare/v5.1.3...v5.1.4) (2026-09-30)
+
+
+### :bug: Bug Fixes
+
+* **pickup-locations:** request version 2.0 of the endpoint ([#241](https://github.com/myparcelnl/js-sdk/issues/241)) ([a3e16e7](https://github.com/myparcelnl/js-sdk/commit/a3e16e797b2a0d971a38387afb4ad34f938f98b6))
+
 ## [5.1.3](https://github.com/myparcelnl/js-sdk/compare/v5.1.2...v5.1.3) (2026-09-29)
 
 ## [5.1.2](https://github.com/myparcelnl/js-sdk/compare/v5.1.1...v5.1.2) (2026-07-17)
