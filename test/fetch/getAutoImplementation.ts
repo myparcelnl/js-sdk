@@ -1,14 +1,15 @@
 import path from 'path';
 import fs from 'fs';
 import {type MockedResponse} from '@Test/fetch/defineMockResponse';
-import {doActualFetch} from './doActualFetch';
 import {BASE_URL} from '@/model/client/AbstractClient';
 
 export const DIR_EXAMPLES = path.resolve(__dirname, 'examples');
 
+const NO_MATCH = new Error('No match');
+
 /**
- * Find an existing file in examples that matches the attempted request. If it
- * does not exist, throw, unless RECORD_EXAMPLES=1 allows a real API call.
+ * Find an existing file in examples that matches the attempted request. Throws
+ * when none matches, or rethrows the error of a fixture that failed to load or respond.
  */
 export const getAutoImplementation = async (info: string | Request, init?: RequestInit): Promise<MockedResponse> => {
   const files = fs.readdirSync(DIR_EXAMPLES);
@@ -23,17 +24,17 @@ export const getAutoImplementation = async (info: string | Request, init?: Reque
           return imported.response();
         }
 
-        throw new Error('No match');
+        throw NO_MATCH;
       }),
     );
   } catch (e) {
-    // Without this guard, a test that has no example sends a request to the production API.
-    if (process.env.RECORD_EXAMPLES !== '1') {
-      throw new Error(
-        `No example in ${DIR_EXAMPLES} for ${init?.method ?? 'GET'} ${info.toString()}. Run with RECORD_EXAMPLES=1 to record one.`,
-      );
+    const errors: unknown[] = e instanceof AggregateError ? e.errors : [e];
+    const failure = errors.find((error) => error !== NO_MATCH);
+
+    if (failure) {
+      throw failure;
     }
 
-    return doActualFetch(info, init);
+    throw new Error(`No example in ${DIR_EXAMPLES} for ${init?.method ?? 'GET'} ${info.toString()}.`);
   }
 };
