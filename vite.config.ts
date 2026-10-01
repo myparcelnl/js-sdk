@@ -21,8 +21,10 @@ const config = defineConfig((env) => {
         name: 'MyParcelSdk',
         formats: ['cjs', 'es'],
       },
-      rollupOptions: {
+      rolldownOptions: {
         external: [/^@myparcel\//],
+        // Rolldown only copies "use strict" from the source, which has none, so force it for the cjs build.
+        output: {strict: true},
       },
     },
     test: {
