@@ -64,7 +64,7 @@
     "prettier": "^2.8.4",
     "publint": "^0.3.24",
     "sort-package-json": "^2.4.1",
-    "typescript": "^5.2.0",
+    "typescript": "^7.0.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.0",
     "vitest": "^2.0.0"
