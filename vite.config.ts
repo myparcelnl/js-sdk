@@ -1,6 +1,7 @@
 import path from 'path';
 import {configDefaults, defineConfig} from 'vitest/config';
 import dts from 'vite-plugin-dts';
+import pkg from './package.json';
 
 const config = defineConfig((env) => {
   return {
@@ -22,7 +23,8 @@ const config = defineConfig((env) => {
         formats: ['cjs', 'es'],
       },
       rolldownOptions: {
-        external: [/^@myparcel\//],
+        // Derived from dependencies, so a package rename cannot leave a runtime dependency bundled.
+        external: Object.keys(pkg.dependencies).map((name) => new RegExp(`^${name}(/|$)`)),
         // Rolldown only copies "use strict" from the source, which has none, so force it for the cjs build.
         output: {strict: true},
       },
