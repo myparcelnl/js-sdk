@@ -4,7 +4,7 @@ import dts from 'vite-plugin-dts';
 
 const config = defineConfig((env) => {
   return {
-    plugins: [dts({entryRoot: 'src'})],
+    plugins: [dts({entryRoot: 'src', include: ['src']})],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
