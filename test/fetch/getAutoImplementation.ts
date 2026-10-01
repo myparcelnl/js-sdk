@@ -8,7 +8,7 @@ export const DIR_EXAMPLES = path.resolve(__dirname, 'examples');
 
 /**
  * Find an existing file in examples that matches the attempted request. If it
- * does not exist, a real API call will be made.
+ * does not exist, throw, unless RECORD_EXAMPLES=1 allows a real API call.
  */
 export const getAutoImplementation = async (info: string | Request, init?: RequestInit): Promise<MockedResponse> => {
   const files = fs.readdirSync(DIR_EXAMPLES);
@@ -27,6 +27,13 @@ export const getAutoImplementation = async (info: string | Request, init?: Reque
       }),
     );
   } catch (e) {
+    // Without this guard, a test that has no example sends a request to the production API.
+    if (process.env.RECORD_EXAMPLES !== '1') {
+      throw new Error(
+        `No example in ${DIR_EXAMPLES} for ${init?.method ?? 'GET'} ${info.toString()}. Run with RECORD_EXAMPLES=1 to record one.`,
+      );
+    }
+
     return doActualFetch(info, init);
   }
 };
