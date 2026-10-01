@@ -53,7 +53,7 @@
     "@myparcel-dev/eslint-config-node": "^1.4.0",
     "@myparcel-dev/eslint-config-prettier": "^1.4.0",
     "@myparcel-dev/eslint-config-prettier-typescript": "^1.4.0",
-    "@myparcel-dev/semantic-release-config": "^6.0.0",
+    "@myparcel-dev/semantic-release-config": "^7.0.2",
     "@tsconfig/recommended": "^1.0.2",
     "@types/node": "^20.0.0",
     "@vitest/coverage-v8": "^2.0.0",
