@@ -131,19 +131,13 @@ describe('AbstractClient', () => {
       new ApiException({
         message:
           'The cc field is required. The carrier field is required. The platform field is required. (request_id: 1649780852.44186255a8746bdec)',
-        request_id: '1649768916.0403625579d409d84',
+        request_id: '1649780852.44186255a8746bdec',
         errors: [
           {
-            code: 3212,
-            message: 'cc is required',
-          },
-          {
-            code: 3212,
-            message: 'postal_code is required',
-          },
-          {
-            code: 3212,
-            message: 'number is required',
+            status: 400,
+            code: 3224,
+            title: 'The cc field is required. The carrier field is required. The platform field is required.',
+            message: 'The cc field is required. The carrier field is required. The platform field is required.',
           },
         ],
       }),
@@ -647,11 +641,13 @@ describe('AbstractClient', () => {
       await expect(sdk.getDeliveryOptions()).rejects.toThrow(
         new ApiException({
           message: 'The cc field is required. The carrier field is required. The platform field is required. (request_id: 1649780852.44186255a8746bdec)',
-          request_id: '1649768916.0403625579d409d84',
+          request_id: '1649780852.44186255a8746bdec',
           errors: [
             {
-              code: 3212,
-              message: 'cc is required',
+              status: 400,
+              code: 3224,
+              title: 'The cc field is required. The carrier field is required. The platform field is required.',
+              message: 'The cc field is required. The carrier field is required. The platform field is required.',
             },
           ],
         }),

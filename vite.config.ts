@@ -4,7 +4,7 @@ import dts from 'vite-plugin-dts';
 
 const config = defineConfig((env) => {
   return {
-    plugins: [dts({entryRoot: 'src'})],
+    plugins: [dts({entryRoot: 'src', include: ['src']})],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
@@ -21,8 +21,10 @@ const config = defineConfig((env) => {
         name: 'MyParcelSdk',
         formats: ['cjs', 'es'],
       },
-      rollupOptions: {
+      rolldownOptions: {
         external: [/^@myparcel\//],
+        // Rolldown only copies "use strict" from the source, which has none, so force it for the cjs build.
+        output: {strict: true},
       },
     },
     test: {
