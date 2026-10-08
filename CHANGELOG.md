@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.7](https://github.com/myparcelnl/js-sdk/compare/v5.1.6...v5.1.7) (2026-10-08)
+
+### :bug: Bug Fixes
+
+* **build:** externalize runtime dependencies ([#257](https://github.com/myparcelnl/js-sdk/issues/257)) ([4a37a46](https://github.com/myparcelnl/js-sdk/commit/4a37a465393466b2c8f8f52f78b34e904bef6531)), closes [#193](https://github.com/myparcelnl/js-sdk/issues/193)
+
 ## [5.1.6](https://github.com/myparcelnl/js-sdk/compare/v5.1.5...v5.1.6) (2026-10-08)
 
 ## [5.1.5](https://github.com/myparcelnl/js-sdk/compare/v5.1.4...v5.1.5) (2026-09-30)
