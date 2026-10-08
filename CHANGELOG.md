@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.6](https://github.com/myparcelnl/js-sdk/compare/v5.1.5...v5.1.6) (2026-10-08)
+
 ## [5.1.5](https://github.com/myparcelnl/js-sdk/compare/v5.1.4...v5.1.5) (2026-09-30)
 
 ## [5.1.4](https://github.com/myparcelnl/js-sdk/compare/v5.1.3...v5.1.4) (2026-09-30)
