@@ -1,14 +1,15 @@
 import path from 'path';
 import fs from 'fs';
 import {type MockedResponse} from '@Test/fetch/defineMockResponse';
-import {doActualFetch} from './doActualFetch';
 import {BASE_URL} from '@/model/client/AbstractClient';
 
 export const DIR_EXAMPLES = path.resolve(__dirname, 'examples');
 
+const NO_MATCH = new Error('No match');
+
 /**
- * Find an existing file in examples that matches the attempted request. If it
- * does not exist, a real API call will be made.
+ * Find an existing file in examples that matches the attempted request. Throws
+ * when none matches, or rethrows the error of a fixture that failed to load or respond.
  */
 export const getAutoImplementation = async (info: string | Request, init?: RequestInit): Promise<MockedResponse> => {
   const files = fs.readdirSync(DIR_EXAMPLES);
@@ -23,10 +24,17 @@ export const getAutoImplementation = async (info: string | Request, init?: Reque
           return imported.response();
         }
 
-        throw new Error('No match');
+        throw NO_MATCH;
       }),
     );
   } catch (e) {
-    return doActualFetch(info, init);
+    const errors: unknown[] = e instanceof AggregateError ? e.errors : [e];
+    const failure = errors.find((error) => error !== NO_MATCH);
+
+    if (failure) {
+      throw failure;
+    }
+
+    throw new Error(`No example in ${DIR_EXAMPLES} for ${init?.method ?? 'GET'} ${info.toString()}.`);
   }
 };
