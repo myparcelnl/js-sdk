@@ -279,11 +279,11 @@ __metadata:
   linkType: hard
 
 "@myparcel-dev/constants@npm:^2.7.0":
-  version: 2.10.4
-  resolution: "@myparcel-dev/constants@npm:2.10.4"
+  version: 2.10.5
+  resolution: "@myparcel-dev/constants@npm:2.10.5"
   dependencies:
     "@myparcel-dev/ts-utils": "npm:^1.15.0"
-  checksum: 10c0/60d2ac5357691e7a04e7aae7e9a691e7efbea22c9e0f3d850c0aabaecbc62b8ac235f597a9476b05f0f0910d7e36cb507c6fd215b3e32bd118a1786883430899
+  checksum: 10c0/4257cce78904c6b93e551dfbd3c60d352b2268878aa3cfb030b5e5a8b9dbac052a0197f34f8de4e53545b4827d6ad71029994276030c1641070a95dea792c96a
   languageName: node
   linkType: hard
 
