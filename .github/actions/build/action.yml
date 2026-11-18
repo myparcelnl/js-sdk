@@ -8,6 +8,6 @@ runs:
       shell: bash
       #language=sh
       run: |
-        yarn run typecheck
+        pnpm run typecheck
 
-        yarn run build
+        pnpm run build
