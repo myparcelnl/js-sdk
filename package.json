@@ -23,7 +23,8 @@
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
-    "lib"
+    "lib",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "vite build",
@@ -32,7 +33,7 @@
     "test:coverage": "vitest run --coverage",
     "test:run": "vitest run",
     "typecheck": "tsc --noEmit",
-    "watch": "yarn build:dev --watch"
+    "watch": "pnpm build:dev --watch"
   },
   "lint-staged": {
     "*.{ts,js,cjs.mjs}": "eslint --fix",
@@ -53,7 +54,8 @@
     "@myparcel-dev/eslint-config-node": "^1.4.0",
     "@myparcel-dev/eslint-config-prettier": "^1.4.0",
     "@myparcel-dev/eslint-config-prettier-typescript": "^1.4.0",
-    "@myparcel-dev/semantic-release-config": "^7.0.2",
+    "@myparcel-dev/prettier-config": "^2.0.7",
+    "@myparcel-dev/semantic-release-config": "^8.1.0",
     "@tsconfig/recommended": "^1.0.2",
     "@types/node": "^22.12.0",
     "@vitest/coverage-v8": "^5.0.3",
@@ -63,18 +65,30 @@
     "husky": "^9.0.0",
     "prettier": "^2.8.4",
     "publint": "^0.3.24",
+    "semantic-release": "^25.0.9",
     "sort-package-json": "^2.4.1",
     "typescript": "^5.2.0",
     "vite": "^8.3.1",
     "vite-plugin-dts": "^5.1.1",
     "vitest": "^5.0.3"
   },
-  "packageManager": "yarn@4.17.1",
-  "volta": {
-    "node": "22.22.2",
-    "yarn": "4.17.1"
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=24.21"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.21",
+      "onFail": "download"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^12.11",
+      "onFail": "download"
+    }
   }
 }

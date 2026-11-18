@@ -2,15 +2,17 @@
 
 ## 0. Requirements
 
-- [Node 16](https://nodejs.org/)
-- [Yarn](https://classic.yarnpkg.com/)
+- Node.js 24, version 24.21 or later
+- pnpm 12, version 12.11 or later
+- No Volta on your machine. Its `yarn` does not go through corepack, so the `packageManager` field in `package.json`
+  does not stop it.
 
 ## 1. Basics
 
 - Fork this repository and clone it to your machine
-- Install dependencies using Yarn:
+- Install dependencies using pnpm:
   ```bash
-  yarn
+  pnpm install
   ```
 
 ## 2. Make your changes
@@ -23,7 +25,7 @@
 Run tests with the following command:
 
 ```bash
-yarn run test:coverage
+pnpm test:coverage
 ```
 
 - Coverage % needs to be equal to or greater than that of the previous commit.
