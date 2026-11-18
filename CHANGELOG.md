@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.10](https://github.com/myparcelnl/js-sdk/compare/v5.1.9...v5.1.10) (2026-11-18)
+
+### ⚠ BREAKING CHANGES
+
+* - requires Node.js 24.21 or later; Node.js 22 is no longer supported
+
+### build
+
+* move from Yarn to pnpm and require Node.js 24 ([#283](https://github.com/myparcelnl/js-sdk/issues/283)) ([5c64459](https://github.com/myparcelnl/js-sdk/commit/5c64459d02772de259ed89cfd8f088241916b9a5)), references [myparcelnl/constants#210](https://github.com/myparcelnl/constants/issues/210)
+
 ## [5.1.9](https://github.com/myparcelnl/js-sdk/compare/v5.1.8...v5.1.9) (2026-11-12)
 
 ## [5.1.8](https://github.com/myparcelnl/js-sdk/compare/v5.1.7...v5.1.8) (2026-10-29)
